@@ -1,0 +1,278 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  max-height: 100vh;
+}
+
+h1 {
+  color: #426696;
+  font-weight: 600;
+  font-size: 3rem;
+  opacity: 0.8;
+}
+h2 {
+  color: #658ec6;
+  font-weight: 500;
+  opacity: 0.8;
+  margin-bottom: 2rem;
+}
+
+h2 {
+  align-self: center;
+  margin-top: -40px;
+}
+
+h3{
+  font-size: 25px;
+}
+
+h3, h4 {
+  color: #426696;
+  opacity: 0.8;
+}
+
+p, td, th {
+  color: #658ec6;
+  opacity: 0.8;
+  margin-bottom: 5px;
+}
+
+
+
+main {
+  font-family: "Poppins", sans-serif;
+  min-height: 100vh;
+  background: linear-gradient(to right top, #9a65df, #6cdbeb);
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+}
+
+
+.page {
+  background: white;
+  min-height: 80vh;
+  width: 60%;
+  background: linear-gradient(
+    to right bottom,
+    rgba(255, 255, 255, 0.7),
+    rgba(255, 255, 255, 0.3)
+  );
+  border-radius: 2rem;
+  z-index: 2;
+  backdrop-filter: blur(2rem);
+  display: flex; 
+}
+.circle1,
+.circle2 {
+  background: white;
+  background: linear-gradient(
+    to right bottom,
+    rgba(255, 255, 255, 0.8),
+    rgba(255, 255, 255, 0.3)
+  );
+  height: 20rem;
+  width: 20rem;
+  position: absolute;
+  border-radius: 50%;
+}
+
+.circle1 {
+  top: 5%;
+  right: 15%;
+}
+.circle2 {
+  bottom: 8%;
+  left: 10%;
+}
+
+/* ******nav */
+nav {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  text-align: center;
+  background: linear-gradient(
+    to right bottom,
+    rgba(255, 255, 255, 0.7),
+    rgba(255, 255, 255, 0.3)
+  );
+  border-radius: 2rem;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  min-width: 12rem;
+}
+
+.user {
+  padding-top: 30px;
+  
+}
+
+.links{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.link {
+  display: flex;
+  margin: 0rem 0rem;
+  margin-top: 2rem;
+  align-items: center;
+  
+}
+
+.link:hover {
+  cursor: pointer;
+}
+
+.link > a > h3 {
+  font-size: 23px;
+}
+/**************************************************/
+/* VIEW APPOINTMENTS */
+
+.confirm {
+    display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.8);
+
+  border-radius: 1rem;
+  min-height: 70%;
+  align-self: center;
+  min-width: 500px;
+  
+  margin: 10px;
+  padding: 8px;
+  box-shadow: 6px 6px 20px rgba(122, 122, 122, 0.212);
+  justify-content: space-between;
+}
+
+/**************************************************/
+/* SELECT DATE SECTION */
+.status {
+  margin-bottom: 0rem;
+  display: flex;
+  justify-content: center; 
+  flex-direction: column;
+
+}
+
+input {
+  background:  rgba(138, 134, 134, 0.144);
+  border: none;
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 2rem;
+}
+
+input[type="submit"] {
+  width: 100px;
+  align-self: center;
+  cursor: pointer;
+  outline: none;
+}
+
+.status input[type="date"] {
+  outline: none;
+}
+
+.status input[type="submit"]:hover {
+  background-color: #b1afaf;
+}
+
+
+
+.content {
+  margin: 5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 20px;
+}
+
+.content h3{
+  padding-bottom: 30px;
+  font-weight: normal;
+}
+
+
+.form-body{
+  display: flex;
+  flex-direction: column;
+}
+
+/**************************************************/
+/* SELECT TIME SECTION */
+.time-layout {
+  width: 100%;
+}
+
+
+.timeInput {
+  position: absolute;
+  left: -100vw;
+}
+
+.timeInput:checked ~ .timeLabel {
+  background: #c66565;
+}
+
+.timeLabel{
+  background: #A5D6A7;
+    margin: 2rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+
+/**************************************************/
+/* SELECT DOCTOR SECTION */
+
+
+.status {
+  margin-bottom: 3rem;
+}
+
+
+.games {
+  margin: 1rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.8);
+
+  border-radius: 1rem;
+  max-height: 8rem;
+  align-self: center;
+
+  width:75%;
+  
+  margin: 10px;
+  padding: 8px;
+  box-shadow: 6px 6px 20px rgba(122, 122, 122, 0.212);
+  justify-content: space-between;
+}
+
+.card > div > input {
+  margin-right: 30px;
+  color: #658ec6;
+  opacity: 0.8;
+  font-size: 15px;
+}
+
+

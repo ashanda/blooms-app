@@ -1,0 +1,23 @@
+.fc-event-title.fc-sticky {
+    font-weight: 600;
+    padding: 0.2rem 0.3rem;
+    display: inline-block;
+    vertical-align: top;
+    left: 0;
+    right: 0;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  @media (min-width: 576px){
+
+  
+  .modal-sm {
+    max-width: 600px !important;
+  }
+
+}
+
+.search{
+  margin-bottom: 0 !important;
+}
