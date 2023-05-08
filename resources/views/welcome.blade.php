@@ -18,7 +18,7 @@
         </nav>
         <div class="container-fluid d-flex flex-column justify-content-center align-self-center text-light">
             <div class="p-4 text-center">
-                <h1>Blooms Clinic </h1>
+                <h1>{{  env('APP_NAME') }}</h1>
                 {{-- @php
                     $phone = '0787200877' ;
                     $message ='yogeemedia' ;
