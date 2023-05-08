@@ -7,6 +7,7 @@ use App\Models\Appointment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\DaySummery;
 use MaddHatter\LaravelFullcalendar\Facades\Calendar;
 
 
@@ -106,5 +107,27 @@ class FollowUpController extends Controller
     public function destroy(FollowUp $followUp)
     {
         //
+    }
+
+    public function save_day_summary(Request $request){
+        $whatsappChat = $request->input('whatsapp_chat');
+        $whatsappCall = $request->input('whatsapp_call');
+        $messengerChat = $request->input('messenger_chat');
+        $directCall = $request->input('direct_call');
+        $ads_id= $request->input('adsName');
+
+        // Create a new instance of the DaySummary model
+        $daySummary = new DaySummery();
+        $daySummary->sale_agent_id = Auth::user()->id;
+        $daySummary->whatsapp_chat = $whatsappChat;
+        $daySummary->whatsapp_call = $whatsappCall;
+        $daySummary->messenger_chat = $messengerChat;
+        $daySummary->direct_call = $directCall;
+        $daySummary->ads_id = $ads_id;
+    
+    // Save the DaySummary model
+    $daySummary->save();
+    
+    return redirect()->back()->with('success', 'Data saved successfully.');
     }
 }

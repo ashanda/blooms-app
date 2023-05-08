@@ -71,6 +71,8 @@ Route::group(['middleware' => ['auth', 'sales_agent']], function () {
    
     Route::post('/followups/action', [FollowUpController::class, 'action']);
     
+    Route::post('/save_day_summary',[FollowUpController::class, 'save_day_summary'])->name('save_day_summary');
+    
 });
 
 //admin CRUD

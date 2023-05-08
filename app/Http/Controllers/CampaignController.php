@@ -51,6 +51,7 @@ class CampaignController extends Controller
                 $campaign->image = $imagePath;
             }
             $campaign->assigned_agent = $request->input('agent_id');
+            $campaign->status = 1;
             $campaign->save();
             
             // Assign an agent
@@ -103,6 +104,7 @@ class CampaignController extends Controller
         $campaign->image = $imagePath;
     }
     $campaign->assigned_agent = $request->input('agent_id');
+    $campaign->status= $request->input('campaigns_status');
     $campaign->save();
     
     

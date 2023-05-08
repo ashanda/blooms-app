@@ -29,7 +29,7 @@ class InvoiceController extends Controller
         $convert = Appointment::where('appointment_id', $request->appoinment_id)->first();
 
         if ($convert) {
-            if($convert->source  != 'front_office') {
+            if($convert->source  != 'Front Office') {
                 $convert->status = 'converted';
             }else{
                 $convert->status = 'sucess';

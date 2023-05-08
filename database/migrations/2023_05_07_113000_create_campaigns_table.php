@@ -18,6 +18,7 @@ class CreateCampaignsTable extends Migration
             $table->string('name');
             $table->string('image');
             $table->string('assigned_agent');
+            $table->string('status');
             $table->timestamps();
         });
     }

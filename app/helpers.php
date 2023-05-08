@@ -3,6 +3,7 @@ use App\Models\CustomerTreatment;
 use App\Models\User;
 use App\Models\Treatment;
 use App\Models\Campaign;
+use App\Models\DaySummery;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
@@ -69,11 +70,26 @@ function findSalesAgent($id) {
 
 
 function campaingFind() {
-	$findcampaigns = Campaign::where('assigned_agent','=',Auth::user()->id)->get(); 
+	$findcampaigns = Campaign::where('assigned_agent','=',Auth::user()->id)->where('status','=',1)->get(); 
 	return $findcampaigns;
 }
 
 function allTreatments() {
 	$allTreatments = Treatment::all(); 
 	return $allTreatments;
+}
+
+function todaysummary($id){
+	$today = Carbon::now()->format('Y-m-d');
+	if($id == 1){
+		$todaysummaries = DaySummery::all( );
+	}else{
+		$todaysummaries = DaySummery::where('sale_agent_id', $id)
+		->whereDate('created_at', $today)
+		->get();
+	}
+	
+
+	return $todaysummaries;
+
 }

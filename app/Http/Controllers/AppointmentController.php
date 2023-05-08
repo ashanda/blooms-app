@@ -55,7 +55,6 @@ class AppointmentController extends Controller
         $appointment->customer_address = $request->address;
         $appointment->treatment = $request->treatments;
         $appointment->source = $request->source;
-        $appointment->campaing_id = $request->campaing_id;
         $appointment->ads_name = $request->ads_name;
         $appointment->appointment_date_time = $request->appointmentDateTime;
         $appointment->note = $request->note;

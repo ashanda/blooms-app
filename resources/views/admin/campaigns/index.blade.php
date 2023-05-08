@@ -21,6 +21,7 @@
                     <th>Name</th>
                     <th>Image</th>
                     <th>Assigned Agent</th>
+                    <th>Status</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -36,6 +37,13 @@
                             @endif
                         </td>
                         <td>{{ findSalesAgent($campaign->assigned_agent)->name }}</td>
+                        @if ($campaign->status = 1)
+
+                        <td>{{ 'Active' }}</td>
+                        @else
+                        <td>{{ 'Deactive' }}</td>
+                        @endif
+                        
                         <td>
                             <a href="{{ route('campaigns.edit', $campaign->id) }}" class="btn btn-sm btn-primary">Edit</a>
                             <form action="{{ route('campaigns.destroy', $campaign->id) }}" method="POST" style="display: inline-block;">

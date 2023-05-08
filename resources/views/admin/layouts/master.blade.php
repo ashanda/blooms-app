@@ -272,18 +272,27 @@
 
 </script>
 
+@if (Auth::user()->role_id != 5 )
+<script>
+document.getElementById('add-customer-link').addEventListener('click', function() {
+  $('#modal-form1').modal('show');
+});
+</script>
+@endif
 <script>
 document.getElementById('add-appointment-link').addEventListener('click', function() {
   $('#modal-form').modal('show');
 });
 
-document.getElementById('add-customer-link').addEventListener('click', function() {
-  $('#modal-form1').modal('show');
-});
-
 document.getElementById('patient_docs').addEventListener('click', function() {
   $('#patient_docs').modal('show');
 });
+
+document.getElementById('add_day_summery').addEventListener('click', function() {
+  $('#day_summery').modal('show');
+});
+
+
 document.getElementById('sourceSelect').addEventListener('change', function() {
   var adsNameFieldWrapper = document.getElementById('adsNameFieldWrapper');
   var adsNameSelect = document.getElementById('adsNameSelect');

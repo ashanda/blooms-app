@@ -111,6 +111,18 @@
         </div>
       </div>
       @endif
+      @if ( Auth::user()->role->name == 'Sales Agent')
+      <div class="col-sm-4 mt-sm-0 mt-4">
+        <div class="card border h-100">
+          <div class="card-body d-flex flex-column justify-content-center text-center">
+            <a href="javascript:;" id="add_day_summery">
+              <i class="fa fa-plus text-secondary text-sm mb-1" aria-hidden="true"></i>
+              <h6 class="text-secondary">Add Day Summery</h6>
+            </a>
+          </div>
+        </div>
+      </div>
+      @endif
       @if ( Auth::user()->role->name == 'Assistant')
 
         <div class="col-sm-12 mt-sm-0 mt-12">
@@ -188,6 +200,57 @@
                             <td><h6 class="mb-1 text-dark text-sm me-3">{{ $todayAppoinment->appoinment_id }}</h6></td>
                             <td><h6 class="mb-1 text-dark text-sm me-3">{{ $todayAppoinment->customer_id }}</h6></td>
                             <td><h6 class="mb-1 text-dark text-sm">{{ $todayAppoinment->treatment }}</h6></td>
+                          </tr>
+                          @endforeach
+                        </tbody>
+                      </table>
+                    </div>
+                    
+                  
+                  
+                </li>
+               
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        @elseif (Auth::user()->role->name == 'Sales Agent' || Auth::user()->role->name == 'Admin')
+        
+        <div class="col-lg-12 col-sm-6">
+          <div class="card">
+            <div class="card-header pb-0 p-3">
+              <h6 class="mb-0">Day Summary</h6>
+            </div>
+            <div class="card-body p-3">
+              <ul class="list-group">
+                @php
+                 $todaysummaries = todaysummary(Auth::user()->id);
+                @endphp
+              
+                <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
+                  
+                   
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th>Agent Name</th>
+                            <th>Whats app call</th>
+                            <th>Whats app Chat</th>
+                            <th>Messenger Chat</th>
+                            <th>Direct Call</th>
+                          </tr>
+                        </thead>
+                        <tbody style="text-align: center;">
+                          @foreach (  $todaysummaries as  $todaysummary)
+                          <tr>
+                            
+                            <td><h6 class="mb-1 text-dark text-sm me-3">{{ findSalesAgent($todaysummary->sale_agent_id)->name }}</h6></td>
+                            <td><h6 class="mb-1 text-dark text-sm me-3">{{ $todaysummary->whatsapp_call }}</h6></td>
+                            <td><h6 class="mb-1 text-dark text-sm">{{ $todaysummary->whatsapp_chat }}</h6></td>
+                            <td><h6 class="mb-1 text-dark text-sm">{{ $todaysummary->messenger_chat }}</h6></td>
+                            <td><h6 class="mb-1 text-dark text-sm">{{ $todaysummary->direct_call }}</h6></td>
                           </tr>
                           @endforeach
                         </tbody>
@@ -635,8 +698,8 @@
                   </div>
                   <div class="form-group">
                     <label for="modal-name">Treatment:</label>
-                    <input type="hidden" class="form-control" id="modal-treatment">
-                    <input type="text" class="form-control" name="treatment">
+                    <input type="text" class="form-control" id="modal-treatment" name="treatment">
+                    
                   </div>
                   <hr class="horizontal dark mt-0">
                   <h6>Assign Assistant</h6>
@@ -712,7 +775,11 @@
               <button type="button" id="addFieldsButton" class="btn btn-primary">
                 <i class="fas fa-plus"></i> Add Fields
               </button>
-            
+
+              <div class="form-group">
+                <label for="modal-name">Next Appoinment Date:</label>
+                <input class="form-control" type="datetime-local" id="appointmentDateTime" name="appointmentDateTime" >
+            </div>
               <!-- Submit button to save all the fields -->
               <button type="submit" class="btn btn-success">Save</button>
             </form>
@@ -723,5 +790,45 @@
       </div>
   </div>
 </div>
+
+<div id="day_summery" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="day_summery" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalTitle">WhatsApp and Messenger Options</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="save-form" method="POST" action="{{ route('save_day_summary') }}">
+          @csrf
+          <p>WhatsApp Chat: <input type="text" name="whatsapp_chat"></p>
+          <p>WhatsApp Call: <input type="text" name="whatsapp_call"></p>
+          <p>Messenger Chat: <input type="text" name="messenger_chat"></p>
+          <p>Direct Call: <input type="text" name="direct_call"></p>
+          <div id="adsNameFieldWrapper" class="mb-3">
+            <label for="adsName">Ads Name</label>
+            <div class="input-group">
+              <select class="form-control" id="adsName" name="adsName">
+                @foreach ( campaingFind() as $campain)
+                       <option value="{{ $campain->id  }}">{{ $campain->name }}</option>
+                @endforeach
+              </select>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Save</button>
+         
+        </form>
+      </div>      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 </div>
 @endsection
