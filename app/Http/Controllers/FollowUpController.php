@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\DaySummery;
 use MaddHatter\LaravelFullcalendar\Facades\Calendar;
-
+use RealRashid\SweetAlert\Facades\Alert;
 
 class FollowUpController extends Controller
 {
@@ -127,7 +127,7 @@ class FollowUpController extends Controller
     
     // Save the DaySummary model
     $daySummary->save();
-    
+    Alert::success('Success', 'Today Summary Data Save successfully.');
     return redirect()->back()->with('success', 'Data saved successfully.');
     }
 }

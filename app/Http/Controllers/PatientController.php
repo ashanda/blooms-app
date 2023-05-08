@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Time;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
-
+use RealRashid\SweetAlert\Facades\Alert;
 class PatientController extends Controller
 {
     //View patients bookings
@@ -119,6 +119,7 @@ class PatientController extends Controller
             'patient_id' => Auth::user()->id
         ]);
 
+        Alert::success('Success', 'Appointment booked successfully!');
         return redirect()->route('patient.book')->with('message', 'Appointment booked successfully!');
     }
 
@@ -131,6 +132,7 @@ class PatientController extends Controller
         
         $appointmentToCancel->update(['patient_id' => null]);
 
+        Alert::success('Success', 'Appointment cancelled successfully!');
         return redirect()->route('patient.index')->with('message', 'Appointment cancelled successfully!');
     }
 }

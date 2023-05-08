@@ -8,6 +8,7 @@ use App\Models\Treatment;
 use App\Models\Time;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AppointmentController extends Controller
 {
@@ -64,6 +65,7 @@ class AppointmentController extends Controller
 
         // Redirect or perform additional actions as needed
         // For example:
+        Alert::success('Success', 'Appointment created successfully.');  
         return redirect()->back()->with('success', 'Appointment created successfully.');
     }
 
@@ -150,6 +152,7 @@ class AppointmentController extends Controller
         $appointment->status = 'ongoing';
         $appointment->save();
 
+        Alert::success('Success', 'Appointment updated successfully.'); 
         return redirect()->route('home')->with('success', 'Appointment updated successfully.');
     }
 

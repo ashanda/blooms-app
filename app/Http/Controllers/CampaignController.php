@@ -6,7 +6,7 @@ use App\Models\Campaign;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-
+use RealRashid\SweetAlert\Facades\Alert;
 class CampaignController extends Controller
 {
     /**
@@ -45,10 +45,12 @@ class CampaignController extends Controller
             $campaign->name = $request->input('name');
             
             // Save the image
+
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
-                $imagePath = $image->store('campaigns', 'public');
-                $campaign->image = $imagePath;
+                $filename = date('YmdHi').$image->getClientOriginalName();
+                $image -> move(public_path('/campaing_image'), $filename);
+                $campaign->image = $filename;
             }
             $campaign->assigned_agent = $request->input('agent_id');
             $campaign->status = 1;
@@ -56,7 +58,7 @@ class CampaignController extends Controller
             
             // Assign an agent
 
-            
+            Alert::success('Success', 'Campaign created successfully.'); 
             return redirect()->route('campaigns.index')->with('success', 'Campaign created successfully.');
         }
 
@@ -107,7 +109,7 @@ class CampaignController extends Controller
     $campaign->status= $request->input('campaigns_status');
     $campaign->save();
     
-    
+    Alert::success('Success', 'Campaign updated successfully.'); 
     return redirect()->route('campaigns.index')->with('success', 'Campaign updated successfully.');
 }
 
@@ -124,7 +126,7 @@ public function destroy($id)
     
     
     $campaign->delete();
-    
+    Alert::warning('Delete', 'Campaign deleted successfully.');
     return redirect()->route('campaigns.index')->with('success', 'Campaign deleted successfully.');
 }
 }

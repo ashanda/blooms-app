@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CustomerTreatment;
 use App\Models\Treatment;
 use Illuminate\Http\Request;
-
+use RealRashid\SweetAlert\Facades\Alert;
 class TreatmentController extends Controller
 {
     /**
@@ -107,7 +107,7 @@ class TreatmentController extends Controller
         $treatment->other_expense = $request->other_expense;
         $treatment->note = $request->note;
         $treatment->save();
-    
+        Alert::success('Success', 'Treatment updated successfully');
         return redirect()->route('treatment.index')->with('success', 'Treatment updated successfully');
     }
 
@@ -124,7 +124,7 @@ class TreatmentController extends Controller
 
             // Delete the treatment
             $treatment->delete();
-
+            Alert::success('Success', 'Treatment deleted successfully');
             // Redirect or perform any other necessary actions
             return redirect()->back()->with('success', 'Treatment deleted successfully');
     }

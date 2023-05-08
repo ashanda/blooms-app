@@ -23,6 +23,7 @@
   <!-- CSS Files -->
   <link id="pagestyle" href="{{ asset('css/soft-ui-dashboard.css?v=1.1.1')}}" rel="stylesheet" />
   <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.min.css">
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
@@ -37,6 +38,7 @@
     <!-- End Navbar -->
     <div class="container-fluid py-4">
     <!-- Main content -->
+        @include('sweetalert::alert')
         @yield('content')
     <!--End Main content -->
     </div>
@@ -61,6 +63,8 @@
   <script src="{{ asset('js/plugins/jkanban/jkanban.js')}}"></script>
   <script src="{{ asset('js/plugins/chartjs.min.js')}}"></script>
   
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.min.js"></script>
+ 
   <script>
     
     var ctx1 = document.getElementById("chart-line-1").getContext("2d");

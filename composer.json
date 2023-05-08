@@ -17,7 +17,8 @@
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.1",
-        "maddhatter/laravel-fullcalendar": "*"
+        "maddhatter/laravel-fullcalendar": "*",
+        "realrashid/sweet-alert": "^7.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

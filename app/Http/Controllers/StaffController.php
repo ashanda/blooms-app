@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use App\Models\User;
 use App\Models\Role;
-
+use RealRashid\SweetAlert\Facades\Alert;
 class StaffController extends Controller
 {
     /**
@@ -62,7 +62,7 @@ class StaffController extends Controller
             'phone_number' => $request->phone_number,
             'role_id' => $request->role_id
         ]);
-        
+        Alert::success('Success', 'Member registered successfully!');
         return redirect()->back()->with('message', 'Member registered successfully!');
     }
 
@@ -130,7 +130,7 @@ class StaffController extends Controller
             'phone_number' => $request->phone_number,
             'role_id' => $request->role_id
         ]);
-        
+        Alert::success('Success', 'Member updated successfully!');
         return redirect()->route('staff.index')->with('message', 'Member updated successfully!');
     }
 
@@ -161,7 +161,7 @@ class StaffController extends Controller
             
         $staff = User::find($id); 
         $staff->delete();
-
+        Alert::success('Success', 'Member deleted successfully!');
         return redirect()->route('staff.index')->with('message', 'Member deleted successfully!');
     }
 }

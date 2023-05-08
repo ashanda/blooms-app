@@ -8,6 +8,7 @@ use App\Models\PatientDocs;
 use App\Models\CustomerTreatment;
 use App\Models\Treatment;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 class PatientDocsController extends Controller
 {
     public function saveDocs(Request $request){
@@ -23,12 +24,14 @@ class PatientDocsController extends Controller
         $dropdown = $dropdownFields[$index];
 
         // Save $upload to the public folder
-        $path = $upload->store('public/patient_docs');
-
+        
+        $file= $upload;
+        $filename = date('YmdHi').$file->getClientOriginalName();
+        $file -> move(public_path('/patient_docs'), $filename);
         // Save the file path and dropdown value to the database
         $document = new PatientDocs();
         $document->appoinment_id = $appoinment_id ;
-        $document->document = $path;
+        $document->document = $filename;
         $document->document_type = $dropdown;
         $document->save();
     }
@@ -72,6 +75,7 @@ class PatientDocsController extends Controller
         $appointment->save();
     }
     // Redirect or perform any other necessary actions
+    Alert::success('Success', 'Patient Document Uploads successfully');
     return redirect()->route('home')->with('message', 'Member updated successfully!');
 
 }
