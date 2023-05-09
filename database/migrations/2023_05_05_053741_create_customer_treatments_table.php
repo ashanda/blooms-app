@@ -18,6 +18,7 @@ class CreateCustomerTreatmentsTable extends Migration
             $table->string('appoinment_id');
             $table->string('customer_id');
             $table->string('assistant');
+            $table->string('doctor_id');
             $table->string('treatment');
             $table->string('status')->default('waiting')->comment('done','waiting');
             $table->timestamps();

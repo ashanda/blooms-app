@@ -65,7 +65,7 @@ Route::group(['middleware' => ['auth', 'doctor']], function () {
     Route::get('/appointment', [App\Http\Controllers\AppointmentController::class, 'view'])->name('appointment.view');
 
     Route::get('/patient_data', [PatientDocsController::class, 'all'])->name('patient.all');
-    Route::get('/patient_data/{id}', [PatientDocsController::class, 'docs'])->name('patient.docs');
+    Route::get('/patient_data/{id}', [PatientDocsController::class, 'docs'])->name('patient.data');
 
 
 });

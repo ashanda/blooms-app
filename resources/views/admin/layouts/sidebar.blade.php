@@ -229,7 +229,7 @@
   @endif
 
   @if(Auth::user()->role->name == 'Doctor')
-  <hr class="horizontal dark" />
+  
   <li class="nav-item">
     <a  href="{{ route('patient.all') }}" class="nav-link " aria-controls="pagesExamples" role="button" aria-expanded="false">
       <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">

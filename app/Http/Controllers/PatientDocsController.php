@@ -19,7 +19,8 @@ class PatientDocsController extends Controller
         $dropdownFields = $request->input('dropdown');
         $appointmentDateTime = $request->appointmentDateTime;
     // Process the fields as needed
-
+    $current_appoinment_data = Appointment::where('appointment_id','=',$appoinment_id)->first();
+ 
     // Example: Save the fields to the database
     foreach ($uploadFields as $index => $upload) {
         $dropdown = $dropdownFields[$index];
@@ -32,6 +33,8 @@ class PatientDocsController extends Controller
         // Save the file path and dropdown value to the database
         $document = new PatientDocs();
         $document->appoinment_id = $appoinment_id ;
+        $document->customer_id = $current_appoinment_data->customer_id ;
+        $document->doctor_id = $current_appoinment_data->doctor_id ;
         $document->document = $filename;
         $document->document_type = $dropdown;
         $document->save();
@@ -53,7 +56,7 @@ class PatientDocsController extends Controller
 
     //Create appoinment Assistant
     if($appointmentDateTime){
-        $current_appoinment_data = Appointment::where('appointment_id','=',$appoinment_id)->first();
+        
         $random_number = '#' . mt_rand(100000, 999999);
         // Create a new appointment instance
         $appointment = new Appointment();
@@ -62,7 +65,7 @@ class PatientDocsController extends Controller
         }
         $treatment = Treatment::where('treatment_name',$current_appoinment_data->treatment)->first();   
         $appointment->appointment_id = $random_number.'-'.$treatment->treatment_code ;
-        $appointment->customer_id = $random_number ;
+        $appointment->customer_id = $current_appoinment_data->customer_id ;
         $appointment->customer_name = $current_appoinment_data->customer_name;
         $appointment->customer_phone = $current_appoinment_data->customer_phone;
         $appointment->customer_address = $current_appoinment_data->customer_address;
@@ -84,23 +87,27 @@ class PatientDocsController extends Controller
 
     public function all(Request $request){
         //get appinment id base it docs
-        $doc_patients = DB::table('appointments')
-        ->join('customers', 'customers.customer_id', '=', 'appointments.customer_id')
-        ->select('appointments.appointment_id as appointment_id','customers.name','customers.phone')
-        ->where('appointments.doctor_id', Auth::user()->id)
-        ->get();
+        $doc_patients = DB::table('customers')
+            ->join('patient_docs', 'customers.customer_id', '=', 'patient_docs.customer_id')
+            ->select('customers.customer_id as customer_id', 'customers.name', 'customers.phone')
+            ->where('patient_docs.doctor_id', Auth::user()->id)
+            ->distinct('customers.customer_id')
+            ->get();
+
         $pageTitle = 'Patient Documents';
-        return view('admin.patient.index',compact('doc_patients','$pageTitle'));
+        return view('admin.patient.index',compact('doc_patients','pageTitle'));
     }
 
-    public function show(){
+    public function docs($id){
         //get appinment id base it docs
-        DB::table('appointments')
-        ->join('patient_docs', 'appointments.appointment_id', '=', 'patient_docs.appoinment_id')
-        ->join('customers', 'customers.customer_id', '=', 'appointments.customer_id')
-        ->select('appointments.id as appointment_id', 'patient_docs.*','customers.name','customers.phone')
-        ->where('appointments.doctor_id', Auth::user()->id)
+        $patients_docs = DB::table('patient_docs')
+        ->Join('appointments', 'appointments.appointment_id', '=', 'patient_docs.appoinment_id')
+        ->where('patient_docs.customer_id', $id)
         ->get();
+    
+        $pageTitle = 'Patient Documents';
+
+        return view('admin.patient.show', compact('patients_docs','pageTitle'));
     }
     
 }

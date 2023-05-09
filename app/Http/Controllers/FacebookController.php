@@ -24,49 +24,51 @@ class FacebookController extends Controller
     
     {
         
-        try {
-            $accessToken = env('YOUR_ACCESS_TOKEN');
+        // try {
+        //     $accessToken = env('YOUR_ACCESS_TOKEN');
     
-            $response = $this->fb->get('/me/adaccounts', $accessToken);
-            $adAccounts = $response->getGraphEdge()->asArray();
+        //     $response = $this->fb->get('/me/adaccounts', $accessToken);
+        //     $adAccounts = $response->getGraphEdge()->asArray();
     
-            $adsData = [];
+        //     $adsData = [];
 
-            foreach ($adAccounts as $account) {
-                $adAccountID = $account['id'];
+        //     foreach ($adAccounts as $account) {
+        //         $adAccountID = $account['id'];
 
-                $adsResponse = $this->fb->get("/{$adAccountID}/ads", $accessToken);
-                $ads = $adsResponse->getGraphEdge()->asArray();
+        //         $adsResponse = $this->fb->get("/{$adAccountID}/ads", $accessToken);
+        //         $ads = $adsResponse->getGraphEdge()->asArray();
 
-                foreach ($ads as $ad) {
-                    $adID = $ad['id'];
+        //         foreach ($ads as $ad) {
+        //             $adID = $ad['id'];
 
-                    $insightsResponse = $this->fb->get("/{$adID}/ads?fields=ad_id,ad_name,reach,impressions,spend,clicks&action_attribution_windows=['1d_click','7d_click']", $accessToken);
-                    $insights = $insightsResponse->getGraphEdge()->asArray();
-                    dd($insights );
-                    foreach ($insights as $insight) {
-                        $adData = [
-                            'ad_id' => $insight['ad_id'],
-                            'ad_name' => $insight['ad_name'],
-                            'reach' => $insight['reach'],
-                            'impressions' => $insight['impressions'],
-                            'spend' => $insight['spend'],
-                            'clicks' => $insight['clicks'],
-                            'date_stop' => $insight['date_stop'],
-                        ];
+        //             $insightsResponse = $this->fb->get("/{$adID}/ads?fields=ad_id,ad_name,reach,impressions,spend,clicks&action_attribution_windows=['1d_click','7d_click']", $accessToken);
+        //             $insights = $insightsResponse->getGraphEdge()->asArray();
+        //             dd($insights );
+        //             foreach ($insights as $insight) {
+        //                 $adData = [
+        //                     'ad_id' => $insight['ad_id'],
+        //                     'ad_name' => $insight['ad_name'],
+        //                     'reach' => $insight['reach'],
+        //                     'impressions' => $insight['impressions'],
+        //                     'spend' => $insight['spend'],
+        //                     'clicks' => $insight['clicks'],
+        //                     'date_stop' => $insight['date_stop'],
+        //                 ];
 
-                        $adsData[] = $adData;
+        //                 $adsData[] = $adData;
 
-                    }
-                }
-            }
+        //             }
+        //         }
+        //     }
        
-            return response()->json($adsData);
+        //     return response()->json($adsData);
 
-        } catch (FacebookResponseException $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
-        } catch (FacebookSDKException $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
-        }
+        // } catch (FacebookResponseException $e) {
+        //     return response()->json(['error' => $e->getMessage()], 500);
+        // } catch (FacebookSDKException $e) {
+        //     return response()->json(['error' => $e->getMessage()], 500);
+        // }
+
+        return view('accounts');
 }
 }

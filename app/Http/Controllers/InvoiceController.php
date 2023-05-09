@@ -16,13 +16,14 @@ class InvoiceController extends Controller
         $customer = Customer::where('customer_id',$request->customer_id)->first();
         
         if($customer){
-            
+           
         }else{
-            $customer = new Customer();
-            $customer->customer_id = $request->customer_id;
-            $customer->name = $request->name;
-            $customer->phone = $request->phone;
-            $customer->save();
+        
+        $customer = new Customer();
+        $customer->customer_id = $request->customer_id;
+        $customer->name = $request->name;
+        $customer->phone = $request->phone;
+        $customer->save();
         }
         
        // Appoinment Status Change
@@ -43,6 +44,7 @@ class InvoiceController extends Controller
         $customer->appoinment_id = $request->appoinment_id;
         $customer->customer_id = $request->customer_id;
         $customer->assistant = $request->assistant;
+        $customer->doctor_id = $convert->doctor_id;
         $customer->treatment = $request->treatment;
         $customer->save();
 

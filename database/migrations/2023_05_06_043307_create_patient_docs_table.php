@@ -16,6 +16,8 @@ class CreatePatientDocsTable extends Migration
         Schema::create('patient_docs', function (Blueprint $table) {
             $table->id();
             $table->string('appoinment_id');
+            $table->string('customer_id');
+            $table->string('doctor_id');
             $table->string('document');
             $table->string('document_type');
             $table->timestamps();
