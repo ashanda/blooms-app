@@ -17,6 +17,7 @@ class CreateTreatmentsTable extends Migration
             $table->id();
             $table->string('treatment_code');
             $table->string('treatment_name');
+            $table->string('doctor_id');
             $table->string('treatment_time');
             $table->float('face_value', 8, 2);
             $table->float('actual_value', 8, 2);

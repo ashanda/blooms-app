@@ -55,6 +55,7 @@ class AppointmentController extends Controller
         $appointment->customer_phone = $request->phone;
         $appointment->customer_address = $request->address;
         $appointment->treatment = $request->treatments;
+        $appointment->doctor_id = $request->doctors;
         $appointment->source = $request->source;
         $appointment->ads_name = $request->ads_name;
         $appointment->appointment_date_time = $request->appointmentDateTime;

@@ -22,6 +22,7 @@ class CreateAppointmentsTable extends Migration
             $table->string('customer_phone');
             $table->string('customer_address')->nullable();
             $table->string('treatment');
+            $table->string('doctor_id');
             $table->string('source')->comment('ads,direct,reffrell,front_office,personal');
             $table->string('ads_name')->nullable();
             $table->dateTime('appointment_date_time');

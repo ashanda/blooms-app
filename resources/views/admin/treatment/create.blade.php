@@ -25,7 +25,17 @@
                   <label for="treatment_name">Treatment Name:</label>
                   <input type="text" name="treatment_name" id="treatment_name" class="form-control">
                 </div>
-              
+                <div class="form-group">
+                  <label for="treatment_name">Doctor Name:</label>
+                  <select name="doctor_id" id="doctor_id" class="form-control">
+                    @foreach ($doctors as $doctor)
+                      <option value="{{ $doctor->id}}">{{ $doctor->name }}</option>
+                    @endforeach
+                    
+                  </select>
+                  
+                </div>
+               
                 <div class="form-group">
                   <label for="treatment_time">Time:</label>
                   <input type="text" name="treatment_time" id="treatment_time" class="form-control">

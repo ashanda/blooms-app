@@ -551,7 +551,13 @@
                   @endforeach
                 </select>
               </div>
-              
+
+              <label for="treatments">Doctors</label>
+              <div class="input-group mb-3">
+              <select class="form-control" id="doctors" name="doctors">
+                <!-- Doctors options will be populated dynamically -->
+             </select>
+            </div>
               <label for="source">Source</label>
               <div class="input-group mb-3">
                 <select class="form-control" id="sourceSelect" name="source" required>

@@ -67,32 +67,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="row p-2">
-                            <div class="col-lg-6">
-                                <label for="education">Degree</label>
-                                <input type="text" name="education"
-                                    class="form-control @error('education') is-invalid @enderror"
-                                    value="{{$staff->education}}" >
-
-                                @error('education')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                            <div class="col-lg-6">
-                                <label for="address">Address</label>
-                                <input type="text" name="address"
-                                    class="form-control @error('address') is-invalid @enderror" value="{{ $staff->address }}"
-                                    >
-
-                                @error('address')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+                        
                         <div class="row p-2">
                             <div class="col-lg-6">
                                 <label for="phone_number">Phone Number</label>
@@ -106,46 +81,11 @@
                                     </span>
                                 @enderror
                             </div>
-                            <div class="col-lg-6">
-                                <label for="department">Specialisation</label>
-                                <select class="form-control @error('department') is-invalid @enderror" name="department" value="{{ $staff->department}}">
-                                    @foreach(['GP', 'PCP', 'Physician', 'Nurse'] as $department)
-                                        <option value="{{ $department }}" @if($staff->department == $department) selected @endif>{{ $department }}</option>
-                                    @endforeach
-                                </select>
-                                @error('department')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
                         </div>
                         <div class="row p-2 d-flex ">
-                            <div class="col-lg-9">
-                                <label for="description">About</label>
-                                <textarea class="form-control @error('description') is-invalid @enderror" name="description"
-                                    rows="4">{{ $staff->description }}</textarea>
-
-                                @error('description')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
                             <div class="col-lg-3">
                                 <div class="d-flex flex-column ">
-                                    <div class="p-1">
-                                        <label>Photo</label>
-                                        <input type="file" class="form-control @error('image') is-invalid @enderror" name="image" style="color:transparent">
-                                        <span class="input-group-append"></span>
-
-                                        @error('image')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-
+                                
                                     <div class="p-1">
                                         <label for="role_id">Role</label>
                                         <select class="form-control @error('role_id') is-invalid @enderror" name="role_id" value="{{ $staff->role_id }}">

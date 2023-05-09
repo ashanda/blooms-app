@@ -114,14 +114,7 @@ class StaffController extends Controller
         ]);
         
         $staff = User::find($id);
-        $image = $staff->image;
-        
-        if($request->hasFile('image'))
-        {
-            if(file_exists(public_path('images/' . $image)) && $image != '')
-                unlink(public_path('images/' . $image));
-            $image = $this->imgHandle($request);
-        }
+       
         
         $staff->update([
             'name' => $request->name,

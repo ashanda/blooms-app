@@ -8,6 +8,7 @@ use App\Models\PatientDocs;
 use App\Models\CustomerTreatment;
 use App\Models\Treatment;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
 class PatientDocsController extends Controller
 {
@@ -66,6 +67,7 @@ class PatientDocsController extends Controller
         $appointment->customer_phone = $current_appoinment_data->customer_phone;
         $appointment->customer_address = $current_appoinment_data->customer_address;
         $appointment->treatment = $current_appoinment_data->treatment;
+        $appointment->doctor_id = $current_appoinment_data->doctor_id;
         $appointment->source = 'Front Office';
         $appointment->ads_name = $current_appoinment_data->ads_name;
         $appointment->appointment_date_time = $appointmentDateTime;
@@ -79,5 +81,26 @@ class PatientDocsController extends Controller
     return redirect()->route('home')->with('message', 'Member updated successfully!');
 
 }
+
+    public function all(Request $request){
+        //get appinment id base it docs
+        $doc_patients = DB::table('appointments')
+        ->join('customers', 'customers.customer_id', '=', 'appointments.customer_id')
+        ->select('appointments.appointment_id as appointment_id','customers.name','customers.phone')
+        ->where('appointments.doctor_id', Auth::user()->id)
+        ->get();
+        $pageTitle = 'Patient Documents';
+        return view('admin.patient.index',compact('doc_patients','$pageTitle'));
+    }
+
+    public function show(){
+        //get appinment id base it docs
+        DB::table('appointments')
+        ->join('patient_docs', 'appointments.appointment_id', '=', 'patient_docs.appoinment_id')
+        ->join('customers', 'customers.customer_id', '=', 'appointments.customer_id')
+        ->select('appointments.id as appointment_id', 'patient_docs.*','customers.name','customers.phone')
+        ->where('appointments.doctor_id', Auth::user()->id)
+        ->get();
+    }
     
 }

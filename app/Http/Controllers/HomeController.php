@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use App\Models\User;
+use App\Models\Treatment;
 class HomeController extends Controller
 {
     /**
@@ -29,5 +30,21 @@ class HomeController extends Controller
         return redirect()->to('/dashboard');
          }
         return redirect()->to('/');
+    }
+
+    public function getDoctors(Request $request)
+    {
+        $selectedTreatments = $request->input('treatments');
+        $get_treatments = Treatment::whereIn('treatment_name', $selectedTreatments)->get();
+        $doctors = [];
+
+        foreach ($get_treatments as $get_treatment) {
+            $doctor = User::where('id', $get_treatment->doctor_id)->first();
+            if ($doctor) {
+                $doctors[] = $doctor;
+            }
+        }
+
+        return response()->json(['doctors' => $doctors]);
     }
 }

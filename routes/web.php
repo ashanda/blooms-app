@@ -10,6 +10,7 @@ use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\TreatmentController;  
 use App\Http\Controllers\PatientDocsController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\HomeController;
 
 
 
@@ -26,6 +27,8 @@ Route::get('/fb',[FacebookController::class, 'index'])->name('fb');
 Route::post('/add_appointment', [AppointmentController::class, 'add_appointment'])->name('add_appointment');
 Route::get('/followups', [FollowUpController::class, 'view'])->name('followups.view');
 Route::post('/followups', [FollowUpController::class, 'show'])->name('followups.show');
+
+
 Route::get('/dashboard', function () {
     $pageTitle = Auth::user()->role->name.' '.'Dashboard';
     return view('dashboard', compact('pageTitle'));
@@ -60,6 +63,11 @@ Route::group(['middleware' => ['auth', 'doctor']], function () {
     //view booked appointments
     Route::post('/appointment', [App\Http\Controllers\AppointmentController::class, 'show'])->name('appointment.show');
     Route::get('/appointment', [App\Http\Controllers\AppointmentController::class, 'view'])->name('appointment.view');
+
+    Route::get('/patient_data', [PatientDocsController::class, 'all'])->name('patient.all');
+    Route::get('/patient_data/{id}', [PatientDocsController::class, 'docs'])->name('patient.docs');
+
+
 });
 
 //Sale Agent CRUD
@@ -102,6 +110,8 @@ Route::post('/treatment/patient_docs', [PatientDocsController::class, 'saveDocs'
 Route::post('/invoice', [InvoiceController::class, 'create'])->name('invoice.create');
 Route::get('/appointments/{appointment}/edit', [AppointmentController::class,'edit'])->name('appointments.edit');
 Route::put('/appointments/{appointment}', [AppointmentController::class,'update'])->name('appointments.update');
+
+Route::get('/getdoctors', [HomeController::class, 'getDoctors']);
 
 
 

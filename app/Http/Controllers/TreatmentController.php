@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CustomerTreatment;
 use App\Models\Treatment;
+use App\Models\User;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 class TreatmentController extends Controller
@@ -28,7 +29,8 @@ class TreatmentController extends Controller
     public function create()
     {
        $pageTitle = 'Create Treatment';
-       return view('admin.treatment.create',compact('pageTitle'));
+       $doctors = User::where('role_id', '=', 3)->get();
+       return view('admin.treatment.create',compact('pageTitle','doctors'));
     }
 
     /**
@@ -45,6 +47,7 @@ class TreatmentController extends Controller
     $treatment = new Treatment();
     $treatment->treatment_code = $request->treatment_code;
     $treatment->treatment_name = $request->treatment_name;
+    $treatment->doctor_id = $request->doctor_id;
     $treatment->treatment_time = $request->treatment_time;
     $treatment->face_value = $request->face_value;
     $treatment->actual_value = $request->actual_value;
@@ -99,6 +102,7 @@ class TreatmentController extends Controller
         $treatment = Treatment::findOrFail($id);
         $treatment->treatment_code = $request->treatment_code;
         $treatment->treatment_name = $request->treatment_name;
+        $treatment->doctor_id = $request->doctor_id;
         $treatment->treatment_time = $request->treatment_time;
         $treatment->face_value = $request->face_value;
         $treatment->actual_value = $request->actual_value;
