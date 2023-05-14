@@ -222,8 +222,56 @@
         </div>
         
         @elseif (Auth::user()->role->name == 'Sales Agent' || Auth::user()->role->name == 'Admin')
-        
         <div class="col-lg-12 col-sm-6">
+          <div class="card">
+            <div class="card-header pb-0 p-3">
+              <h6 class="mb-0">Day Summary</h6>
+            </div>
+            <div class="card-body p-3">
+              <ul class="list-group">
+                @php
+                 $todaysummaries = todaysummary(Auth::user()->id);
+                @endphp
+              
+                <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
+                  
+                   
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th>Agent Name</th>
+                            <th>Whats app call</th>
+                            <th>Whats app Chat</th>
+                            <th>Messenger Chat</th>
+                            <th>Direct Call</th>
+                          </tr>
+                        </thead>
+                        <tbody style="text-align: center;">
+                          @foreach (  $todaysummaries as  $todaysummary)
+                          <tr>
+                            
+                            <td><h6 class="mb-1 text-dark text-sm me-3">{{ findSalesAgent($todaysummary->sale_agent_id)->name }}</h6></td>
+                            <td><h6 class="mb-1 text-dark text-sm me-3">{{ $todaysummary->whatsapp_call }}</h6></td>
+                            <td><h6 class="mb-1 text-dark text-sm">{{ $todaysummary->whatsapp_chat }}</h6></td>
+                            <td><h6 class="mb-1 text-dark text-sm">{{ $todaysummary->messenger_chat }}</h6></td>
+                            <td><h6 class="mb-1 text-dark text-sm">{{ $todaysummary->direct_call }}</h6></td>
+                          </tr>
+                          @endforeach
+                        </tbody>
+                      </table>
+                    </div>
+                    
+                  
+                  
+                </li>
+               
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-12 col-sm-6 mt-5">
           <div class="card">
             <div class="card-header pb-0 p-3">
               <h6 class="mb-0">Day Summary</h6>

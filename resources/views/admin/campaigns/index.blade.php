@@ -31,7 +31,7 @@
                         <td>{{ $campaign->name }}</td>
                         <td>
                             @if ($campaign->image)
-                                <img src="{{ asset('storage/' . $campaign->image) }}" alt="Campaign Image" width="100">
+                                <img src="{{ asset('campaing_image/' . $campaign->image) }}" alt="Campaign Image" width="100">
                             @else
                                 No Image
                             @endif
