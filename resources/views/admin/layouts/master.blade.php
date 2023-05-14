@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <!-- CSRF Token -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('img/apple-icon.png')}}">
-  <link rel="icon" type="image/png" href="{{ asset('img/favicon.png')}}">
+  <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('img/bloom-skin-clinic-logo.png')}}">
+  <link rel="icon" type="image/png" href="{{ asset('img/bloom-skin-clinic-logo.png')}}">
   <title>
     {{  'Bloom Skin Clinic' }}
   </title>
