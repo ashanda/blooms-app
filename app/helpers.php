@@ -93,3 +93,8 @@ function todaysummary($id){
 	return $todaysummaries;
 
 }
+
+function isRouteActive($slug)
+{
+    return request()->is($slug);
+}

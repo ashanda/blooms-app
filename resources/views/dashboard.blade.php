@@ -3,6 +3,20 @@
 @section('content')
 
 <div class="container-fluid py-4">
+  <div class="col-lg-12 mb-5">
+    <div class="card p-3">
+    <div class="overflow-hidden position-relative border-radius-lg bg-cover h-100">
+    <span class="mask bg-gradient-dark"></span>
+    <div class="card-body position-relative z-index-1 h-100 p-3">
+     
+
+
+    <h6 class="text-white font-weight-bolder mb-3">Hey {{ Auth::user()->name }} !</h6>
+    <p class="text-white mb-3">Stay informed with important updates, alerts, and messages regarding your dashboard and its features.</p>
+    </div>
+    </div>
+    </div>
+    </div>
   <div class="row">
     <div class="col-xl-8 col-lg-7">
       @if (Auth::user()->role->name != 'Assistant' && Auth::user()->role->name != 'Doctor')
@@ -100,24 +114,29 @@
       </div>
       @endif
       @if ( Auth::user()->role->name != 'Assistant' && Auth::user()->role->name != 'Doctor')
-      <div class="col-sm-4 mt-sm-0 mt-4">
-        <div class="card border h-100">
+      <div class="col-sm-4 mt-sm-0 mt-4 ">
+        <div class="card border h-100 lead-card">
           <div class="card-body d-flex flex-column justify-content-center text-center">
             <a href="javascript:;" id="add-appointment-link">
               <i class="fa fa-plus text-secondary text-sm mb-1" aria-hidden="true"></i>
+              @if(Auth::user()->role->name == 'Sales Agent')
+              <h6 class="text-secondary">New Lead</h6>
+              @else
               <h6 class="text-secondary">Add Appointment</h6>
+              @endif
+              
             </a>
           </div>
         </div>
       </div>
       @endif
       @if ( Auth::user()->role->name == 'Sales Agent')
-      <div class="col-sm-4 mt-sm-0 mt-4">
-        <div class="card border h-100">
+      <div class="col-sm-4 mt-sm-0 mt-4 ">
+        <div class="card border h-100 lead-card">
           <div class="card-body d-flex flex-column justify-content-center text-center">
             <a href="javascript:;" id="add_day_summery">
               <i class="fa fa-plus text-secondary text-sm mb-1" aria-hidden="true"></i>
-              <h6 class="text-secondary">Add Day Summery</h6>
+              <h6 class="text-secondary">Day Summary</h6>
             </a>
           </div>
         </div>
@@ -228,46 +247,63 @@
               <h6 class="mb-0">Day Summary</h6>
             </div>
             <div class="card-body p-3">
-              <ul class="list-group">
-                @php
-                 $todaysummaries = todaysummary(Auth::user()->id);
-                @endphp
-              
-                <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                  
-                   
-                    <div class="table-responsive">
-                      <table class="table">
-                        <thead>
-                          <tr>
-                            <th>Agent Name</th>
-                            <th>Whats app call</th>
-                            <th>Whats app Chat</th>
-                            <th>Messenger Chat</th>
-                            <th>Direct Call</th>
-                          </tr>
-                        </thead>
-                        <tbody style="text-align: center;">
-                          @foreach (  $todaysummaries as  $todaysummary)
-                          <tr>
-                            
-                            <td><h6 class="mb-1 text-dark text-sm me-3">{{ findSalesAgent($todaysummary->sale_agent_id)->name }}</h6></td>
-                            <td><h6 class="mb-1 text-dark text-sm me-3">{{ $todaysummary->whatsapp_call }}</h6></td>
-                            <td><h6 class="mb-1 text-dark text-sm">{{ $todaysummary->whatsapp_chat }}</h6></td>
-                            <td><h6 class="mb-1 text-dark text-sm">{{ $todaysummary->messenger_chat }}</h6></td>
-                            <td><h6 class="mb-1 text-dark text-sm">{{ $todaysummary->direct_call }}</h6></td>
-                          </tr>
-                          @endforeach
-                        </tbody>
-                      </table>
-                    </div>
-                    
-                  
-                  
-                </li>
-               
-              </ul>
+              <form id="save-form" method="POST" action="{{ route('save_day_summary') }}">
+                @csrf
+            
+                <div class="form-row align-items-center">
+                  <div class="col-auto">
+                    <label for="whatsapp_chat">WhatsApp Chat:</label>
+                  </div>
+                  <div class="col-auto">
+                    <input type="text" class="form-control" id="whatsapp_chat" name="whatsapp_chat">
+                  </div>
+                </div>
+            
+                <div class="form-row align-items-center">
+                  <div class="col-auto">
+                    <label for="whatsapp_call">WhatsApp Call:</label>
+                  </div>
+                  <div class="col-auto">
+                    <input type="text" class="form-control" id="whatsapp_call" name="whatsapp_call">
+                  </div>
+                </div>
+            
+                <div class="form-row align-items-center">
+                  <div class="col-auto">
+                    <label for="messenger_chat">Messenger Chat:</label>
+                  </div>
+                  <div class="col-auto">
+                    <input type="text" class="form-control" id="messenger_chat" name="messenger_chat">
+                  </div>
+                </div>
+            
+                <div class="form-row align-items-center">
+                  <div class="col-auto">
+                    <label for="direct_call">Direct Call:</label>
+                  </div>
+                  <div class="col-auto">
+                    <input type="text" class="form-control" id="direct_call" name="direct_call">
+                  </div>
+                </div>
+            
+                <div class="form-row align-items-center">
+                  <div class="col-auto">
+                    <label for="adsName">Ads Name:</label>
+                  </div>
+                  <div class="col-auto">
+                    <select class="form-control" id="adsName" name="adsName">
+                      @foreach (campaingFind() as $campaign)
+                        <option value="{{ $campaign->id }}">{{ $campaign->name }}</option>
+                      @endforeach
+                    </select>
+                  </div>
+                </div>
+            
+                <hr class="horizontal dark mt-0">
+                <button type="submit" class="btn btn-primary" style="width: 100%;background-color: #82d616;">Save</button>
+              </form>
             </div>
+            
           </div>
         </div>
 
@@ -452,7 +488,14 @@
       <div class="modal-body p-0">
         <div class="card card-plain">
           <div class="card-header pb-0 text-left">
+            @if (auth::user()->role->name != 'Sales Agent')
             <h3 class="font-weight-bolder text-info text-gradient">Add Appointment</h3>
+
+            @else
+            <h3 class="font-weight-bolder text-info text-gradient">New Lead</h3>
+            
+
+            @endif
             
           </div>
           <div class="card-body">
@@ -731,35 +774,66 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modalTitle">WhatsApp and Messenger Options</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <h5 class="modal-title" id="modalTitle">Day Summary</h5>
+     
       </div>
       <div class="modal-body">
         <form id="save-form" method="POST" action="{{ route('save_day_summary') }}">
           @csrf
-          <p>WhatsApp Chat: <input type="text" name="whatsapp_chat"></p>
-          <p>WhatsApp Call: <input type="text" name="whatsapp_call"></p>
-          <p>Messenger Chat: <input type="text" name="messenger_chat"></p>
-          <p>Direct Call: <input type="text" name="direct_call"></p>
-          <div id="adsNameFieldWrapper" class="mb-3">
-            <label for="adsName">Ads Name</label>
-            <div class="input-group">
+      
+          <div class="form-row align-items-center">
+            <div class="col-auto">
+              <label for="whatsapp_chat">WhatsApp Chat:</label>
+            </div>
+            <div class="col-auto">
+              <input type="text" class="form-control" id="whatsapp_chat" name="whatsapp_chat">
+            </div>
+          </div>
+      
+          <div class="form-row align-items-center">
+            <div class="col-auto">
+              <label for="whatsapp_call">WhatsApp Call:</label>
+            </div>
+            <div class="col-auto">
+              <input type="text" class="form-control" id="whatsapp_call" name="whatsapp_call">
+            </div>
+          </div>
+      
+          <div class="form-row align-items-center">
+            <div class="col-auto">
+              <label for="messenger_chat">Messenger Chat:</label>
+            </div>
+            <div class="col-auto">
+              <input type="text" class="form-control" id="messenger_chat" name="messenger_chat">
+            </div>
+          </div>
+      
+          <div class="form-row align-items-center">
+            <div class="col-auto">
+              <label for="direct_call">Direct Call:</label>
+            </div>
+            <div class="col-auto">
+              <input type="text" class="form-control" id="direct_call" name="direct_call">
+            </div>
+          </div>
+      
+          <div class="form-row align-items-center">
+            <div class="col-auto">
+              <label for="adsName">Ads Name:</label>
+            </div>
+            <div class="col-auto">
               <select class="form-control" id="adsName" name="adsName">
-                @foreach ( campaingFind() as $campain)
-                       <option value="{{ $campain->id  }}">{{ $campain->name }}</option>
+                @foreach (campaingFind() as $campaign)
+                  <option value="{{ $campaign->id }}">{{ $campaign->name }}</option>
                 @endforeach
               </select>
             </div>
           </div>
-          <button type="submit" class="btn btn-primary">Save</button>
-         
+      
+          <hr class="horizontal dark mt-0">
+          <button type="submit" class="btn btn-primary" style="width: 100%;background-color: #82d616;">Save</button>
         </form>
       </div>      
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-      </div>
     </div>
   </div>
 </div>

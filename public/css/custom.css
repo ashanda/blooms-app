@@ -21,3 +21,14 @@
 .search{
   margin-bottom: 0 !important;
 }
+
+.lead-card{
+  background-color: #82d616;
+}
+
+.lead-card h6{
+  color: #ffffff !important;
+}
+.lead-card i{
+  color: #ffffff !important;
+}

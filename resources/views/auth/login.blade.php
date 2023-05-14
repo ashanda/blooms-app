@@ -45,23 +45,23 @@
                   </div>
                 </form>
               </div>
-              <div class="card-footer text-center pt-0 px-lg-2 px-1">
+              {{-- <div class="card-footer text-center pt-0 px-lg-2 px-1">
                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
                                         {{ __('Forgot Your Password?') }}
                                     </a>
                  @endif
-              </div>
+              </div> --}}
             </div>
           </div>
           <div class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 end-0 text-center justify-content-center flex-column">
             <div class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center">
               <img src="{{ asset('img/shapes/pattern-lines.svg')}}" alt="pattern-lines" class="position-absolute opacity-4 start-0">
               <div class="position-relative">
-                <img class="max-width-500 w-100 position-relative z-index-2" src="{{ asset('img/illustrations/chat.png')}}" alt="chat-img">
+                <img class="max-width-500 w-100 position-relative z-index-2" src="{{ asset('img/illustrations/bloom-skin-clinic-logo.png')}}" alt="chat-img">
               </div>
-              <h4 class="mt-5 text-white font-weight-bolder">"Attention is the new currency"</h4>
-              <p class="text-white">The more effortless the writing looks, the more effort the writer actually put into the process.</p>
+              <h4 class="mt-5 text-white font-weight-bolder">"Bloom Skin Care: Enhance Your Natural Beauty and Nourish Your Skin"</h4>
+              
             </div>
           </div>
         </div>
