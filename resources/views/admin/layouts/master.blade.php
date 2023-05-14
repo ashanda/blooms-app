@@ -603,8 +603,34 @@ function createInitialFields() {
         });
      });
   });
+
+
+
+
 </script>
 
+<script>
+$(document).ready(function() {
+  $('#adsName').change (function() {
+    var selectedCampaign = $(this).val();
+
+    // Make an AJAX request to the backend route
+    $.ajax({
+      url: '/get-related-image',
+      type: 'GET',
+      data: { campaignId: selectedCampaign },
+      success: function(response) {
+        // Update the image source with the received URL or image path
+        $('#relatedImage').attr('src', response);
+      },
+      error: function(xhr) {
+        // Handle error
+        console.log(xhr.responseText);
+      }
+    });
+  });
+});
+</script>
 </body>
 
 </html>

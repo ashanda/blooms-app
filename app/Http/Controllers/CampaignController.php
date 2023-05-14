@@ -129,4 +129,16 @@ public function destroy($id)
     Alert::warning('Delete', 'Campaign deleted successfully.');
     return redirect()->route('campaigns.index')->with('success', 'Campaign deleted successfully.');
 }
+
+
+public function getRelatedImage(Request $request)
+  {
+    $campaignId = $request->input('campaignId');
+    // Get the URL or image path based on the campaign ID
+    $campaign = Campaign::find($campaignId);
+    $imagePath = $campaign->$campaign;
+    // Retrieve the image path or URL based on the campaign ID
+    return $imagePath;
+  }
+
 }

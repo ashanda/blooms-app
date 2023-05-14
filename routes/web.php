@@ -11,6 +11,7 @@ use App\Http\Controllers\TreatmentController;
 use App\Http\Controllers\PatientDocsController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CampaignController;
 
 
 
@@ -22,6 +23,8 @@ Route::get('/', function () {
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
 
 Route::get('/fb',[FacebookController::class, 'index'])->name('fb');
 Route::post('/add_appointment', [AppointmentController::class, 'add_appointment'])->name('add_appointment');
@@ -112,7 +115,7 @@ Route::get('/appointments/{appointment}/edit', [AppointmentController::class,'ed
 Route::put('/appointments/{appointment}', [AppointmentController::class,'update'])->name('appointments.update');
 
 Route::get('/getdoctors', [HomeController::class, 'getDoctors']);
-
+Route::get('/get-related-image', [CampaignController::class , 'getRelatedImage']);
 
 
 });

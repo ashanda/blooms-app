@@ -546,10 +546,14 @@
                 </select>
               </div>
             
+              <div id="imageContainer">
+                <img id="relatedImage" src="" alt="Related Image">
+              </div>
+
               <div id="adsNameFieldWrapper" class="mb-3">
                 <label for="adsName">Ads Name</label>
                 <div class="input-group">
-                  <select class="form-control" id="adsName" name="adsName">
+                  <select class="form-control" id="adsName" name="adsName" >
                     @foreach ( campaingFind() as $campain)
                            <option value="{{ $campain->id  }}">{{ $campain->name }}</option>
                     @endforeach
