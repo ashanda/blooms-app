@@ -12,7 +12,7 @@ use App\Http\Controllers\PatientDocsController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CampaignController;
-
+use app\Http\Controllers\LeadController;
 
 
 
@@ -26,7 +26,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 
-Route::get('/fb',[FacebookController::class, 'index'])->name('fb');
+
 Route::post('/add_appointment', [AppointmentController::class, 'add_appointment'])->name('add_appointment');
 Route::get('/followups', [FollowUpController::class, 'view'])->name('followups.view');
 Route::post('/followups', [FollowUpController::class, 'show'])->name('followups.show');
@@ -103,6 +103,7 @@ Route::get('/ongoing_appointments', [AppointmentController::class, 'ongoing_appo
 Route::get('/missed_appointments', [AppointmentController::class, 'missed_appoinment'])->name('missed_appoinment');
 Route::get('/converted_appointments', [AppointmentController::class, 'converted_appoinment'])->name('converted_appoinment');
 Route::get('/assign_appointments', [AppointmentController::class, 'assign_appoinment'])->name('assign_appoinment');
+Route::get('/recurring_appointments', [AppointmentController::class, 'recurring_appoinment'])->name('recurring_appoinment');
 
 Route::get('/appointments/search', [AppointmentController::class, 'search'])->name('appointments.search');
 
@@ -113,9 +114,12 @@ Route::post('/treatment/patient_docs', [PatientDocsController::class, 'saveDocs'
 Route::post('/invoice', [InvoiceController::class, 'create'])->name('invoice.create');
 Route::get('/appointments/{appointment}/edit', [AppointmentController::class,'edit'])->name('appointments.edit');
 Route::put('/appointments/{appointment}', [AppointmentController::class,'update'])->name('appointments.update');
+Route::get('/new_appointment', [App\Http\Controllers\AppointmentController::class, 'new_appointment'])->name('appointment.new_appointment');
+
+Route::resource('lead', App\Http\Controllers\LeadController::class);
 
 Route::get('/getdoctors', [HomeController::class, 'getDoctors']);
-Route::get('/get-related-image', [CampaignController::class , 'getRelatedImage']);
+Route::get('/getrelatedimage', [HomeController::class, 'getRelatedImage']);
 
 
 });

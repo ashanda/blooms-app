@@ -74,6 +74,7 @@ class PatientDocsController extends Controller
         $appointment->source = 'Front Office';
         $appointment->ads_name = $current_appoinment_data->ads_name;
         $appointment->appointment_date_time = $appointmentDateTime;
+        $appointment->status = 'recurring';
         $appointment->note = $request->note;
        
         // Save the appointment

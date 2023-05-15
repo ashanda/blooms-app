@@ -24,6 +24,7 @@
   <link id="pagestyle" href="{{ asset('css/soft-ui-dashboard.css?v=1.1.1')}}" rel="stylesheet" />
   <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.min.css">
+  
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
@@ -64,7 +65,11 @@
   <script src="{{ asset('js/plugins/chartjs.min.js')}}"></script>
   
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.min.js"></script>
- 
+   <!-- Github buttons -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src="{{ asset('js/soft-ui-dashboard.min.js?v=1.1.1')}}"></script>
+
   <script>
     
     var ctx1 = document.getElementById("chart-line-1").getContext("2d");
@@ -283,9 +288,14 @@ document.getElementById('add-customer-link').addEventListener('click', function(
 });
 </script>
 @endif
+
 <script>
 document.getElementById('add-appointment-link').addEventListener('click', function() {
   $('#modal-form').modal('show');
+});
+
+document.getElementById('add-lead-link').addEventListener('click', function() {
+  $('#new-lead').modal('show');
 });
 
 document.getElementById('patient_docs').addEventListener('click', function() {
@@ -299,7 +309,7 @@ document.getElementById('add_day_summery').addEventListener('click', function() 
 
 document.getElementById('sourceSelect').addEventListener('change', function() {
   var adsNameFieldWrapper = document.getElementById('adsNameFieldWrapper');
-  var adsNameSelect = document.getElementById('adsNameSelect');
+  var adsNameSelect = document.getElementById('adsName');
   
   if (this.value === 'Ads') {
     adsNameFieldWrapper.style.display = 'block';
@@ -308,6 +318,27 @@ document.getElementById('sourceSelect').addEventListener('change', function() {
     adsNameFieldWrapper.style.display = 'none';
     adsNameSelect.classList.remove('form-control-sm');
   }
+});
+
+// AJAX call to get the selected option value
+$('#adsName').change(function() {
+  var selectedOptionValue = $(this).val();
+  
+  // Perform your AJAX request using the selectedOptionValue
+  // Example AJAX call:
+  $.ajax({
+    url: '/getrelatedimage',
+    method: 'POST',
+    data: { optionValue: selectedOptionValue },
+    success: function(response) {
+      // Handle the AJAX response
+      console.log(response);
+    },
+    error: function(xhr, status, error) {
+      // Handle the AJAX error
+      console.log('error');
+    }
+  });
 });
 
 </script> 
@@ -371,10 +402,7 @@ function createInitialFields() {
   return fieldsContainer;
 }
 </script>
-  <!-- Github buttons -->
-  <script async defer src="https://buttons.github.io/buttons.js"></script>
-  <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="{{ asset('js/soft-ui-dashboard.min.js?v=1.1.1')}}"></script>
+
 
 
 <script>
@@ -576,7 +604,6 @@ function createInitialFields() {
     balanceInput.value = balance.toFixed(2); // Adjust the decimal places as needed
   }
 </script>
-
 <script>
   $(document).ready(function() {
      $('#treatments').change(function() {
@@ -603,33 +630,6 @@ function createInitialFields() {
         });
      });
   });
-
-
-
-
-</script>
-
-<script>
-$(document).ready(function() {
-  $('#adsName').change (function() {
-    var selectedCampaign = $(this).val();
-
-    // Make an AJAX request to the backend route
-    $.ajax({
-      url: '/get-related-image',
-      type: 'GET',
-      data: { campaignId: selectedCampaign },
-      success: function(response) {
-        // Update the image source with the received URL or image path
-        $('#relatedImage').attr('src', response);
-      },
-      error: function(xhr) {
-        // Handle error
-        console.log(xhr.responseText);
-      }
-    });
-  });
-});
 </script>
 </body>
 

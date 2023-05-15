@@ -4,6 +4,8 @@ use App\Models\User;
 use App\Models\Treatment;
 use App\Models\Campaign;
 use App\Models\DaySummery;
+use App\Models\Lead;
+use App\Models\Appointment;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
@@ -97,4 +99,43 @@ function todaysummary($id){
 function isRouteActive($slug)
 {
     return request()->is($slug);
+}
+
+
+function all_leads_count(){
+	if(Auth::user()->role->name == 'Admin'){
+		$all_leads = Lead::count();
+	}else{
+		$all_leads =Lead::where('agent_id', Auth::user()->id)->count();
+	}
+	return $all_leads;
+}
+
+function all_appoinments_count(){
+	if(Auth::user()->role->name == 'Admin'){
+		$all_appoinments = Appointment::count();
+	}else{
+		$all_appoinments =Appointment::where('agent_id', Auth::user()->id)->count();
+	}
+	return $all_appoinments;
+}
+
+function all_missed_appoinments_count(){
+	if(Auth::user()->role->name == 'Admin'){
+		$all_missed_appoinments = Appointment::where('status', 'missed')->count();
+	}else{
+		$all_missed_appoinments = Appointment::where('status', 'missed')
+											  ->where('agent_id', Auth::user()->id)->count();
+	}
+	return $all_missed_appoinments;
+}
+
+function all_ongoing_appoinments_count(){
+	if(Auth::user()->role->name == 'Admin'){
+		$all_missed_appoinments = Appointment::where('status', 'missed')->count();
+	}else{
+		$all_missed_appoinments = Appointment::where('status', 'ongoing')
+											  ->where('agent_id', Auth::user()->id)->count();
+	}
+	return $all_missed_appoinments;
 }

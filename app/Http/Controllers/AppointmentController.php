@@ -136,6 +136,20 @@ class AppointmentController extends Controller
         return view('admin.appointment.view', compact('appointments','pageTitle'));
     }
 
+    public function recurring_appoinment(){
+        $pageTitle = 'Recurring Appoinments';
+        if(Auth::user()->role_id == 5){
+            $appointments = Appointment::where('status', 'recurring')
+                                        ->where('agent_id', '=', Auth::user()->id)
+                                        ->get();
+        }else{
+            $appointments = Appointment::where('status', 'recurring')->get();
+        }
+
+        return view('admin.appointment.view', compact('appointments','pageTitle'));
+
+    }
+
     public function edit($id)
     {
         $pageTitle = 'Edit Appoinment';
@@ -175,6 +189,12 @@ class AppointmentController extends Controller
         } else {
             return response()->json(['message' => 'User not found.',401]);
         }
+    }
+
+
+    public function new_appointment(){
+        $pageTitle = 'Create Appoinment';
+        return view('admin.appointment.create', compact('pageTitle'));
     }
 
 }

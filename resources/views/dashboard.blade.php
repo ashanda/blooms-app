@@ -113,18 +113,25 @@
           </div>
       </div>
       @endif
+      @if (Auth::user()->role->name == 'Sales Agent')
+      <div class="col-sm-4 mt-sm-0 mt-4 ">
+        <div class="card border h-100 lead-card">
+          <div class="card-body d-flex flex-column justify-content-center text-center">
+            <a href="javascript:;" id="add-lead-link">
+              <i class="fa fa-plus text-secondary text-sm mb-1" aria-hidden="true"></i>
+              <h6 class="text-secondary">New Lead</h6>
+            </a>
+          </div>
+        </div>
+      </div>
+      @endif
       @if ( Auth::user()->role->name != 'Assistant' && Auth::user()->role->name != 'Doctor')
       <div class="col-sm-4 mt-sm-0 mt-4 ">
         <div class="card border h-100 lead-card">
           <div class="card-body d-flex flex-column justify-content-center text-center">
             <a href="javascript:;" id="add-appointment-link">
               <i class="fa fa-plus text-secondary text-sm mb-1" aria-hidden="true"></i>
-              @if(Auth::user()->role->name == 'Sales Agent')
-              <h6 class="text-secondary">New Lead</h6>
-              @else
-              <h6 class="text-secondary">Add Appointment</h6>
-              @endif
-              
+              <h6 class="text-secondary">New Appointment</h6> 
             </a>
           </div>
         </div>
@@ -488,14 +495,8 @@
       <div class="modal-body p-0">
         <div class="card card-plain">
           <div class="card-header pb-0 text-left">
-            @if (auth::user()->role->name != 'Sales Agent')
+          
             <h3 class="font-weight-bolder text-info text-gradient">Add Appointment</h3>
-
-            @else
-            <h3 class="font-weight-bolder text-info text-gradient">New Lead</h3>
-            
-
-            @endif
             
           </div>
           <div class="card-body">
@@ -546,9 +547,7 @@
                 </select>
               </div>
             
-              <div id="imageContainer">
-                <img id="relatedImage" src="" alt="Related Image">
-              </div>
+              
 
               <div id="adsNameFieldWrapper" class="mb-3">
                 <label for="adsName">Ads Name</label>
@@ -560,7 +559,107 @@
                   </select>
                 </div>
               </div>
+              <div id="imageContainer">
+                <img id="relatedImage" src="" alt="Related Image">
+              </div>
+              
+              <label for="appointmentDateTime">Appointment Date & Time</label>
+              <div class="input-group mb-3">
+                <input class="form-control" type="datetime-local" id="appointmentDateTime" name="appointmentDateTime"  required>
+              </div>
+              
+              <label for="note">Note</label>
+              <div class="input-group mb-3">
+                <textarea class="form-control" id="note" name="note" rows="3"></textarea>
+              </div>
+              
+              <div class="text-center">
+                <button type="submit" class="btn btn-round bg-gradient-info btn-lg w-100 mt-4 mb-0">Add Appointment</button>
+              </div>
+            </form>
             
+          </div>
+        
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="new-lead" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-body p-0">
+        <div class="card card-plain">
+          <div class="card-header pb-0 text-left">
+          
+            <h3 class="font-weight-bolder text-info text-gradient">New Lead</h3>
+            
+          </div>
+          <div class="card-body">
+            <form role="form text-left" action="{{ route('lead.create') }}" method="POST" enctype="multipart/form-data">
+              @csrf
+              <label for="name">Name</label>
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" id="name" name="name" placeholder="Name" aria-label="Name" aria-describedby="name-addon" required>
+              </div>
+              
+              <label for="phone">Phone Number</label>
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone" aria-label="Phone" aria-describedby="phone-addon" required>
+              </div>
+              
+              <label for="address">Address</label>
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" id="address" name="address" placeholder="Address" aria-label="Address" aria-describedby="email-addon">
+              </div>
+              
+              <label for="treatments">Treatments</label>
+              <div class="input-group mb-3">
+                <select class="form-control" id="treatments" name="treatments" multiple required>
+                  @foreach (allTreatments() as $treatment)
+                     <option value="{{ $treatment->treatment_name }}">{{ $treatment->treatment_name }}</option>
+                  @endforeach
+                </select>
+              </div>
+
+              <label for="treatments">Doctors</label>
+              <div class="input-group mb-3">
+              <select class="form-control" id="doctors" name="doctors">
+                <!-- Doctors options will be populated dynamically -->
+             </select>
+            </div>
+              <label for="source">Source</label>
+              <div class="input-group mb-3">
+                <select class="form-control" id="sourceSelect" name="source" required>
+                  @if (Auth::user()->role_id == 5)
+                    <option>Ads</option>
+                    <option>Direct</option>
+                    <option>Personal</option>
+                    <option>Referral</option>
+                  @else
+                      <option>Front Office</option>
+                  @endif
+                  
+                </select>
+              </div>
+            
+              
+
+              <div id="adsNameFieldWrapper" class="mb-3">
+                <label for="adsName">Ads Name</label>
+                <div class="input-group">
+                  <select class="form-control" id="adsName" name="adsName" >
+                    @foreach ( campaingFind() as $campain)
+                           <option value="{{ $campain->id  }}">{{ $campain->name }}</option>
+                    @endforeach
+                  </select>
+                </div>
+              </div>
+              <div id="imageContainer">
+                <img id="relatedImage" src="" alt="Related Image">
+              </div>
+              
               <label for="appointmentDateTime">Appointment Date & Time</label>
               <div class="input-group mb-3">
                 <input class="form-control" type="datetime-local" id="appointmentDateTime" name="appointmentDateTime"  required>
