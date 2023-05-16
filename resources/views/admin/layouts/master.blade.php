@@ -71,35 +71,93 @@
   <script src="{{ asset('js/soft-ui-dashboard.min.js?v=1.1.1')}}"></script>
 
   @yield('scripts')
-
 {{-- get doctoter related treatment --}}
-  <script>
-    $(document).ready(function() {
-       $('#treatments').change(function() {
-          var selectedTreatments = $(this).val(); // Get the selected treatment values
-    
-          // Send AJAX request to retrieve related doctors
-          $.ajax({
-             url: '/getdoctors',
-             type: 'GET',
-             data: { treatments: selectedTreatments },
-             success: function(response) {
-                // Handle the response and populate the doctors select element
-                var doctorsSelect = $('#doctors');
-                doctorsSelect.empty();
-    
-                $.each(response.doctors, function(key, doctor) {
-                   doctorsSelect.append($('<option></option>').val(doctor.id).text(doctor.name));
-                });
-             },
-             error: function(xhr) {
-                // Handle error
-                console.log(xhr.responseText);
-             }
-          });
-       });
-    });
+<script>
+  $(document).ready(function() {
+     $('#treatments').change(function() {
+        var selectedTreatments = $(this).val(); // Get the selected treatment values
+  
+        // Send AJAX request to retrieve related doctors
+        $.ajax({
+           url: '/getdoctors',
+           type: 'GET',
+           data: { treatments: selectedTreatments },
+           success: function(response) {
+              // Handle the response and populate the doctors select element
+              var doctorsSelect = $('#doctors');
+              doctorsSelect.empty();
+  
+              $.each(response.doctors, function(key, doctor) {
+                 doctorsSelect.append($('<option></option>').val(doctor.id).text(doctor.name));
+              });
+           },
+           error: function(xhr) {
+              // Handle error
+              console.log(xhr.responseText);
+           }
+        });
+     });
+  });
 </script>
+<script>
+  $(document).ready(function() {
+    // Function to perform AJAX request
+    function performAjaxRequest(selectedValue) {
+      // Perform your AJAX request here using the selectedValue
+      // Example AJAX request
+      $.ajax({
+        url: '/getrelatedimage',
+        method: 'GET',
+        data: { selectedValue: selectedValue },
+        success: function(response) {
+          // Handle the AJAX response
+          if (response.image) {
+            var imageUrl = '{{ asset("campaing_image") }}/' + response.image; // Adjust the URL to match your image path
+            $('.relatedImage').attr('src', imageUrl);
+          } else {
+            $('.relatedImage').attr('src', ''); // Set an empty source if no image is available
+          }
+        },
+        error: function(xhr, status, error) {
+          // Handle the AJAX error
+          console.error(error);
+        }
+      });
+    }
+    
+    $(document).on('change', '.adsName', function() {
+      var selectedValue = $(this).val(); // Get the selected value
+      
+      // Call the AJAX function
+      performAjaxRequest(selectedValue);
+    });
+    
+    // Trigger the change event initially to handle the default selection
+    $('.adsName').change();
+  });
+  </script>
+  
+  <script type="text/javascript">
+    var sourceSelects = document.getElementsByClassName('sourceSelect');
+    var adsNameFieldWrappers = document.getElementsByClassName('adsNameFieldWrapper');
+  
+    for (var i = 0; i < sourceSelects.length; i++) {
+      sourceSelects[i].addEventListener('change', createChangeHandler(adsNameFieldWrappers[i]));
+    }
+  
+    function createChangeHandler(wrapper) {
+      return function() {
+        if (this.value === 'Ads') {
+          wrapper.style.display = 'block';
+        } else {
+          wrapper.style.display = 'none';
+        }
+      };
+    }
+  </script>
+  
+
+
 
 </body>
 

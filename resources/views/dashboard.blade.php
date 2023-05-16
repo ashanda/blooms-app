@@ -534,7 +534,7 @@
             </div>
               <label for="source">Source</label>
               <div class="input-group mb-3">
-                <select class="form-control" id="sourceSelect" name="source" required>
+                <select class="form-control sourceSelect" id="sourceSelect" name="source" required>
                   @if (Auth::user()->role_id == 5)
                     <option>Ads</option>
                     <option>Direct</option>
@@ -549,19 +549,21 @@
             
               
 
-              <div id="adsNameFieldWrapper" class="mb-3">
+              <div id="adsNameFieldWrapper" class="mb-3 adsNameFieldWrapper">
                 <label for="adsName">Ads Name</label>
                 <div class="input-group">
-                  <select class="form-control" id="adsName" name="adsName" >
+                  <select class="form-control adsName" id="adsName" name="adsName" >
                     @foreach ( campaingFind() as $campain)
                            <option value="{{ $campain->id  }}">{{ $campain->name }}</option>
                     @endforeach
                   </select>
                 </div>
+              
+                <div id="imageContainer" class="mt-3">
+                <img class="relatedImage" src="" alt="Related Image" style="max-width: 200px; max-height: 200px;">
               </div>
-              <div id="imageContainer">
-                <img id="relatedImage" src="" alt="Related Image">
-              </div>
+            </div>
+              
               
               <label for="appointmentDateTime">Appointment Date & Time</label>
               <div class="input-group mb-3">
@@ -629,36 +631,37 @@
                 <!-- Doctors options will be populated dynamically -->
              </select>
             </div>
-              <label for="source">Source</label>
-              <div class="input-group mb-3">
-                <select class="form-control" id="sourceSelect" name="source" required>
-                  @if (Auth::user()->role_id == 5)
-                    <option>Ads</option>
-                    <option>Direct</option>
-                    <option>Personal</option>
-                    <option>Referral</option>
-                  @else
-                      <option>Front Office</option>
-                  @endif
-                  
+            <label for="source">Source</label>
+            <div class="input-group mb-3">
+              <select class="form-control sourceSelect" id="sourceSelect" name="source" required>
+                @if (Auth::user()->role_id == 5)
+                  <option>Ads</option>
+                  <option>Direct</option>
+                  <option>Personal</option>
+                  <option>Referral</option>
+                @else
+                    <option>Front Office</option>
+                @endif
+                
+              </select>
+            </div>
+          
+            
+
+            <div id="adsNameFieldWrapper" class="mb-3 adsNameFieldWrapper">
+              <label for="adsName">Ads Name</label>
+              <div class="input-group">
+                <select class="form-control adsName" id="adsName" name="adsName" >
+                  @foreach ( campaingFind() as $campain)
+                         <option value="{{ $campain->id  }}">{{ $campain->name }}</option>
+                  @endforeach
                 </select>
               </div>
             
-              
-
-              <div id="adsNameFieldWrapper" class="mb-3">
-                <label for="adsName">Ads Name</label>
-                <div class="input-group">
-                  <select class="form-control" id="adsName" name="adsName" >
-                    @foreach ( campaingFind() as $campain)
-                           <option value="{{ $campain->id  }}">{{ $campain->name }}</option>
-                    @endforeach
-                  </select>
-                </div>
-              </div>
-              <div id="imageContainer">
-                <img id="relatedImage" src="" alt="Related Image">
-              </div>
+            <div id="imageContainer" class="mt-3">
+              <img class="relatedImage" src="" alt="Related Image" style="max-width: 200px; max-height: 200px;">
+            </div>
+          </div>
               
               <label for="appointmentDateTime">Appointment Date & Time</label>
               <div class="input-group mb-3">
@@ -671,7 +674,7 @@
               </div>
               
               <div class="text-center">
-                <button type="submit" class="btn btn-round bg-gradient-info btn-lg w-100 mt-4 mb-0">Add Appointment</button>
+                <button type="submit" class="btn btn-round bg-gradient-info btn-lg w-100 mt-4 mb-0">Add Lead</button>
               </div>
             </form>
             
@@ -682,9 +685,6 @@
     </div>
   </div>
 </div>
-
-
-
 
 
 <div class="modal fade" id="modal-form1" tabindex="-1" role="dialog" aria-labelledby="modal-form1" aria-hidden="true">
@@ -1119,7 +1119,7 @@ $.ajax({
   url: '/followups', // Replace with your Laravel route URL that fetches the events
   type: 'GET',
   success: function(events) {
-      console.log(events);
+
     // Map the Laravel events to FullCalendar events format
     var mappedEvents = events.map(function(event) {
       var userId = {{ Auth::user()->id }};
@@ -1191,39 +1191,10 @@ $('#day_summery').modal('show');
 });
 
 
-document.getElementById('sourceSelect').addEventListener('change', function() {
-var adsNameFieldWrapper = document.getElementById('adsNameFieldWrapper');
-var adsNameSelect = document.getElementById('adsName');
 
-if (this.value === 'Ads') {
-  adsNameFieldWrapper.style.display = 'block';
-  adsNameSelect.classList.add('form-control-sm');
-} else {
-  adsNameFieldWrapper.style.display = 'none';
-  adsNameSelect.classList.remove('form-control-sm');
-}
-});
 
 // AJAX call to get the selected option value
-$('#adsName').change(function() {
-var selectedOptionValue = $(this).val();
 
-// Perform your AJAX request using the selectedOptionValue
-// Example AJAX call:
-$.ajax({
-  url: '/getrelatedimage',
-  method: 'POST',
-  data: { optionValue: selectedOptionValue },
-  success: function(response) {
-    // Handle the AJAX response
-    console.log(response);
-  },
-  error: function(xhr, status, error) {
-    // Handle the AJAX error
-    console.log('error');
-  }
-});
-});
 
 </script> 
 

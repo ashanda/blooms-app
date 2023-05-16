@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Campaign;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
@@ -46,5 +47,15 @@ class HomeController extends Controller
         }
 
         return response()->json(['doctors' => $doctors]);
+    }
+
+    public function getRelatedImage(Request $request)
+    {
+        $get_image = Campaign::select('image')
+                                ->where('id', $request->selectedValue)
+                                ->first();
+        return response()->json($get_image);
+
+        
     }
 }

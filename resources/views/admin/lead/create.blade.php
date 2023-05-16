@@ -40,7 +40,7 @@
             </div>
               <label for="source">Source</label>
               <div class="input-group mb-3">
-                <select class="form-control" id="sourceSelect" name="source" required>
+                <select class="form-control sourceSelect" id="sourceSelect" name="source" required>
                   @if (Auth::user()->role_id == 5)
                     <option>Ads</option>
                     <option>Direct</option>
@@ -55,19 +55,20 @@
             
               
 
-              <div id="adsNameFieldWrapper" class="mb-3">
+              <div id="adsNameFieldWrapper" class="mb-3 adsNameFieldWrapper">
                 <label for="adsName">Ads Name</label>
                 <div class="input-group">
-                  <select class="form-control" id="adsName" name="adsName" >
+                  <select class="form-control adsName" id="adsName" name="adsName" >
                     @foreach ( campaingFind() as $campain)
                            <option value="{{ $campain->id  }}">{{ $campain->name }}</option>
                     @endforeach
                   </select>
                 </div>
+              
+                <div id="imageContainer" class="mt-3">
+                <img class="relatedImage" src="" alt="Related Image" style="max-width: 200px; max-height: 200px;">
               </div>
-              <div id="imageContainer">
-                <img id="relatedImage" src="" alt="Related Image">
-              </div>
+            </div>
                            
               <label for="note">Note</label>
               <div class="input-group mb-3">
