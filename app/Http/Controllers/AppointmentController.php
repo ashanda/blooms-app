@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Appointment;
 use App\Models\Treatment;
 use App\Models\Time;
+use App\Models\Lead;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -57,13 +58,18 @@ class AppointmentController extends Controller
         $appointment->treatment = $request->treatments;
         $appointment->doctor_id = $request->doctors;
         $appointment->source = $request->source;
-        $appointment->ads_name = $request->ads_name;
+        $appointment->ads_name = $request->adsName;
         $appointment->appointment_date_time = $request->appointmentDateTime;
         $appointment->note = $request->note;
        
         // Save the appointment
         $appointment->save();
 
+        if($request->leadID !== null){
+            $lead = Lead::findOrFail($request->leadID);
+            $lead->status = 'converted';
+            $lead->save();
+        }  
         // Redirect or perform additional actions as needed
         // For example:
         Alert::success('Success', 'Appointment created successfully.');  
@@ -163,6 +169,10 @@ class AppointmentController extends Controller
     public function update(Request $request, $id){
         $appointment = Appointment::findOrFail($id);
         $appointment->treatment = $request->input('treatments');
+        if($request->input('doctors') !== null){
+            $appointment->doctor_id = $request->input('doctors');
+        }
+        
         $appointment->appointment_date_time = $request->input('appointmentDateTime');
         $appointment->status = 'ongoing';
         $appointment->save();

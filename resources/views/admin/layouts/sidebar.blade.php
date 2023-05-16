@@ -94,6 +94,14 @@
       <span class="sidenav-normal">New Lead </span>
       </a>
       </li>
+
+      <li class="nav-item {{ isRouteActive('converted-leads') ? 'active' : '' }}">
+        <a class="nav-link " href="{{ route('lead.converted_leads') }}">
+        <span class="sidenav-mini-icon"> M </span>
+        <span class="sidenav-normal">All Converted Leads</span>
+        </a>
+        </li>
+
       <li class="nav-item {{ isRouteActive('lead') ? 'active' : '' }}">
       <a class="nav-link " href="{{ route('lead.index') }}">
       <span class="sidenav-mini-icon"> M </span>

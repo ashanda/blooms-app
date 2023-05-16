@@ -23,7 +23,12 @@
                         @endforeach
                     </select>
                 </div>
-
+                <label for="treatments">Doctors</label>
+                <div class="input-group mb-3">
+                <select class="form-control" id="doctors" name="doctors">
+                  <!-- Doctors options will be populated dynamically -->
+               </select>
+                </div>
                 <div class="form-group">
                     <label for="date">Appointment Date</label>
                     <input class="form-control" type="datetime-local" id="appointmentDateTime" name="appointmentDateTime"  required>

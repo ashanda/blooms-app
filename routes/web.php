@@ -117,6 +117,7 @@ Route::put('/appointments/{appointment}', [AppointmentController::class,'update'
 Route::get('/new_appointment', [App\Http\Controllers\AppointmentController::class, 'new_appointment'])->name('appointment.new_appointment');
 
 Route::resource('lead', App\Http\Controllers\LeadController::class);
+Route::get('/converted-leads', [App\Http\Controllers\LeadController::class, 'converted_leads'])->name('lead.converted_leads');
 
 Route::get('/getdoctors', [HomeController::class, 'getDoctors']);
 Route::get('/getrelatedimage', [HomeController::class, 'getRelatedImage']);

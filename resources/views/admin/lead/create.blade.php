@@ -6,7 +6,7 @@
     
       <div class="card">
         <div class="card-body">
-            <form role="form text-left" action="{{ route('add_appointment') }}" method="POST" enctype="multipart/form-data">
+            <form role="form text-left" action="{{ route('lead.store') }}" method="POST" enctype="multipart/form-data">
               @csrf
               <label for="name">Name</label>
               <div class="input-group mb-3">
@@ -68,12 +68,7 @@
               <div id="imageContainer">
                 <img id="relatedImage" src="" alt="Related Image">
               </div>
-              
-              <label for="appointmentDateTime">Appointment Date & Time</label>
-              <div class="input-group mb-3">
-                <input class="form-control" type="datetime-local" id="appointmentDateTime" name="appointmentDateTime"  required>
-              </div>
-              
+                           
               <label for="note">Note</label>
               <div class="input-group mb-3">
                 <textarea class="form-control" id="note" name="note" rows="3"></textarea>
