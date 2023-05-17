@@ -19,7 +19,7 @@ class StaffController extends Controller
     public function index()
     {
         $pageTitle = 'All Staff';
-        $staff = User::where('role_id', '!=', '3')
+        $staff = User::where('role_id', '!=', '1')
                         ->get();
         return view('admin.staff.index', ['staff' => $staff])->with('pageTitle', $pageTitle);
     }
