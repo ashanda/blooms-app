@@ -13,7 +13,8 @@ use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CampaignController;
 use app\Http\Controllers\LeadController;
-
+use app\Http\Controllers\ExpenseCatController;
+use app\Http\Controllers\ExpensesController;
 
 
 Auth::routes();
@@ -92,6 +93,8 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 
     Route::resource('/treatment', App\Http\Controllers\TreatmentController::class);
     Route::resource('/campaigns', App\Http\Controllers\CampaignController::class);
+    Route::resource('/expense_type', App\Http\Controllers\ExpenseCatController::class);
+    Route::resource('/expense', App\Http\Controllers\ExpenseController::class);
   
 });
 
