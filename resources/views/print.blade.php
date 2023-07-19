@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Print Invoice</title>
     <style>
@@ -60,7 +61,10 @@
                     <h3>Invoice ID: {{ $invoice->invoice_id }}</h3>
                 </th>
             </tr>
-
+            <tr>
+                <td><strong>Appointment Name:</strong></td>
+                <td style="text-align: right;">Appointment Name</td>
+            </tr>
             <tr>
                 <td><strong>Appointment ID:</strong></td>
                 <td style="text-align: right;">{{ $invoice->appointment_id }}</td>
@@ -90,9 +94,10 @@
 
     <script>
         // JavaScript code for printing the page
-        window.onload = function () {
+        window.onload = function() {
             window.print();
         };
     </script>
 </body>
+
 </html>
