@@ -20,7 +20,7 @@
     </div>
   <div class="row">
     <div class="col-xl-8 col-lg-7">
-      @if (Auth::user()->role->name != 'Assistant' ||  Auth::user()->role->name != 'Doctor' ||  Auth::user()->role->name != 'Sales Agent' ||  Auth::user()->role->name != 'Front Officer')
+      @if (Auth::user()->role->name != 'Assistant' &&  Auth::user()->role->name != 'Doctor' &&  Auth::user()->role->name != 'Sales Agent' &&  Auth::user()->role->name != 'Front Officer')
       <div class="row">
         <div class="col-sm-4">
           <div class="card overflow-hidden">
@@ -249,7 +249,19 @@
         </div>
         
         @elseif (Auth::user()->role->name == 'Sales Agent' || Auth::user()->role->name == 'Admin')
-        <div class="col-lg-12 col-sm-6">
+        @php
+          $top_margin ;
+          if (Auth::user()->role->name == 'Sales Agent') {
+            $top_margin = 'mt-5';
+          } else {
+            $top_margin = '';
+          }
+          
+        @endphp 
+
+       
+        @if (Auth::user()->role->name == 'Sales Agent' )
+           <div class="col-lg-12 col-sm-6">
           <div class="card">
             <div class="card-header pb-0 p-3">
               <h6 class="mb-0">Day Summary</h6>
@@ -314,8 +326,10 @@
             
           </div>
         </div>
+        @endif
+       
 
-        <div class="col-lg-12 col-sm-6 mt-5">
+        <div class="col-lg-12 col-sm-6 {{ $top_margin }}">
           <div class="card">
             <div class="card-header pb-0 p-3">
               <h6 class="mb-0">Day Summary</h6>
@@ -341,7 +355,7 @@
                           </tr>
                         </thead>
                         <tbody style="text-align: center;">
-                          @foreach (  $todaysummaries as  $todaysummary)
+                          @foreach ( $todaysummaries as  $todaysummary)
                           <tr>
                             
                             <td><h6 class="mb-1 text-dark text-sm me-3">{{ findSalesAgent($todaysummary->sale_agent_id)->name }}</h6></td>
