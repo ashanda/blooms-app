@@ -20,7 +20,7 @@ class PatientDocsController extends Controller
         $appointmentDateTime = $request->appointmentDateTime;
     // Process the fields as needed
     $current_appoinment_data = Appointment::where('appointment_id','=',$appoinment_id)->first();
- 
+        
     // Example: Save the fields to the database
     foreach ($uploadFields as $index => $upload) {
         $dropdown = $dropdownFields[$index];
@@ -65,6 +65,7 @@ class PatientDocsController extends Controller
         }
         $treatment = Treatment::where('treatment_name',$current_appoinment_data->treatment)->first();   
         $appointment->appointment_id = $random_number.'-'.$treatment->treatment_code ;
+        $appointment->agent_id = $current_appoinment_data->agent_id;
         $appointment->customer_id = $current_appoinment_data->customer_id ;
         $appointment->customer_name = $current_appoinment_data->customer_name;
         $appointment->customer_phone = $current_appoinment_data->customer_phone;
