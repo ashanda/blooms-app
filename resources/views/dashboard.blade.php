@@ -1,3 +1,4 @@
+
 @extends('admin.layouts.master')
 
 @section('content')
@@ -19,15 +20,15 @@
     </div>
   <div class="row">
     <div class="col-xl-8 col-lg-7">
-      @if (Auth::user()->role->name != 'Assistant' && Auth::user()->role->name != 'Doctor')
+      @if (Auth::user()->role->name != 'Assistant' ||  Auth::user()->role->name != 'Doctor' ||  Auth::user()->role->name != 'Sales Agent' ||  Auth::user()->role->name != 'Front Officer')
       <div class="row">
         <div class="col-sm-4">
           <div class="card overflow-hidden">
             <div class="card-header p-3 pb-0">
-              <p class="text-sm mb-0 text-capitalize font-weight-bold">Visitors</p>
+              <p class="text-sm mb-0 text-capitalize font-weight-bold">Patients</p>
               <h5 class="font-weight-bolder mb-0">
-                5,927
-                <span class="text-success text-sm font-weight-bolder">+55%</span>
+                {{ staticsdata()[0]}}
+                <span class="text-success text-sm font-weight-bolder">Current month</span>
               </h5>
             </div>
             <div class="card-body p-0">
@@ -42,8 +43,8 @@
             <div class="card-header p-3 pb-0">
               <p class="text-sm mb-0 text-capitalize font-weight-bold">Income</p>
               <h5 class="font-weight-bolder mb-0">
-                $130,832
-                <span class="text-success text-sm font-weight-bolder">+90%</span>
+                   {{ staticsdata()[1] }}
+                <span class="text-success text-sm font-weight-bolder">Current month</span>
               </h5>
             </div>
             <div class="card-body p-0">
@@ -56,15 +57,15 @@
         <div class="col-sm-4 mt-sm-0 mt-4">
           <div class="card overflow-hidden">
             <div class="card-header p-3 pb-0">
-              <p class="text-sm mb-0 text-capitalize font-weight-bold">Income</p>
+              <p class="text-sm mb-0 text-capitalize font-weight-bold">Appoinments</p>
               <h5 class="font-weight-bolder mb-0">
-                $130,832
-                <span class="text-success text-sm font-weight-bolder">+90%</span>
+                   {{ staticsdata()[2] }}
+                <span class="text-success text-sm font-weight-bolder">Current month</span>
               </h5>
             </div>
             <div class="card-body p-0">
               <div class="chart">
-                <canvas id="chart-line-2" class="chart-canvas" height="100"></canvas>
+                <canvas id="chart-line-3" class="chart-canvas" height="100"></canvas>
               </div>
             </div>
           </div>
@@ -462,7 +463,7 @@
         
 
 @if (Auth::user()->role->name == 'Admin')
-<div class="col-lg-12 col-sm-6">
+{{-- <div class="col-lg-12 col-sm-6">
   <div class="card mt-4">
     <div class="card-body p-3">
       <div class="row">
@@ -478,7 +479,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> --}}
 @endif
 
 
@@ -948,6 +949,44 @@
 
 
 </div>
+
+@php
+
+use Carbon\Carbon;
+
+   // Prepare the data for the chart
+    $customerlabels = [];
+    $customerdata = [];
+
+    $paymentlabels = [];
+    $paymentdata = [];
+
+    $appointmentlabels = [];
+    $appointmentdata = [];
+
+    $currentYear = Carbon::now()->year;
+    foreach ( getCustomerCountByMonth() as $customerCount) {
+        $customerlabels[] = Carbon::createFromDate($customerCount->year, $customerCount->month)->format('M');
+        $customerdata[] = $customerCount->count;
+    }
+
+
+    foreach ( getpayments() as $dataPoint) {
+    
+            $paymentlabels[] = Carbon::createFromDate($currentYear, $dataPoint->month)->format('M');
+            $paymentdata[] = $dataPoint->total_pay_amount;
+    }
+
+    foreach ( getappointment() as $dataPoint) {
+    
+            $appointmentlabels[] = Carbon::createFromDate($currentYear, $dataPoint->month)->format('M');
+            $appointmentdata[] = $dataPoint->count;
+    }
+    // Return the data to the view
+   
+
+@endphp
+
 @endsection
 
 @section('scripts')
@@ -962,20 +1001,20 @@
   gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)'); //purple colors
 
   var ctx2 = document.getElementById("chart-line-2").getContext("2d");
-
+  var ctx3 = document.getElementById("chart-line-3").getContext("2d");
   new Chart(ctx1, {
     type: "line",
     data: {
-      labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+      labels: @json($customerlabels),
       datasets: [{
-        label: "Visitors",
+        label: "Patients",
         tension: 0.5,
         borderWidth: 0,
         pointRadius: 0,
         borderColor: "#cb0c9f",
         borderWidth: 2,
         backgroundColor: gradientStroke1,
-        data: [50, 45, 60, 60, 80, 65, 90, 80, 100],
+        data: @json($customerdata),
         maxBarThickness: 6,
         fill: true
       }],
@@ -1028,7 +1067,7 @@
   new Chart(ctx2, {
     type: "line",
     data: {
-      labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+      labels: @json($paymentlabels),
       datasets: [{
         label: "Income",
         tension: 0.5,
@@ -1037,7 +1076,7 @@
         borderColor: "#cb0c9f",
         borderWidth: 2,
         backgroundColor: gradientStroke1,
-        data: [60, 80, 75, 90, 67, 100, 90, 110, 120],
+        data: @json($paymentdata),
         maxBarThickness: 6,
         fill: true
       }],
@@ -1065,7 +1104,72 @@
           },
           ticks: {
             callback: function(value, index, values) {
-              return '$' + value;
+              return index ;
+            },
+            display: true,
+            padding: 10,
+            color: '#9ca2b7'
+          }
+        },
+        x: {
+          grid: {
+            drawBorder: false,
+            display: true,
+            drawOnChartArea: true,
+            drawTicks: false,
+            borderDash: [5, 5]
+          },
+          ticks: {
+            display: true,
+            padding: 10,
+            color: '#9ca2b7'
+          }
+        },
+      },
+    },
+  });
+
+  new Chart(ctx3, {
+    type: "line",
+    data: {
+      labels: @json($appointmentlabels),
+      datasets: [{
+        label: "Income",
+        tension: 0.5,
+        borderWidth: 0,
+        pointRadius: 0,
+        borderColor: "#cb0c9f",
+        borderWidth: 2,
+        backgroundColor: gradientStroke1,
+        data: @json($appointmentdata),
+        maxBarThickness: 6,
+        fill: true
+      }],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: false,
+        }
+      },
+      interaction: {
+        intersect: false,
+        mode: 'index',
+      },
+      scales: {
+        y: {
+          grid: {
+            drawBorder: false,
+            display: false,
+            drawOnChartArea: true,
+            drawTicks: false,
+            borderDash: [5, 5]
+          },
+          ticks: {
+            callback: function(value, index, values) {
+              return index;
             },
             display: true,
             padding: 10,

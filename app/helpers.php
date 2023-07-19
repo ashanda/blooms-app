@@ -6,6 +6,8 @@ use App\Models\Campaign;
 use App\Models\DaySummery;
 use App\Models\Lead;
 use App\Models\Appointment;
+use App\Models\Customer;
+use App\Models\Invoice;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
@@ -138,4 +140,70 @@ function all_ongoing_appoinments_count(){
 											  ->where('agent_id', Auth::user()->id)->count();
 	}
 	return $all_missed_appoinments;
+}
+
+
+function getCustomerCountByMonth()
+{
+	$currentYear = Carbon::now()->year;
+
+	$customerCounts = Customer::selectRaw('COUNT(*) as count, YEAR(created_at) as year, MONTH(created_at) as month')
+	->whereYear('created_at', $currentYear) // Filter by the current year
+		->groupBy('year', 'month')
+		->orderBy('year')
+		->orderBy('month')
+		->get();
+
+	return $customerCounts;	
+}
+
+function getpayments()
+    {
+        $currentYear = Carbon::now()->year;
+
+        $customerData = Invoice::selectRaw('SUM(pay_amount) as total_pay_amount, MONTH(created_at) as month')
+            ->whereYear('created_at', $currentYear) // Filter by the current year
+            ->where('status', 'settled') // Filter by settled status, adjust as needed
+            ->groupBy('month')
+            ->orderBy('month')
+            ->get();
+
+	return $customerData;		
+}
+
+
+function getappointment()
+{
+	$currentYear = Carbon::now()->year;
+
+	$cappointment = Appointment::selectRaw('COUNT(*) as count, MONTH(created_at) as month')
+	->whereYear('created_at', $currentYear) // Filter by the current year
+		->where('visibility', 'open') // Filter by settled status, adjust as needed
+		->groupBy('month')
+		->orderBy('month')
+		->get();
+
+	return $cappointment;
+}
+
+function staticsdata()
+{
+	$currentYear = Carbon::now()->year;
+	$currentMonth = Carbon::now()->month;
+
+	$customerCount = Customer::whereYear('created_at', $currentYear)
+		->whereMonth('created_at', $currentMonth)
+		->count();
+
+	$invoiceSum = Invoice::whereYear('created_at', $currentYear)
+		->whereMonth('created_at', $currentMonth)
+		->where('status', 'settled')
+		->sum('pay_amount');
+
+	$appointmentCount = Appointment::whereYear('created_at', $currentYear)
+		->whereMonth('created_at', $currentMonth)
+		->where('visibility', 'open')
+		->count();
+
+	return [$customerCount, $invoiceSum, $appointmentCount];
 }
