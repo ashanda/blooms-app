@@ -101,6 +101,33 @@
 </script>
 <script>
   $(document).ready(function() {
+     $('#treatment').change(function() {
+        var selectedTreatments = $(this).val(); // Get the selected treatment values
+  
+        // Send AJAX request to retrieve related doctors
+        $.ajax({
+           url: '/getdoctors',
+           type: 'GET',
+           data: { treatments: selectedTreatments },
+           success: function(response) {
+              // Handle the response and populate the doctors select element
+              var doctorsSelect = $('#doctor');
+              doctorsSelect.empty();
+  
+              $.each(response.doctors, function(key, doctor) {
+                 doctorsSelect.append($('<option></option>').val(doctor.id).text(doctor.name));
+              });
+           },
+           error: function(xhr) {
+              // Handle error
+              console.log(xhr.responseText);
+           }
+        });
+     });
+  });
+</script>
+<script>
+  $(document).ready(function() {
     // Function to perform AJAX request
     function performAjaxRequest(selectedValue) {
       // Perform your AJAX request here using the selectedValue
