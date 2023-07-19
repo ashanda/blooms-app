@@ -90,6 +90,7 @@
       <div class="col-sm-4 mt-sm-0 mt-4">
         <div class="card border h-100">
             <div class="card-body d-flex flex-column justify-content-center text-center">
+              
               <a href="javascript:;" id="add-customer-link">
                 <i class="fa fa-plus text-secondary text-sm mb-1" aria-hidden="true"></i>
                 <h6 class="text-secondary">Quick add Customer</h6>
@@ -603,7 +604,87 @@
   </div>
 </div>
 
-<div class="modal fade" id="new-lead" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
+<div class="modal fade" id="modal-form1" tabindex="-1" role="dialog" aria-labelledby="modal-form1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-body p-0">
+        <div class="card card-plain">
+          <div class="card-header pb-0 text-left">
+            <h3 class="font-weight-bolder text-info text-gradient">Add Customer</h3>
+            
+          </div>
+          <div class="card-body">
+            <form role="form text-left" action="{{ route('add_appointment') }}" method="POST" enctype="multipart/form-data">
+              @csrf
+              <label for="name">Name</label>
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" id="name" name="name" placeholder="Name" aria-label="Name" aria-describedby="name-addon" required>
+              </div>
+              
+              <label for="phone">Phone Number</label>
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone" aria-label="Phone" aria-describedby="phone-addon" required>
+              </div>
+              
+              <label for="address">Address</label>
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" id="address" name="address" placeholder="Address" aria-label="Address" aria-describedby="email-addon">
+              </div>
+              
+              <label for="treatments">Treatments</label>
+              <div class="input-group mb-3">
+                
+                 <select class="form-control" id="treatment" name="treatments" multiple required>
+                  @foreach (allTreatments() as $treatment)
+                  <option value="{{ $treatment->treatment_name }}">{{ $treatment->treatment_name }}</option>
+                  @endforeach
+                </select>
+              </div>
+              <label for="treatments">Doctors</label>
+              <div class="input-group mb-3">
+              <select class="form-control" id="doctor" name="doctors">
+                <!-- Doctors options will be populated dynamically -->
+             </select>
+              </div>
+
+              <label for="appointmentDateTime">Appointment Date & Time</label>
+              <div class="input-group mb-3">
+                <input class="form-control" type="datetime-local" id="appointmentDateTime" name="appointmentDateTime"  required>
+              </div>
+              
+              <label for="note">Note</label>
+              <div class="input-group mb-3">
+                <textarea class="form-control" id="note" name="note" rows="3"></textarea>
+              </div>
+              
+              <hr class="horizontal dark mt-0">
+                    <h6>Payment</h6>
+                    <div class="form-group">
+                      <label for="modal-name">Payment method:</label>
+                      <select class="form-control" id="paymentMethod" name="paymentMethod">
+                        <option value="Cash">Cash</option>
+                        <option value="Card">Card</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="modal-name">Amount:</label>
+                      <input type="text" class="form-control" name="amount">
+                    </div>
+                    <input type="hidden" name="source" value="Front Office">
+              <div class="text-center">
+                <button type="submit" class="btn btn-round bg-gradient-info btn-lg w-100 mt-4 mb-0">Pay</button>
+              </div>
+            </form>
+            
+          </div>
+        
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="new-lead" tabindex="-1" role="dialog" aria-labelledby="new-lead" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
     <div class="modal-content">
       <div class="modal-body p-0">
@@ -633,7 +714,7 @@
               
               <label for="treatments">Treatments</label>
               <div class="input-group mb-3">
-                <select class="form-control" id="treatments" name="treatments" multiple required>
+                <select class="form-control treatments" id="treatment" name="treatments" multiple required>
                   @foreach (allTreatments() as $treatment)
                      <option value="{{ $treatment->treatment_name }}">{{ $treatment->treatment_name }}</option>
                   @endforeach
@@ -702,77 +783,7 @@
 </div>
 
 
-<div class="modal fade" id="modal-form1" tabindex="-1" role="dialog" aria-labelledby="modal-form1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
-    <div class="modal-content">
-      <div class="modal-body p-0">
-        <div class="card card-plain">
-          <div class="card-header pb-0 text-left">
-            <h3 class="font-weight-bolder text-info text-gradient">Add Customer</h3>
-            
-          </div>
-          <div class="card-body">
-            <form role="form text-left" action="{{ route('add_appointment') }}" method="POST" enctype="multipart/form-data">
-              @csrf
-              <label for="name">Name</label>
-              <div class="input-group mb-3">
-                <input type="text" class="form-control" id="name" name="name" placeholder="Name" aria-label="Name" aria-describedby="name-addon" required>
-              </div>
-              
-              <label for="phone">Phone Number</label>
-              <div class="input-group mb-3">
-                <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone" aria-label="Phone" aria-describedby="phone-addon" required>
-              </div>
-              
-              <label for="address">Address</label>
-              <div class="input-group mb-3">
-                <input type="text" class="form-control" id="address" name="address" placeholder="Address" aria-label="Address" aria-describedby="email-addon">
-              </div>
-              
-              <label for="treatments">Treatments</label>
-              <div class="input-group mb-3">
-                <select class="form-control" id="treatments" name="treatments" multiple required>
-                  @foreach (allTreatments() as $treatment)
-                  <option value="{{ $treatment->treatment_name }}">{{ $treatment->treatment_name }}</option>
-                  @endforeach
-                </select>
-              </div>
-              <label for="appointmentDateTime">Appointment Date & Time</label>
-              <div class="input-group mb-3">
-                <input class="form-control" type="datetime-local" id="appointmentDateTime" name="appointmentDateTime"  required>
-              </div>
-              
-              <label for="note">Note</label>
-              <div class="input-group mb-3">
-                <textarea class="form-control" id="note" name="note" rows="3"></textarea>
-              </div>
-              
-              <hr class="horizontal dark mt-0">
-                    <h6>Payment</h6>
-                    <div class="form-group">
-                      <label for="modal-name">Payment method:</label>
-                      <select class="form-control" id="paymentMethod" name="paymentMethod">
-                        <option value="Cash">Cash</option>
-                        <option value="Card">Card</option>
-                      </select>
-                    </div>
-                    <div class="form-group">
-                      <label for="modal-name">Amount:</label>
-                      <input type="text" class="form-control" name="amount">
-                    </div>
 
-              <div class="text-center">
-                <button type="submit" class="btn btn-round bg-gradient-info btn-lg w-100 mt-4 mb-0">Pay</button>
-              </div>
-            </form>
-            
-          </div>
-        
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -1004,6 +1015,35 @@ use Carbon\Carbon;
 @endsection
 
 @section('scripts')
+<script>
+  $(document).ready(function() {
+     $('#treatment').change(function() {
+        var selectedTreatments = $(this).val(); // Get the selected treatment values
+  
+        // Send AJAX request to retrieve related doctors
+        $.ajax({
+           url: '/getdoctors',
+           type: 'GET',
+           data: { treatments: selectedTreatments },
+           success: function(response) {
+              // Handle the response and populate the doctors select element
+              var doctorsSelect = $('#doctors');
+              doctorsSelect.empty();
+  
+              $.each(response.doctors, function(key, doctor) {
+                 doctorsSelect.append($('<option></option>').val(doctor.id).text(doctor.name));
+              });
+           },
+           error: function(xhr) {
+              // Handle error
+              console.log(xhr.responseText);
+           }
+        });
+     });
+  });
+</script>
+
+
 <script>
     
   var ctx1 = document.getElementById("chart-line-1").getContext("2d");
