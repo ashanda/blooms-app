@@ -207,3 +207,20 @@ function staticsdata()
 
 	return [$customerCount, $invoiceSum, $appointmentCount];
 }
+
+
+function todayAppoinmentfront(){
+
+	$todayAppoinment = 	Appointment::where('status', '=', 'ongoing')
+		->whereDate('appointment_date_time', '=', Carbon::today()->format('Y-m-d'))
+		->where('visibility', '=', 'open')
+		->get();
+
+	return 	$todayAppoinment;
+}
+
+
+function userdata($id){
+	$user = User::where('id', $id)->first();
+	return $user;
+}
