@@ -58,6 +58,7 @@ class InvoiceController extends Controller
         $invoice->payment_type = $request->paymentMethod;
         $invoice->pay_amount = $request->payamount;
         $invoice->balance = $request->balance;
+        $invoice->treatment = $request->treatment;
         $invoice->issued_by = Auth::user()->name;
         $invoice->status = 'settled';
         $invoice->save();

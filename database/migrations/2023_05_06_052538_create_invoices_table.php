@@ -17,6 +17,7 @@ class CreateInvoicesTable extends Migration
             $table->id();
             $table->string('invoice_id');
             $table->string('appoinment_id');
+            $table->string('treatment');
             $table->float('discount', 8, 2)->nullable();
             $table->float('tax', 8, 2)->nullable();;
             $table->float('total', 8, 2);

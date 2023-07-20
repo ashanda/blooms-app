@@ -63,7 +63,7 @@
             </tr>
             <tr>
                 <td><strong>Appointment Name:</strong></td>
-                <td style="text-align: right;">Appointment Name</td>
+                <td style="text-align: right;">{{ $invoice->treatment }}</td>
             </tr>
             <tr>
                 <td><strong>Appointment ID:</strong></td>
