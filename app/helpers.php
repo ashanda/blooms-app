@@ -209,14 +209,26 @@ function staticsdata()
 }
 
 
-function todayAppoinmentfront(){
+function todayAppoinmentfront()
+{
+	$todayAppoinment = Appointment::where('status', '=', 'ongoing')
+	->whereDate('appointment_date_time', '=', Carbon::today()->format('Y-m-d'))
+	->where('visibility', '=', 'open')
+	->get();
 
-	$todayAppoinment = 	Appointment::where('status', '=', 'ongoing')
-		->whereDate('appointment_date_time', '=', Carbon::today()->format('Y-m-d'))
-		->where('visibility', '=', 'open')
-		->get();
+	// Add the 'time_in_ampm' attribute to each appointment in the collection
+	$todayAppoinment = $todayAppoinment->map(function ($appointment) {
+		$datetime_str = $appointment->appointment_date_time;
+		$datetime = new DateTime($datetime_str);
+		$time_in_ampm = $datetime->format('h:i A');
+		$appointment->time_in_ampm = $time_in_ampm;
+		return $appointment;
+	});
 
-	return 	$todayAppoinment;
+	// Sort the collection by the 'time_in_ampm' attribute
+	$sortedAppointments = $todayAppoinment->sortBy('time_in_ampm');
+
+	return $sortedAppointments;
 }
 
 

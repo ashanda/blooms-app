@@ -393,13 +393,8 @@
                  
                     <div class="d-flex flex-column">
                       <h6 class="mb-1 text-dark text-sm">{{ $todayappoinmentfronts->appointment_id }}</h6>
-                     @php
-                      $datetime_str = $todayappoinmentfronts->appointment_date_time;
-                      $datetime = new DateTime($datetime_str);
-                      $time_in_ampm = $datetime->format('h:i A');
-                      
-                      @endphp
-                      <span class="text-xs">Time :<span class="font-weight-bold">{{ $time_in_ampm }}</span></span>
+                   
+                      <span class="text-xs">Time :<span class="font-weight-bold">{{ $todayappoinmentfronts->time_in_ampm }}</span></span>
                       <span class="text-xs">Patient :<span class="font-weight-bold">{{ $todayappoinmentfronts->customer_name }}</span></span>
                       <span class="text-xs">Doctor : <span class="font-weight-bold">{{ userdata($todayappoinmentfronts->doctor_id)->name }}</span></span>
                     </div>
