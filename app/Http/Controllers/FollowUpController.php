@@ -27,8 +27,10 @@ class FollowUpController extends Controller
     public function view(Request $request){
         if($request->ajax())
     	{
-            
-            $event = Appointment::all();
+
+            $event = Appointment::join('users', 'users.id', '=', 'appointments.doctor_id')
+            ->select('appointments.*', 'users.*')
+            ->get();
         
         return response()->json($event);
             

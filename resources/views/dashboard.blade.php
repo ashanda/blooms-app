@@ -1217,9 +1217,34 @@ $.ajax({
 
     // Map the Laravel events to FullCalendar events format
     var mappedEvents = events.map(function(event) {
+      
       var userId = {{ Auth::user()->id }};
-      return {
-title: event.treatment,
+    const dateObj = new Date(event.appointment_date_time);
+
+// Get the hours and minutes from the Date object
+const hours = dateObj.getHours();
+const minutes = dateObj.getMinutes();
+
+// Determine the meridiem (am/pm)
+const meridiem = hours >= 12 ? "PM" : "AM";
+
+// Convert hours to 12-hour format
+const formattedHours = hours % 12 || 12;
+
+// Format the time as "hh:mm am/pm"
+const formattedTime = `${formatTwoDigits(formattedHours)}:${formatTwoDigits(minutes)} ${meridiem}`;
+
+// Helper function to add leading zero for single-digit numbers
+function formatTwoDigits(num) {
+  return num.toString().padStart(2, "0");
+}
+
+  return {
+    title: event.treatment,
+    customername: event.customer_name,
+    customerphone: event.customer_phone,
+    doctorname: event.name,
+    time: formattedTime,
 start: event.appointment_date_time,
 className: userId === event.agent_id && event.status === 'converted' ||  event.agent_id === '' && event.status === 'converted'  ? 'bg-gradient-success' : (userId === event.agent_id && event.status === 'missed' || userId != event.agent_id && event.status === 'missed' ? 'bg-gradient-danger' : userId === event.agent_id ? 'bg-gradient-info' : 'bg-gradient-warning')
 
@@ -1240,8 +1265,11 @@ className: userId === event.agent_id && event.status === 'converted' ||  event.a
           },
           events: mappedEvents,
           eventContent: function(arg) {
+            
               return {
-              html: '<div class="fc-event-title fc-sticky">' + arg.event.title + '</div>'
+            html: '<div class="fc-event-title fc-sticky">' + arg.event.title + '</div> <div class=extra_data><ul><li> ' + arg.event.extendedProps.customername + '</li><li> ' + arg.event.extendedProps.customerphone + '</li><li> ' + arg.event.extendedProps.doctorname + '</li><li> ' + arg.event.extendedProps.time + '</li></ul></div>'
+
+             
               };
           }
           });

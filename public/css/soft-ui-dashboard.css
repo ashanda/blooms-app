@@ -37518,3 +37518,6 @@ svg.leaflet-image-layer.leaflet-interactive path {
 }
 
 /*# sourceMappingURL=dashboard-pro.css.map */
+.extra_data li,.fc-event-title{
+  text-transform: capitalize;
+}
