@@ -110,7 +110,7 @@
           <li class="nav-item {{ isRouteActive('lead') ? 'active' : '' }}">
             <a class="nav-link " href="{{ route('lead.index') }}">
               <span class="sidenav-mini-icon"> M </span>
-              <span class="sidenav-normal">All Leads</span>
+              <span class="sidenav-normal">All Leads</span><span class="badge bg-danger ms-1 rounded-circle">{{ all_leads_count() }}</span>
             </a>
           </li>
         </ul>
@@ -147,7 +147,7 @@
             </g>
           </svg>
         </div>
-        <span class="nav-link-text ms-1">Appointments</span>
+        <span class="nav-link-text ms-1">Appointments</span><span class="badge bg-primary ms-1 rounded-circle">{{ all_appoinments_count() }}</span>
       </a>
       <div class="collapse" id="applicationsExamples1" style="">
         <ul class="nav ms-4 ps-3">
@@ -160,13 +160,13 @@
           <li class="nav-item {{ isRouteActive('ongoing_appointments') ? 'active' : '' }}">
             <a class="nav-link " href="{{ route('ongoing_appoinment') }}">
               <span class="sidenav-mini-icon"> O </span>
-              <span class="sidenav-normal">Ongoing </span>
+              <span class="sidenav-normal">Ongoing </span><span class="badge bg-success ms-1 rounded-circle">{{ all_ongoing_appoinments_count() }}</span>
             </a>
           </li>
           <li class="nav-item {{ isRouteActive('missed_appointments') ? 'active' : '' }}">
             <a class="nav-link " href="{{ route('missed_appoinment') }}">
               <span class="sidenav-mini-icon"> M </span>
-              <span class="sidenav-normal">Missed </span>
+              <span class="sidenav-normal">Missed </span><span class="badge bg-danger ms-1 rounded-circle">{{ all_missed_appoinments_count() }}</span>
             </a>
           </li>
           <li class="nav-item {{ isRouteActive('recurring_appointments') ? 'active' : '' }}">
