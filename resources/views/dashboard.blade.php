@@ -107,7 +107,7 @@
                       <div class="input-group">
                           <input type="text" id="search-input" class="form-control" placeholder="Type here...">
                           <div class="input-group-append">
-                              <button type="submit" class="btn btn-primary search">Search</button>
+                          <button type="submit" class="btn btn-primary search px-2 ms-2">Search</button>
                           </div>
                       </div>
                   </form>

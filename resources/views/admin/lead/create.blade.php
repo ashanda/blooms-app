@@ -66,7 +66,7 @@
                 </div>
               
                 <div id="imageContainer" class="mt-3">
-                <img class="relatedImage" src="" alt="Related Image" style="max-width: 200px; max-height: 200px;">
+                <img class="relatedImage" src="" alt="Related Image" style="max-width: 200px; max-height: 200px; font-size:14px;">
               </div>
             </div>
                            
