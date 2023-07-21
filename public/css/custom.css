@@ -1,34 +1,72 @@
 .fc-event-title.fc-sticky {
-    font-weight: 600;
-    padding: 0.2rem 0.3rem;
-    display: inline-block;
-    vertical-align: top;
-    left: 0;
-    right: 0;
-    max-width: 100%;
-    overflow: hidden;
-  }
+  font-weight: 600;
+  padding: 0.2rem 0.3rem;
+  display: inline-block;
+  vertical-align: top;
+  left: 0;
+  right: 0;
+  max-width: 100%;
+  overflow: hidden;
+}
 
-  @media (min-width: 576px){
+@media (min-width: 576px) {
 
-  
+
   .modal-sm {
     max-width: 600px !important;
   }
 
 }
 
-.search{
+.search {
   margin-bottom: 0 !important;
 }
 
-.lead-card{
+.lead-card {
   background-color: #82d616;
 }
 
-.lead-card h6{
+.lead-card h6 {
   color: #ffffff !important;
 }
-.lead-card i{
+
+.lead-card i {
   color: #ffffff !important;
+}
+.fc-daygrid-event{
+    background-image: linear-gradient(310deg, #f53939 0%, #fbcf33 100%) !important; 
+    color: #fff;
+}
+.fc-daygrid-event:hover{
+  color: #fff;
+}
+
+.fc-daygrid-event{
+  display: block;
+}
+.extra_data {
+  transition: 0.5s;
+  opacity: 0;
+	background-color: #8392ab;
+	position: absolute;
+	border-radius: 10px;
+	color: #fff;
+	padding: 10px;
+  z-index: 9999999999;
+}
+.fc-daygrid-event:hover .extra_data{
+  opacity: 1 !important;
+}
+.extra_data ul {
+	padding-left: 0;
+	list-style: none;
+	margin: 0 !important;
+}
+.fc .fc-daygrid-event-harness-abs {
+
+	right: 0 !important;
+}
+
+.fc-daygrid-dot-event:hover, .fc-daygrid-dot-event.fc-event-mirror {
+	/* background: rgba(0, 0, 0, 0.1); */
 }

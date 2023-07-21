@@ -1581,6 +1581,31 @@ function calculateBalance() {
   // Set the balance value
   balanceInput.value = balance.toFixed(2); // Adjust the decimal places as needed
 }
+
+
+
+// Get all .fc-daygrid-day elements
+const dayGridDays = document.querySelectorAll('.fc-daygrid-day');
+
+// Add event listeners to each .fc-daygrid-day element
+dayGridDays.forEach(day => {
+  day.addEventListener('mouseenter', () => {
+    // Get the relevant .fc-daygrid-event element inside this .fc-daygrid-day
+    const eventElement = day.querySelector('.fc-daygrid-event');
+    if (eventElement) {
+      eventElement.style.display = 'block';
+    }
+  });
+
+  day.addEventListener('mouseleave', () => {
+    // Get the relevant .fc-daygrid-event element inside this .fc-daygrid-day
+    const eventElement = day.querySelector('.fc-daygrid-event');
+    if (eventElement) {
+      eventElement.style.display = 'none';
+    }
+  });
+});
+
 </script>
 
 
