@@ -134,12 +134,13 @@ function all_missed_appoinments_count(){
 
 function all_ongoing_appoinments_count(){
 	if(Auth::user()->role->name == 'Admin'){
-		$all_missed_appoinments = Appointment::where('status', 'missed')->count();
+		$all_missed_appoinments = Appointment::where('status', 'ongoing')->count();
 	}else{
 		$all_missed_appoinments = Appointment::where('status', 'ongoing')
 											  ->where('agent_id', Auth::user()->id)->count();
 	}
 	return $all_missed_appoinments;
+	
 }
 
 
