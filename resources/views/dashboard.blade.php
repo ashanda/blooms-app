@@ -156,7 +156,7 @@
         <div class="col-sm-12 mt-sm-0 mt-12">
             <div class="card border h-100">
                 <div class="card-body d-flex flex-column justify-content-center text-center">
-                    <h6 class="text-secondary">Enter Appointment ID</h6>
+                    <h6 class="text-secondary">Enter Appointment ID/Name/Customer Phone</h6>
                     <form id="search-form-feed-data">
                         <div class="input-group">
                             <input type="text" id="search-input-feed-data" class="form-control" placeholder="Type here...">
@@ -393,7 +393,7 @@
                  
                     <div class="d-flex flex-column">
                       <h6 class="mb-1 text-dark text-sm">{{ $todayappoinmentfronts->appointment_id }}</h6>
-                   
+                      <h6 class="mb-1 text-dark text-sm">{{ $todayappoinmentfronts->customer_id }}</h6>
                       <span class="text-xs">Time :<span class="font-weight-bold">{{ $todayappoinmentfronts->time_in_ampm }}</span></span>
                       <span class="text-xs">Patient :<span class="font-weight-bold">{{ $todayappoinmentfronts->customer_name }}</span></span>
                       <span class="text-xs">Doctor : <span class="font-weight-bold">{{ userdata($todayappoinmentfronts->doctor_id)->name }}</span></span>
@@ -501,7 +501,7 @@
               </div>
             
               
-
+              @if (Auth::user()->role_id == 5)
               <div id="adsNameFieldWrapper" class="mb-3 adsNameFieldWrapper">
                 <label for="adsName">Ads Name</label>
                 <div class="input-group">
@@ -516,7 +516,7 @@
                 <img class="relatedImage" src="" alt="Related Image" style="max-width: 200px; max-height: 200px;">
               </div>
             </div>
-              
+          @endif  
               
               <label for="appointmentDateTime">Appointment Date & Time</label>
               <div class="input-group mb-3">
@@ -551,7 +551,7 @@
             
           </div>
           <div class="card-body">
-            <form role="form text-left" action="{{ route('add_appointment') }}" method="POST" enctype="multipart/form-data">
+            <form role="form text-left" action="{{ route('quick_appointment_pay') }}" method="POST" enctype="multipart/form-data">
               @csrf
               <label for="name">Name</label>
               <div class="input-group mb-3">
@@ -593,7 +593,17 @@
               <div class="input-group mb-3">
                 <textarea class="form-control" id="note" name="note" rows="3"></textarea>
               </div>
-              
+              <hr class="horizontal dark mt-0">
+                  <h6>Assign Assistant</h6>
+                  <div class="form-group">
+                    <label for="modal-name">Assistant:</label>
+                    <select class="form-control" id="assistant" name="assistant">
+                      @foreach ( allAssistant() as $allAssistant)
+                        
+                      @endforeach
+                      <option value="{{ $allAssistant->id }}">{{ $allAssistant->name }}</option>
+                    </select>
+                  </div>
               <hr class="horizontal dark mt-0">
                     <h6>Payment</h6>
                     <div class="form-group">
@@ -603,10 +613,18 @@
                         <option value="Card">Card</option>
                       </select>
                     </div>
-                    <div class="form-group">
-                      <label for="modal-name">Amount:</label>
-                      <input type="text" class="form-control" name="amount">
-                    </div>
+                     <div class="form-group">
+                    <label for="modal-name">Total:</label>
+                    <input type="text" class="form-control" id="total1" name="total1">
+                  </div>
+                  <div class="form-group">
+                    <label for="modal-name">Pay Amount:</label>
+                    <input type="text" class="form-control" id="payamount1" name="payamount1">
+                  </div>
+                  <div class="form-group">
+                    <label for="modal-name">Balance:</label>
+                    <input type="text" class="form-control" name="balance1" id="balance1" readonly>
+                  </div>
                     <input type="hidden" name="source" value="Front Office">
               <div class="text-center">
                 <button type="submit" class="btn btn-round bg-gradient-info btn-lg w-100 mt-4 mb-0">Pay</button>
@@ -1582,6 +1600,21 @@ function calculateBalance() {
   balanceInput.value = balance.toFixed(2); // Adjust the decimal places as needed
 }
 
+const totalInput1 = document.getElementById('total1');
+const payAmountInput1 = document.getElementById('payamount1');
+const balanceInput1 = document.getElementById('balance1');
+
+// Add event listener for input change
+payAmountInput1.addEventListener('input', calculateBalance1);
+
+function calculateBalance1() {
+  const total1 = parseFloat(totalInput1.value);
+  const payAmount1 = parseFloat(payAmountInput1.value);
+  const balance1 = payAmount1 - total1;
+
+  // Set the balance value
+  balanceInput1.value = balance1.toFixed(2); // Adjust the decimal places as needed
+}
 
 
 // Get all .fc-daygrid-day elements

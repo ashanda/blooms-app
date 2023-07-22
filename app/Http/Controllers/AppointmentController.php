@@ -5,6 +5,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Appointment;
 use App\Models\Treatment;
+use App\Models\Customer;
+use App\Models\Invoice;
+use App\Models\CustomerTreatment;
 use App\Models\Time;
 use App\Models\Lead;
 use Illuminate\Support\Facades\App;
@@ -205,6 +208,76 @@ class AppointmentController extends Controller
     public function new_appointment(){
         $pageTitle = 'Create Appoinment';
         return view('admin.appointment.create', compact('pageTitle'));
+    }
+
+
+    public function quick_appointment_pay(Request $request){
+
+        $random_number = '#' . mt_rand(100000, 999999);
+        // Create a new appointment instance
+        $appointment = new Appointment();
+        if (Auth::user()->role_id == 5) {
+            $appointment->agent_id = Auth::user()->id;
+        }
+         
+        $treatment = Treatment::where('treatment_name', $request->treatments)->first();
+        $appoinment_id = $random_number . '-' . $treatment->treatment_code;
+        $customer_id = $random_number;
+        $appointment->appointment_id = $appoinment_id;
+        $appointment->customer_id = $customer_id;
+        $appointment->customer_name = $request->name;
+        $appointment->customer_phone = $request->phone;
+        $appointment->customer_address = $request->address;
+        $appointment->treatment = $request->treatments;
+        $appointment->doctor_id = $request->doctors;
+        $appointment->source = $request->source;
+        $appointment->ads_name = $request->adsName;
+        $appointment->appointment_date_time = $request->appointmentDateTime;
+        $appointment->status = 'sucess';
+        $appointment->note = $request->note;
+
+        // Save the appointment
+        $appointment->save();
+
+
+        //Customer Treatment Table Record
+        $customer = new CustomerTreatment();
+        $customer->appoinment_id = $appoinment_id;
+        $customer->customer_id = $customer_id;
+        $customer->assistant = $request->assistant;
+        $customer->doctor_id = $request->doctors;
+        $customer->appointment_date_time = $request->appointmentDateTime;
+        $customer->treatment = $request->treatments;
+        $customer->save();
+
+        $customer = Customer::where('customer_id', $customer_id)->first();
+
+        if ($customer) {
+        } else {
+
+            $customer = new Customer();
+            $customer->customer_id = $customer_id;
+            $customer->name = $request->name;
+            $customer->phone = $request->phone;
+            $customer->save();
+        }
+
+        // Invoice and print
+        $random_number = '#' . mt_rand(100000, 999999);
+        $invoice = new Invoice();
+        $invoice->invoice_id = $random_number;
+        $invoice->appoinment_id = $appoinment_id;
+        $invoice->total = $request->total1;
+        $invoice->payment_type = $request->paymentMethod;
+        $invoice->pay_amount = $request->payamount1;
+        $invoice->balance = $request->balance1;
+        $invoice->treatment = $request->treatments;
+        $invoice->issued_by = Auth::user()->name;
+        $invoice->status = 'settled';
+        $invoice->save();
+
+        return view('print', ['invoice' => $invoice]);
+
     }
 
 }

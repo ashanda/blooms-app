@@ -29,6 +29,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 Route::post('/add_appointment', [AppointmentController::class, 'add_appointment'])->name('add_appointment');
+Route::post('/quick_appointment_pay', [AppointmentController::class,'quick_appointment_pay'])->name('quick_appointment_pay');
 Route::get('/followups', [FollowUpController::class, 'view'])->name('followups.view');
 Route::post('/followups', [FollowUpController::class, 'show'])->name('followups.show');
 

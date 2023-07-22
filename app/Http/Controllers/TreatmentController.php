@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\CustomerTreatment;
 use App\Models\Treatment;
+use App\Customer;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 class TreatmentController extends Controller
@@ -135,11 +137,21 @@ class TreatmentController extends Controller
 
 
     public function getFeedData(Request $request){
-       
-        $query = $request->input('query');
+        date_default_timezone_set('Asia/Colombo');
+        $inputQuery = $request->input('query');
+        $currentDateTime = Carbon::now();
 
-        $getFeedData = CustomerTreatment::where('appoinment_id', $query)->first();
-
+        $getFeedData = CustomerTreatment::where('status', 'waiting')
+        ->join('customers', 'customers.customer_id', '=', 'customer_treatments.customer_id')
+        ->where('customer_treatments.appointment_date_time', '>=', $currentDateTime)
+        ->where(function ($query) use ($inputQuery) {
+            $query->where('appoinment_id', $inputQuery)
+                ->orWhere('phone', $inputQuery)
+                ->orWhere('name', $inputQuery);
+        })
+        ->first(['customer_treatments.*', 'customers.*']);
+    
+        
         if ($getFeedData) {
             return response()->json($getFeedData);
         } else {

@@ -14,7 +14,8 @@ class InvoiceController extends Controller
     public function create(Request $request){
         //Convert Customer
         $customer = Customer::where('customer_id',$request->customer_id)->first();
-        
+        $convert = Appointment::where('appointment_id', $request->appoinment_id)->first();
+
         if($customer){
            
         }else{
@@ -23,6 +24,7 @@ class InvoiceController extends Controller
         $customer->customer_id = $request->customer_id;
         $customer->name = $request->name;
         $customer->phone = $request->phone;
+        $customer->appointment_date_time = $convert->appointment_date_time;
         $customer->save();
         }
         
