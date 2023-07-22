@@ -170,6 +170,7 @@ class AppointmentController extends Controller
     }
 
     public function update(Request $request, $id){
+        dd('mac');
         $appointment = Appointment::findOrFail($id);
         $appointment->treatment = $request->input('treatments');
         if($request->input('doctors') !== null){
@@ -177,6 +178,7 @@ class AppointmentController extends Controller
         }
         
         $appointment->appointment_date_time = $request->input('appointmentDateTime');
+        $appointment->note = $request->input('note');
         $appointment->status = 'ongoing';
         $appointment->save();
 

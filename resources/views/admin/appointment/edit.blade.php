@@ -24,16 +24,22 @@
                     </select>
                 </div>
                 <label for="treatments">Doctors</label>
+                <p style="font-size: 15px;color: red;">Note : you are not change treatment it will assign old doctor</p>
                 <div class="input-group mb-3">
+                    
                 <select class="form-control" id="doctors" name="doctors">
                   <!-- Doctors options will be populated dynamically -->
                </select>
                 </div>
                 <div class="form-group">
                     <label for="date">Appointment Date</label>
-                    <input class="form-control" type="datetime-local" id="appointmentDateTime" name="appointmentDateTime"  required>
+                    <input class="form-control" type="datetime-local" id="appointmentDateTime" value="{{ $appointment->appointment_date_time }}" name="appointmentDateTime"  required>
 
                 </div>
+                <label for="note">Note</label>
+              <div class="input-group mb-3">
+                <textarea class="form-control" id="note" name="note" value="{{ $appointment->treatment }}" rows="3" required></textarea>
+              </div>
                 <button type="submit" class="btn btn-primary">Update</button>
             </form>
         </div>
