@@ -101,9 +101,10 @@ class CampaignController extends Controller
     
     // Update the image if a new image is provided
     if ($request->hasFile('image')) {
-        $image = $request->file('image');
-        $imagePath = $image->store('campaigns', 'public');
-        $campaign->image = $imagePath;
+            $image = $request->file('image');
+            $filename = date('YmdHi') . $image->getClientOriginalName();
+            $image->move(public_path('/campaing_image'), $filename);
+            $campaign->image = $filename;
     }
     $campaign->assigned_agent = $request->input('agent_id');
     $campaign->status= $request->input('campaigns_status');

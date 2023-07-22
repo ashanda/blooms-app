@@ -20,7 +20,7 @@
             <div class="form-group">
                 <label for="image">Image</label>
                 <input type="file" name="image" id="image" class="form-control-file">
-                <img src="{{ asset('storage/' . $campaign->image) }}" alt="Campaign Image" width="200">
+                <img src="{{ asset('campaing_image/' . $campaign->image) }}" alt="Campaign Image" width="200">
             </div>
 
             <div class="form-group">
@@ -28,7 +28,7 @@
                 <select name="agent_id" id="agent_id" class="form-control">
                     <option value="">Select Agent</option>
                     @foreach ($agents as $agent)
-                        <option value="{{ $agent->id }}" {{ $campaign->agent_id == $agent->id ? 'selected' : '' }}>
+                        <option value="{{ $agent->id }}" {{ $campaign->assigned_agent == $agent->id ? 'selected' : '' }}>
                             {{ $agent->name }}
                         </option>
                     @endforeach
