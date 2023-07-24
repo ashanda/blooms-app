@@ -70,3 +70,7 @@
 .fc-daygrid-dot-event:hover, .fc-daygrid-dot-event.fc-event-mirror {
 	/* background: rgba(0, 0, 0, 0.1); */
 }
+
+i.material-icons {
+  font-style: normal !important;
+}

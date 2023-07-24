@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('content')
-    <div class="container">
+<div class="container px-0 px-md-4 px-lg-4">
         <div class="card">
             <div class="card-header card-header-warning">
               <h4 class="card-title">{{ $pageTitle }}</h4>

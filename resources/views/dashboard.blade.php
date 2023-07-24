@@ -3,7 +3,7 @@
 
 @section('content')
 
-<div class="container-fluid py-4">
+<div class="container-fluid py-4 px-0 px-md-4 px-lg-4">
   <div class="col-lg-12 mb-5">
     <div class="card p-3">
     <div class="overflow-hidden position-relative border-radius-lg bg-cover h-100">
@@ -153,7 +153,7 @@
       @endif
       @if ( Auth::user()->role->name == 'Assistant' || Auth::user()->role->name == 'Doctor')
 
-        <div class="col-sm-12 mt-sm-0 mt-12">
+        <div class="col-sm-12 mt-sm-0">
             <div class="card border h-100">
                 <div class="card-body d-flex flex-column justify-content-center text-center">
                     <h6 class="text-secondary">Enter Appointment ID/Name/Customer Phone</h6>
@@ -380,7 +380,7 @@
         </div>
         @else
         <div class="col-lg-12 col-sm-6">
-          <div class="card">
+          <div class="card mt-3">
             <div class="card-header pb-0 p-3">
               <h6 class="mb-0">Today Patients</h6>
             </div>

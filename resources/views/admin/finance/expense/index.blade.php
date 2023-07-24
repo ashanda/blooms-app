@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('content')
-    <div class="container">
+    <div class="container px-0 px-md-4 px-lg-4">
         <div class="card">
             <div class="card-header card-header-warning">
               <h4 class="card-title">{{ $pageTitle }}</h4>
@@ -18,7 +18,6 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Expense Type</th>
                     <th>Amount</th>
                     <th>Date</th>
                     <th>Actions</th>
@@ -27,9 +26,10 @@
             <tbody>
                 @foreach ($campaigns as $campaign)
                     <tr>
-                        <td>{{ $campaign->expenses_type }}</td>
-                        <td>{{ $campaign->amount }}</td>
-                       <td>{{ $campaign->date }}</td>
+                    <th mb-0 text-xs>Expense Type</th>
+                        <td class="mb-0 text-xs">{{ $campaign->expenses_type }}</td>
+                        <td class="mb-0 text-xs">{{ $campaign->amount }}</td>
+                        <td class="mb-0 text-xs">{{ $campaign->date }}</td>
                         
                         <td>
                             <a href="{{ route('expense.edit', $campaign->id) }}" class="btn btn-sm btn-primary">Edit</a>

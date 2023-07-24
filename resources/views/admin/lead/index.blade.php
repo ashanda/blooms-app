@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="container-fluid py-4">
+<div class="container-fluid py-4 px-0 px-md-4 px-lg-4">
     
     <div class="card">
         <div class="table-responsive">

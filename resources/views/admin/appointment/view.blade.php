@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="container-fluid py-4">
+<div class="container-fluid py-4 px-0 px-md-4 px-lg-4">
     
     <div class="card">
         <div class="table-responsive">
@@ -14,7 +14,6 @@
                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Treatment</th>
                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Appointment Date</th>
                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
-                <th class="text-secondary opacity-7"></th>
               </tr>
             </thead>
             <tbody>
@@ -37,11 +36,11 @@
                   <td class="align-middle text-center">
                     <span class="text-secondary text-xs font-weight-bold">{{ $appointment->appointment_date_time }}</span>
                   </td>
-                  <td class="align-middle">
+                  <td class="align-middle text-center">
                     @if ($appointment->visibility == 'closed' && $appointment->status == 'converted' && $appointment->agent_id == Auth::user()->id)
                     <p class="text-xs font-weight-bold mb-0">{{ "Can't edit" }}</p>
                     @else
-                    <a href="{{ route('appointments.edit', $appointment->id) }}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                    <a href="{{ route('appointments.edit', $appointment->id) }}" class="font-weight-bold text-xs btn btn-sm btn-primary" data-toggle="tooltip" data-original-title="Edit user">
                       Edit
                     </a>
                     @endif

@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('content')
-    <div class="container">
+    <div class="container px-0 px-md-4 px-lg-4">
         @if (Session::has('message'))
             <div class="alert alert-danger">
                 {{ Session::get('message') }}
@@ -15,20 +15,20 @@
             <div class="card-body table-responsive">
               <table class="table table-hover">
                 <thead class="text-warning">
-                  <th>ID</th>
-                  <th>Name</th>
-                  <th>Treatment Code</th>
-                  <th>Treatment Value</th>
-                  <th>Action</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">ID</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">Name</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">Treatment Code</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">Treatment Value</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">Action</th>
                 </thead>
                 <tbody>
                     @foreach ( $treatments as $treatment)
                     <tr>
-                        <td>{{ $treatment->id }}</td>
-                        <td>{{ $treatment->treatment_name }}</td>
-                        <td>{{ $treatment->treatment_code }}</td>
-                        <td>{{ $treatment->actual_value }}</td>
-                        <td>
+                        <td class="mb-0 text-xs">{{ $treatment->id }}</td>
+                        <td class="mb-0 text-xs">{{ $treatment->treatment_name }}</td>
+                        <td class="mb-0 text-xs">{{ $treatment->treatment_code }}</td>
+                        <td class="mb-0 text-xs">{{ $treatment->actual_value }}</td>
+                        <td class="mb-0 text-xs">
                             <!-- Edit button -->
                             <a href="{{ route('treatment.edit', $treatment->id) }}" class="btn btn-primary">Edit</a>
                             <!-- Delete button -->
