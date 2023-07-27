@@ -23499,7 +23499,7 @@ html {
   }
 
   .g-sidenav-hidden .navbar-vertical {
-    max-width: 6rem !important;
+    max-width: 7rem !important;
   }
 
   .g-sidenav-hidden .navbar-vertical.fixed-start~.main-content {

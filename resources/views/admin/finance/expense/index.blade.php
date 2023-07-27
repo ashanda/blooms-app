@@ -18,18 +18,18 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Amount</th>
-                    <th>Date</th>
-                    <th>Actions</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Expense Type</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Amount</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Date</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($campaigns as $campaign)
                     <tr>
-                    <th mb-0 text-xs>Expense Type</th>
-                        <td class="mb-0 text-xs">{{ $campaign->expenses_type }}</td>
-                        <td class="mb-0 text-xs">{{ $campaign->amount }}</td>
-                        <td class="mb-0 text-xs">{{ $campaign->date }}</td>
+                        <td class="mb-0 text-xs px-4">{{ $campaign->expenses_type }}</td>
+                        <td class="mb-0 text-xs px-4">{{ $campaign->amount }}</td>
+                        <td class="mb-0 text-xs px-4">{{ $campaign->date }}</td>
                         
                         <td>
                             <a href="{{ route('expense.edit', $campaign->id) }}" class="btn btn-sm btn-primary">Edit</a>
