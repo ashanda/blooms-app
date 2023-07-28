@@ -48,7 +48,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <table class="table table-borderless">
+                    <table id="data_table" class="table table-borderless">
                         <tbody>
                             <tr>
                                 @for($hour = 8; $hour < 21; $hour++)

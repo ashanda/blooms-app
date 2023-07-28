@@ -13,7 +13,7 @@
               <p class="card-category">New employees on 15th September, 2016</p>
             </div>
             <div class="card-body table-responsive">
-              <table class="table table-hover">
+              <table id="data_table" class="table table-hover">
                 <thead class="text-warning">
                   <th>ID</th>
                   <th>Name</th>

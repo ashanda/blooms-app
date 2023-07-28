@@ -15,7 +15,7 @@
             </div>
         @endif
         <div class="card-body table-responsive">
-        <table class="table">
+        <table id="data_table" class="table">
             <thead>
                 <tr>
                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>

@@ -13,7 +13,7 @@
              
             </div>
             <div class="card-body table-responsive">
-              <table class="table table-hover">
+              <table id="data_table" class="table table-hover">
                 <thead class="text">
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Customer ID</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>

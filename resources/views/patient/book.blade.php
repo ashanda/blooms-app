@@ -31,7 +31,7 @@
                 class="d-flex flex-column justify-content-center">
                 @csrf
                 <h3 class="align-self-center">Select the time for your appointment</h3>
-                <table class="table table-borderless">
+                <table id="data_table" class="table table-borderless">
                     <tbody>
                         <tr>
                             <div class="d-flex btn-group-toggle flex-wrap" data-toggle="buttons">

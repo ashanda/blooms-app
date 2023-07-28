@@ -15,7 +15,7 @@
             </div>
         @endif
         <div class="card-body table-responsive">
-        <table class="table">
+        <table id="data_table" class="table">
             <thead>
                 <tr>
                     <th>Amount</th>

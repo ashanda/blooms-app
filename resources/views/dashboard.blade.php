@@ -220,7 +220,7 @@
                   
                    
                     <div class="table-responsive">
-                      <table class="table">
+                      <table id="data_table" class="table">
                         <thead>
                           <tr>
                             <th>App No</th>
@@ -345,7 +345,7 @@
                   
                    
                     <div class="table-responsive">
-                      <table class="table">
+                      <table id="data_table" class="table">
                         <thead>
                           <tr>
                             <th>Agent Name</th>
