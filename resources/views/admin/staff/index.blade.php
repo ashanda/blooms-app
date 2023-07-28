@@ -12,7 +12,7 @@
             <div class="card">
                 <div class="card-header card-header-primary">
                     <h4 class="card-title">Staff</h4>
-                    <p class="card-category">Manage Doctors or Administrators</p>
+                    <p class="card-category">Manage Doctors, Accountants, Assistants, Sales Agents and Admins</p>
                 </div>
                 <div class="card-body">
                     <table id="data_table" class="table container-fluid px-0 px-md-4 px-lg-4">
