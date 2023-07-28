@@ -35,7 +35,7 @@
                 </select>
             </div>
 
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label for="agent_id">Campaigns Status</label>
                 <select name="campaigns_status"  class="form-control">
                     @php
@@ -55,7 +55,28 @@
                                      
                     
                 </select>
-            </div>
+            </div> -->
+
+            <div class="form-group">
+                <label for="agent_id">Campaigns Status</label>
+                <select name="campaigns_status" class="form-control">
+                    @php
+                    if ($campaign->status == 1) {
+                        $status = 'Active';
+                    } else {
+                        $status = 'Deactive';
+                    }
+                    @endphp
+
+                    @if ($campaign->status == 1)
+                        <option value="1">{{ "Active" }}</option>
+                        <option value="2">{{ "Deactive" }}</option>
+                    @else
+                        <option value="2">{{ "Deactive" }}</option>
+                        <option value="1">{{ "Active" }}</option>
+                    @endif
+            </select>
+        </div>
 
             <button type="submit" class="btn btn-primary">Update Campaign</button>
         </form>

@@ -50,7 +50,7 @@
                                             </a>
                                             <a href="{{ route('staff.show', $member->id) }}">
                                                 <button type="button" class="btn btn-sm btn-danger">
-                                                <i class="material-icons" style="font-size: inherit;">edit</i>
+                                                <i class="material-icons" style="font-size: inherit;">delete</i>
                                                 </button>
                                             </a>
                                         </div>
