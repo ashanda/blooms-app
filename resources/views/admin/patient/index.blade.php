@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('content')
-    <div class="container">
+    <div class="container px-0 px-md-4 px-lg-4">
         @if (Session::has('message'))
             <div class="alert alert-danger">
                 {{ Session::get('message') }}
@@ -13,12 +13,12 @@
              
             </div>
             <div class="card-body table-responsive">
-              <table class="table table-hover">
+              <table id="data_table" class="table table-hover">
                 <thead class="text">
-                  <th>Customer ID</th>
-                  <th>Name</th>
-                  <th>Phone</th>
-                   <th>Action</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Customer ID</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Phone</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
                 </thead>
                 <tbody>
                     @foreach ( $doc_patients as $doc_patient)

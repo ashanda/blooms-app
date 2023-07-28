@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('content')
-    <div class="container">
+    <div class="container px-0 px-md-4 px-lg-4">
         @if (Session::has('message'))
                 <div class="alert alert-success">
                     {{ Session::get('message') }}
@@ -48,7 +48,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <table class="table table-borderless">
+                    <table id="data_table" class="table table-borderless">
                         <tbody>
                             <tr>
                                 @for($hour = 8; $hour < 21; $hour++)

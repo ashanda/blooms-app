@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ExpenseCat;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ExpenseCatController extends Controller
 {
@@ -45,8 +46,8 @@ class ExpenseCatController extends Controller
         $expenseType->save();
 
         // Redirect to a success page or wherever you want to go
-        
-        return redirect()->route('expense_type.index')->with('success', 'Expense type created successfully');
+        Alert::success('Success', 'Expense type created successfully');  
+        return redirect()->route('expense_type.index');
     }
 
     /**
@@ -92,8 +93,9 @@ class ExpenseCatController extends Controller
 
         $expenseType->save();
 
+        Alert::success('Success', 'Expense type updated successfully');  
         // Redirect to a success page or wherever you want to go
-        return redirect()->route('expense_type.index')->with('success', 'Expense type updated successfully');
+        return redirect()->route('expense_type.index');
     }
 
     /**
@@ -110,7 +112,8 @@ class ExpenseCatController extends Controller
         // Delete the expense type
         $expenseType->delete();
 
+        Alert::warning('Delete', 'Expense type deleted successfully');
         // Redirect to a success page or wherever you want to go
-        return redirect()->route('expense_type.index')->with('success', 'Expense type deleted successfully');
+        return redirect()->route('expense_type.index');
     }
 }

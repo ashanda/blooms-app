@@ -59,7 +59,8 @@ class TreatmentController extends Controller
     $treatment->note = $request->note;
     $treatment->save();
 
-    return redirect()->route('treatment.index')->with('success', 'Treatment created successfully');
+    Alert::success('Success', 'Treatment created successfully');
+    return redirect()->route('treatment.index');
 }
     
 
@@ -114,7 +115,7 @@ class TreatmentController extends Controller
         $treatment->note = $request->note;
         $treatment->save();
         Alert::success('Success', 'Treatment updated successfully');
-        return redirect()->route('treatment.index')->with('success', 'Treatment updated successfully');
+        return redirect()->route('treatment.index');
     }
 
     /**
@@ -132,7 +133,7 @@ class TreatmentController extends Controller
             $treatment->delete();
             Alert::success('Success', 'Treatment deleted successfully');
             // Redirect or perform any other necessary actions
-            return redirect()->back()->with('success', 'Treatment deleted successfully');
+            return redirect()->back();
     }
 
 

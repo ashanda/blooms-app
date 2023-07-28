@@ -76,7 +76,7 @@ class AppointmentController extends Controller
         // Redirect or perform additional actions as needed
         // For example:
         Alert::success('Success', 'Appointment created successfully.');  
-        return redirect()->back()->with('success', 'Appointment created successfully.');
+        return redirect()->back();
     }
 
 
@@ -183,7 +183,7 @@ class AppointmentController extends Controller
         $appointment->save();
 
         Alert::success('Success', 'Appointment updated successfully.'); 
-        return redirect()->route('home')->with('success', 'Appointment updated successfully.');
+        return redirect()->route('home');
     }
 
     public function delete_appoinment(){

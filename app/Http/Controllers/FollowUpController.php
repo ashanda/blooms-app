@@ -130,6 +130,6 @@ class FollowUpController extends Controller
     // Save the DaySummary model
     $daySummary->save();
     Alert::success('Success', 'Today Summary Data Save successfully.');
-    return redirect()->back()->with('success', 'Data saved successfully.');
+    return redirect()->back();
     }
 }

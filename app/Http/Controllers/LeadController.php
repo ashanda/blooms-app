@@ -130,7 +130,7 @@ class LeadController extends Controller
         $lead->save();
 
         Alert::success('Success', 'Appointment updated successfully.'); 
-        return redirect()->route('lead.index')->with('success', 'Appointment updated successfully.');
+        return redirect()->route('lead.index');
     }
 
     /**
@@ -145,6 +145,6 @@ class LeadController extends Controller
 
         $lead->delete();
         Alert::warning('Delete', 'Campaign deleted successfully.');
-        return redirect()->route('lead.index')->with('success', 'Campaign deleted successfully.');
+        return redirect()->route('lead.index');
     }
 }

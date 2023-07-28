@@ -70,7 +70,7 @@
             </div>
         </div>
 
-        <table class="receipt-item-table">
+        <table id="data_table" class="receipt-item-table">
             <thead>
                 <tr>
                     <th>Item</th>

@@ -63,7 +63,7 @@ class StaffController extends Controller
             'role_id' => $request->role_id
         ]);
         Alert::success('Success', 'Member registered successfully!');
-        return redirect()->back()->with('message', 'Member registered successfully!');
+        return redirect()->back();
     }
 
     /**
@@ -124,7 +124,7 @@ class StaffController extends Controller
             'role_id' => $request->role_id
         ]);
         Alert::success('Success', 'Member updated successfully!');
-        return redirect()->route('staff.index')->with('message', 'Member updated successfully!');
+        return redirect()->route('staff.index');
     }
 
     private function imgHandle(Request $request)
@@ -155,6 +155,6 @@ class StaffController extends Controller
         $staff = User::find($id); 
         $staff->delete();
         Alert::success('Success', 'Member deleted successfully!');
-        return redirect()->route('staff.index')->with('message', 'Member deleted successfully!');
+        return redirect()->route('staff.index');
     }
 }

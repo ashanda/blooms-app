@@ -59,7 +59,7 @@ class CampaignController extends Controller
             // Assign an agent
 
             Alert::success('Success', 'Campaign created successfully.'); 
-            return redirect()->route('campaigns.index')->with('success', 'Campaign created successfully.');
+            return redirect()->route('campaigns.index');
         }
 
     /**
@@ -111,7 +111,7 @@ class CampaignController extends Controller
     $campaign->save();
     
     Alert::success('Success', 'Campaign updated successfully.'); 
-    return redirect()->route('campaigns.index')->with('success', 'Campaign updated successfully.');
+    return redirect()->route('campaigns.index');
 }
 
 public function destroy($id)
@@ -128,7 +128,7 @@ public function destroy($id)
     
     $campaign->delete();
     Alert::warning('Delete', 'Campaign deleted successfully.');
-    return redirect()->route('campaigns.index')->with('success', 'Campaign deleted successfully.');
+    return redirect()->route('campaigns.index');
 }
 
 

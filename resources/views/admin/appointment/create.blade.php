@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="container-fluid py-4">
+<div class="container-fluid py-4 px-0 px-md-4 px-lg-4">
     
       <div class="card">
         <div class="card-body">
@@ -55,7 +55,7 @@
             
               
 
-              <div id="adsNameFieldWrapper" class="mb-3 adsNameFieldWrapper">
+              <div id="adsNameFieldWrapper" class="mb-3 adsNameFieldWrapper d-none">
                 <label for="adsName">Ads Name</label>
                 <div class="input-group">
                   <select class="form-control adsName" id="adsName" name="adsName" >
