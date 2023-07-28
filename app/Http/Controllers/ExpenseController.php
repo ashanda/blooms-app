@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Expenses;
 use App\Models\ExpenseCat;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ExpenseController extends Controller
 {
@@ -48,8 +49,9 @@ class ExpenseController extends Controller
 
         $expenseType->save();
 
+        Alert::success('Success', 'Expense Add successfully');
         // Redirect to a success page or wherever you want to go
-        return redirect()->route('expense.index')->with('success', 'Expense Add successfully');
+        return redirect()->route('expense.index');
     }
     /**
      * Display the specified resource.
@@ -96,8 +98,9 @@ class ExpenseController extends Controller
 
         $expenseType->save();
 
+        Alert::success('Success', 'Expense updated successfully');
         // Redirect to a success page or wherever you want to go
-        return redirect()->route('expense.index')->with('success', 'Expense updated successfully');
+        return redirect()->route('expense.index');
     }
 
     /**
@@ -114,7 +117,8 @@ class ExpenseController extends Controller
         // Delete the expense type
         $expenseType->delete();
 
+        Alert::warning('Delete', 'Expense deleted successfully');
         // Redirect to a success page or wherever you want to go
-        return redirect()->route('expense.index')->with('success', 'Expense deleted successfully');
+        return redirect()->route('expense.index');
     }
 }

@@ -83,7 +83,7 @@ class PatientDocsController extends Controller
     }
     // Redirect or perform any other necessary actions
     Alert::success('Success', 'Patient Document Uploads successfully');
-    return redirect()->route('home')->with('message', 'Member updated successfully!');
+    return redirect()->route('home');
 
 }
 

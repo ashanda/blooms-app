@@ -120,7 +120,7 @@ class PatientController extends Controller
         ]);
 
         Alert::success('Success', 'Appointment booked successfully!');
-        return redirect()->route('patient.book')->with('message', 'Appointment booked successfully!');
+        return redirect()->route('patient.book');
     }
 
     public function delete(Request $request)
@@ -133,6 +133,6 @@ class PatientController extends Controller
         $appointmentToCancel->update(['patient_id' => null]);
 
         Alert::success('Success', 'Appointment cancelled successfully!');
-        return redirect()->route('patient.index')->with('message', 'Appointment cancelled successfully!');
+        return redirect()->route('patient.index');
     }
 }
