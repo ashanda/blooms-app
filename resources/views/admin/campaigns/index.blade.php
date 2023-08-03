@@ -19,8 +19,12 @@
                 <thead>
                     <tr>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">Name</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">Start Date</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">End Date</th>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">Image</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">Description</th>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">Assigned Agent</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">Budget</th>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">Status</th>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">Actions</th>
                     </tr>
@@ -29,6 +33,8 @@
                     @foreach ($campaigns as $campaign)
                     <tr>
                         <td class="mb-0 text-xs">{{ $campaign->name }}</td>
+                        <td class="mb-0 text-xs">{{ $campaign->start_date }}</td>
+                        <td class="mb-0 text-xs">{{ $campaign->end_date }}</td>
                         <td class="mb-0 text-xs">
                             @if ($campaign->image)
                             <img src="{{ asset('campaing_image/' . $campaign->image) }}" alt="Campaign Image" width="100">
@@ -36,7 +42,9 @@
                             No Image
                             @endif
                         </td>
+                        <td class="mb-0 text-xs">{{ $campaign->description }}</td>
                         <td class="mb-0 text-xs">{{ findSalesAgent($campaign->assigned_agent)->name }}</td>
+                        <td class="mb-0 text-xs">{{ $campaign->assign_budget }}</td>
                         @if ($campaign->status = 1)
 
                         <td class="mb-0 text-xs">{{ 'Active' }}</td>

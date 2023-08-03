@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
+
 class CampaignController extends Controller
 {
     /**
@@ -18,7 +19,7 @@ class CampaignController extends Controller
     {
         $pageTitle = 'Campaign';
         $campaigns = Campaign::all();
-        return view('admin.campaigns.index', compact('campaigns','pageTitle'));
+        return view('admin.campaigns.index', compact('campaigns', 'pageTitle'));
     }
 
     /**
@@ -29,8 +30,8 @@ class CampaignController extends Controller
     public function create()
     {
         $pageTitle = 'Create Campaign';
-        $agents = User::where('role_id',5 )->get();
-        return view('admin.campaigns.create',compact('pageTitle','agents'));
+        $agents = User::where('role_id', 5)->get();
+        return view('admin.campaigns.create', compact('pageTitle', 'agents'));
     }
 
     /**
@@ -40,27 +41,34 @@ class CampaignController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-        {
-            $campaign = new Campaign;
-            $campaign->name = $request->input('name');
-            
-            // Save the image
+    {
+        $campaign = new Campaign;
+        $campaign->name = $request->input('name');
+        $campaign->start_date = $request->input('start_date');
+        $campaign->end_date = $request->input('end_date');
+        $campaign->ad_id = uniqid(); // Generate a unique ad_id here, you can use any logic you prefer.
 
-            if ($request->hasFile('image')) {
-                $image = $request->file('image');
-                $filename = date('YmdHi').$image->getClientOriginalName();
-                $image -> move(public_path('/campaing_image'), $filename);
-                $campaign->image = $filename;
-            }
-            $campaign->assigned_agent = $request->input('agent_id');
-            $campaign->status = 1;
-            $campaign->save();
-            
-            // Assign an agent
-
-            Alert::success('Success', 'Campaign created successfully.'); 
-            return redirect()->route('campaigns.index');
+        // Save the image
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $filename = date('YmdHi') . $image->getClientOriginalName();
+            $image->move(public_path('/campaign_image'), $filename);
+            $campaign->image = $filename;
         }
+
+        $campaign->description = $request->input('description');
+        $campaign->assigned_agent = $request->input('agent_id');
+        $campaign->assign_budget = $request->input('assign_budget');
+        $campaign->status = 1; // Assuming 1 represents the active status
+
+        $campaign->save();
+
+        // Assign an agent
+
+        Alert::success('Success', 'Campaign created successfully.');
+        return redirect()->route('campaigns.index');
+    }
+
 
     /**
      * Display the specified resource.
@@ -83,8 +91,8 @@ class CampaignController extends Controller
     {
         $pageTitle = 'Edit Campaign';
         $campaign = Campaign::findOrFail($id);
-        $agents = User::where('role_id',5 )->get();
-        return view('admin.campaigns.edit',compact('pageTitle','campaign','agents'));
+        $agents = User::where('role_id', 5)->get();
+        return view('admin.campaigns.edit', compact('pageTitle', 'campaign', 'agents'));
     }
 
     /**
@@ -95,51 +103,56 @@ class CampaignController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-{
-    $campaign = Campaign::findOrFail($id);
-    $campaign->name = $request->input('name');
-    
-    // Update the image if a new image is provided
-    if ($request->hasFile('image')) {
+    {
+        $campaign = Campaign::findOrFail($id);
+        $campaign->name = $request->input('name');
+        $campaign->start_date = $request->input('start_date');
+        $campaign->end_date = $request->input('end_date');
+
+        // Update the image if a new image is provided
+        if ($request->hasFile('image')) {
             $image = $request->file('image');
             $filename = date('YmdHi') . $image->getClientOriginalName();
-            $image->move(public_path('/campaing_image'), $filename);
+            $image->move(public_path('/campaign_image'), $filename);
             $campaign->image = $filename;
+        }
+
+        $campaign->description = $request->input('description');
+        $campaign->assigned_agent = $request->input('agent_id');
+        $campaign->assign_budget = $request->input('assign_budget');
+
+        $campaign->save();
+
+        Alert::success('Success', 'Campaign updated successfully.');
+        return redirect()->route('campaigns.index');
     }
-    $campaign->assigned_agent = $request->input('agent_id');
-    $campaign->status= $request->input('campaigns_status');
-    $campaign->save();
-    
-    Alert::success('Success', 'Campaign updated successfully.'); 
-    return redirect()->route('campaigns.index');
-}
 
-public function destroy($id)
-{
-    $campaign = Campaign::findOrFail($id);
-    
-    // Delete the campaign image if it exists
-    if ($campaign->image) {
-        Storage::disk('public')->delete($campaign->image);
+
+    public function destroy($id)
+    {
+        $campaign = Campaign::findOrFail($id);
+
+        // Delete the campaign image if it exists
+        if ($campaign->image) {
+            Storage::disk('public')->delete($campaign->image);
+        }
+
+        // Remove the association with the agent
+
+
+        $campaign->delete();
+        Alert::warning('Delete', 'Campaign deleted successfully.');
+        return redirect()->route('campaigns.index');
     }
-    
-    // Remove the association with the agent
-    
-    
-    $campaign->delete();
-    Alert::warning('Delete', 'Campaign deleted successfully.');
-    return redirect()->route('campaigns.index');
-}
 
 
-public function getRelatedImage(Request $request)
-  {
-    $campaignId = $request->input('campaignId');
-    // Get the URL or image path based on the campaign ID
-    $campaign = Campaign::find($campaignId);
-    $imagePath = $campaign->$campaign;
-    // Retrieve the image path or URL based on the campaign ID
-    return $imagePath;
-  }
-
+    public function getRelatedImage(Request $request)
+    {
+        $campaignId = $request->input('campaignId');
+        // Get the URL or image path based on the campaign ID
+        $campaign = Campaign::find($campaignId);
+        $imagePath = $campaign->$campaign;
+        // Retrieve the image path or URL based on the campaign ID
+        return $imagePath;
+    }
 }
