@@ -39,27 +39,37 @@
   color: #fff;
 }
 
-.fc-daygrid-event:hover {
+/* .fc-daygrid-event:hover {
   color: #fff;
-}
+} */
 
 .fc-daygrid-event {
   display: block;
 }
 
 .extra_data {
-  transition: 0.5s;
-  opacity: 0;
-  background-color: #8392ab;
-  position: absolute;
-  border-radius: 10px;
-  color: #fff;
-  padding: 10px;
-  z-index: 9999999999;
+	transition: 0.5s;
+	/* opacity: 0; */
+  display: none;
+	background-color: #8392ab;
+	position: fixed;
+	border-radius: 10px;
+	color: #fff;
+	padding: 10px;
+	z-index: 9999999999 !important;
+	top: 25%;
+	/* left: 50%; */
+	transform: translate(-50% , -50%);
+	-webkit-box-shadow: 0px 0px 50px -10px rgba(0,0,0,0.15);
+	box-shadow: 0px 0px 50px -10px rgba(0,0,0,0.15);
+  width: min-content;
+  left: 50%;
+  text-align: center;
 }
 
 .fc-daygrid-event:hover .extra_data {
-  opacity: 1 !important;
+  /* opacity: 1 !important; */
+  display: block;
 }
 
 .extra_data ul {
@@ -73,10 +83,7 @@
   right: 0 !important;
 }
 
-.fc-daygrid-dot-event:hover,
-.fc-daygrid-dot-event.fc-event-mirror {
-  /* background: rgba(0, 0, 0, 0.1); */
-}
+
 
 i.material-icons {
   font-style: normal !important;
@@ -95,4 +102,10 @@ i.material-icons {
 
 .alert {
   color: #fff;
+}
+
+@media (max-width: 576px) {
+  .fc-toolbar-title {
+    font-size: 14px !important;
+  }
 }
