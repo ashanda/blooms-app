@@ -12,6 +12,7 @@
             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Customer Name</th>
             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Phone Number</th>
             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Treatment</th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Note</th>
             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">convert</th>
             <!-- <th class="text-secondary opacity-7"></th> -->
@@ -34,6 +35,9 @@
             </td>
             <td class="align-middle text-center text-sm">
               <p class="text-xs font-weight-bold mb-0">{{ $lead->treatment }}</p>
+            </td>
+            <td class="align-middle text-center text-sm">
+              <p class="text-xs font-weight-bold mb-0">{{ $lead->note }}</p>
             </td>
             <td class="align-middle text-center text-sm">
 

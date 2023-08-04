@@ -13,11 +13,11 @@
                 <!-- Add your input fields here for editing lead details -->
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="text" class="form-control" id="name" name="customer_name" value="{{ $lead->customer_name }}" >
+                    <input type="text" class="form-control" id="name" name="customer_name" value="{{ $lead->customer_name }}">
                 </div>
                 <div class="form-group">
-                    <label for="name">Phone</label>
-                    <input type="text" class="form-control" id="phone" name="phone" value="{{ $lead->customer_phone }}" >
+                    <label for="name">Phone Number</label>
+                    <input type="text" class="form-control" id="phone" name="phone" value="{{ $lead->customer_phone }}">
                 </div>
                 <div class="form-group">
                     <label for="name">Address</label>
@@ -31,15 +31,22 @@
                     <label for="name">New Treatment</label>
                     <select class="form-control" id="treatments" name="treatments" multiple required>
                         @foreach (allTreatments() as $treatment)
-                           <option value="{{ $treatment->treatment_name }}">{{ $treatment->treatment_name }}</option>
+                        <option value="{{ $treatment->treatment_name }}">{{ $treatment->treatment_name }}</option>
                         @endforeach
                     </select>
                 </div>
-                <label for="treatments">Doctors</label>
-                <div class="input-group mb-3">
-                <select class="form-control" id="doctors" name="doctors">
-                  <!-- Doctors options will be populated dynamically -->
-               </select>
+
+                <div class="form-group">
+                    <label for="treatments">Doctors</label>
+                    <div class="input-group mb-3">
+                        <select class="form-control" id="doctors" name="doctors">
+                            <!-- Doctors options will be populated dynamically -->
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="note">Note</label>
+                    <textarea class="form-control" id="note" name="note" rows="3">{{ $lead->note }}</textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">Update</button>
             </form>

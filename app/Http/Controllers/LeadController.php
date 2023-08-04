@@ -17,32 +17,33 @@ class LeadController extends Controller
     public function index()
     {
         $pageTitle = 'All Lead';
-        if(Auth::user()->role_id == 5){
+        if (Auth::user()->role_id == 5) {
             $leads = Lead::where('agent_id', '=', Auth::user()->id)
-                           ->where('status','not_converted')
-                           ->get();
-        }else{
-            $leads = Lead::where('status','not_converted')->get();
+                ->where('status', 'not_converted')
+                ->get();
+        } else {
+            $leads = Lead::where('status', 'not_converted')->get();
         }
-        
-        return view('admin.lead.index', compact('leads','pageTitle'));
+
+        return view('admin.lead.index', compact('leads', 'pageTitle'));
     }
 
 
-    public function converted_leads(){
+    public function converted_leads()
+    {
         $pageTitle = 'All Converted Lead';
-        if(Auth::user()->role_id == 5){
+        if (Auth::user()->role_id == 5) {
             $leads = Lead::where('agent_id', '=', Auth::user()->id)
-                           ->where('status','converted')
-                           ->get();
-        }else{
-            $leads = Lead::where('status','converted')->get();
+                ->where('status', 'converted')
+                ->get();
+        } else {
+            $leads = Lead::where('status', 'converted')->get();
         }
-        
-        return view('admin.lead.index', compact('leads','pageTitle'));
+
+        return view('admin.lead.index', compact('leads', 'pageTitle'));
     }
 
-    
+
     /**
      * Show the form for creating a new resource.
      *
@@ -63,9 +64,9 @@ class LeadController extends Controller
     public function store(Request $request)
     {
         $lead = new Lead();
-        if(Auth::user()->role_id == 5){
+        if (Auth::user()->role_id == 5) {
             $lead->agent_id = Auth::user()->id;
-        }   
+        }
         $lead->customer_name = $request->name;
         $lead->customer_phone = $request->phone;
         $lead->customer_address = $request->address;
@@ -74,13 +75,13 @@ class LeadController extends Controller
         $lead->source = $request->source;
         $lead->ads_name = $request->adsName;
         $lead->note = $request->note;
-       
+
         // Save the lead
         $lead->save();
 
-        
 
-        Alert::success('Success', 'Lead created successfully.');  
+
+        Alert::success('Success', 'Lead created successfully.');
         return redirect()->route('lead.index')->with('success', 'Lead created successfully.');
     }
 
@@ -107,7 +108,7 @@ class LeadController extends Controller
         $lead = Lead::findOrFail($id);
 
         // Pass the treatment to the view
-        return view('admin.lead.edit', compact('lead','pageTitle'));
+        return view('admin.lead.edit', compact('lead', 'pageTitle'));
     }
 
     /**
@@ -117,19 +118,21 @@ class LeadController extends Controller
      * @param  \App\Models\Lead  $lead
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id){
+    public function update(Request $request, $id)
+    {
         $lead = lead::findOrFail($id);
         $lead->customer_name = $request->input('customer_name');
         $lead->customer_phone = $request->input('phone');
         $lead->customer_address = $request->input('address');
         $lead->treatment = $request->input('treatments');
-        if($request->input('doctors') !== null){
+        if ($request->input('doctors') !== null) {
             $lead->doctor_id = $request->input('doctors');
         }
-        
+        $lead->note = $request->input('note');
+
         $lead->save();
 
-        Alert::success('Success', 'Appointment updated successfully.'); 
+        Alert::success('Success', 'Appointment updated successfully.');
         return redirect()->route('lead.index');
     }
 
