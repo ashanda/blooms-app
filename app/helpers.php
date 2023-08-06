@@ -106,9 +106,9 @@ function isRouteActive($slug)
 
 function all_leads_count(){
 	if(Auth::user()->role->name == 'Admin'){
-		$all_leads = Lead::where('status','converted')->count();
+		$all_leads = Lead::where('status','not_converted')->count();
 	}else{
-		$all_leads =Lead::where('agent_id', Auth::user()->id)->where('status','converted')->count();
+		$all_leads =Lead::where('agent_id', Auth::user()->id)->where('status','not_converted')->count();
 	}
 	return $all_leads;
 }
