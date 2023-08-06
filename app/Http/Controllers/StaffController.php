@@ -57,7 +57,7 @@ class StaffController extends Controller
         ]);
 
         $image = $this->imgHandle($request);
-
+        //dd($request->nic);
         User::create([
             'name' => $request->name,
             'email' => $request->email,
