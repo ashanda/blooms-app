@@ -213,7 +213,7 @@
             </g>
           </svg>
         </div>
-        <span class="nav-link-text ms-1">Converted</span>
+        <span class="nav-link-text ms-1">Appoinment Converted</span>
       </a>
     </li>
     @endif
