@@ -105,19 +105,32 @@ class AppointmentController extends Controller
         return view('admin.appointment.view', compact('appointments','pageTitle'));
     }
 
-    public function missed_appoinment(){
+    public function success_appointment(){
         $pageTitle = 'Missed Appoinments';
         if(Auth::user()->role_id == 5){
+            $appointments = Appointment::whereIn('status', ['sucess', 'converted'])
+                                        ->where('agent_id', '=', Auth::user()->id)
+                                        ->get();
+        }else{
+            $appointments = Appointment::whereIn('status', ['sucess', 'converted'])->get();
+        }
+
+        return view('admin.appointment.view', compact('appointments','pageTitle'));
+    }
+
+    public function missed_appoinment(){
+         $pageTitle = 'Success Appoinments';
+         if(Auth::user()->role_id == 5){
             $appointments = Appointment::where('status', 'missed')
                                         ->where('agent_id', '=', Auth::user()->id)
                                         ->get();
         }else{
             $appointments = Appointment::where('status', 'missed')->get();
         }
+        
 
         return view('admin.appointment.view', compact('appointments','pageTitle'));
     }
-
 
     public function converted_appoinment(){
         $pageTitle = 'Converted Appoinments';

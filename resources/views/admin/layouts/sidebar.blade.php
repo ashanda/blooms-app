@@ -181,6 +181,12 @@
               <span class="sidenav-normal"> Assign </span>
             </a>
           </li>
+          <li class="nav-item {{ isRouteActive('success_appointment') ? 'active' : '' }}">
+            <a class="nav-link " href="{{ route('appointment.success_appointment') }}">
+              <span class="sidenav-mini-icon"> S </span>
+              <span class="sidenav-normal">Success</span>
+            </a>
+          </li>
         </ul>
       </div>
     </li>
@@ -251,8 +257,8 @@
               <span class="sidenav-normal">Expenses </span>
             </a>
           </li>
-          <li class="nav-item {{ isRouteActive('missed_appointments') ? 'active' : '' }}">
-            <a class="nav-link " href="{{ route('missed_appoinment') }}">
+          <li class="nav-item {{ isRouteActive('payment-report') ? 'active' : '' }}">
+            <a class="nav-link " href="{{ route('payment_report') }}">
               <span class="sidenav-mini-icon"> F </span>
               <span class="sidenav-normal">Finance Report </span>
             </a>

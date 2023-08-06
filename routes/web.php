@@ -12,9 +12,10 @@ use App\Http\Controllers\PatientDocsController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CampaignController;
-use app\Http\Controllers\LeadController;
-use app\Http\Controllers\ExpenseCatController;
-use app\Http\Controllers\ExpensesController;
+use App\Http\Controllers\LeadController;
+use App\Http\Controllers\ExpenseCatController;
+use App\Http\Controllers\ExpensesController;
+use App\Http\Controllers\ReportController;
 
 
 Auth::routes();
@@ -96,6 +97,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::resource('/campaigns', App\Http\Controllers\CampaignController::class);
     Route::resource('/expense_type', App\Http\Controllers\ExpenseCatController::class);
     Route::resource('/expense', App\Http\Controllers\ExpenseController::class);
+    Route::get('/payment-report', [ReportController::class,'index'])->name('payment_report');
   
 });
 
@@ -119,6 +121,7 @@ Route::post('/invoice', [InvoiceController::class, 'create'])->name('invoice.cre
 Route::get('/appointments/{appointment}/edit', [AppointmentController::class,'edit'])->name('appointments.edit');
 Route::put('/appointments/{appointment}', [AppointmentController::class,'update'])->name('appointments.update');
 Route::get('/new_appointment', [App\Http\Controllers\AppointmentController::class, 'new_appointment'])->name('appointment.new_appointment');
+Route::get('/success_appointment', [App\Http\Controllers\AppointmentController::class, 'success_appointment'])->name('appointment.success_appointment');
 
 Route::resource('lead', App\Http\Controllers\LeadController::class);
 Route::get('/converted-leads', [App\Http\Controllers\LeadController::class, 'converted_leads'])->name('lead.converted_leads');
