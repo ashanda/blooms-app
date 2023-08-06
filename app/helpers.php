@@ -108,7 +108,7 @@ function all_leads_count(){
 	if(Auth::user()->role->name == 'Admin'){
 		$all_leads = Lead::where('status','converted')->count();
 	}else{
-		$all_leads =Lead::where('agent_id', Auth::user()->id)->where('status','converted')->->count();
+		$all_leads =Lead::where('agent_id', Auth::user()->id)->where('status','converted')->count();
 	}
 	return $all_leads;
 }
