@@ -48,30 +48,40 @@ class DatabaseSeeder extends Seeder
             'name' => 'Administrator',
             'email' => 'admin@admin.com',
             'password' => Hash::make('123456789'),
+            'nic' => '123456789',
+            'joining_date' => '2023-08-06',
             'role_id' => 1
         ]);
         User::create([
             'name' => 'Front Officer',
             'email' => 'officer@officer.com',
             'password' => Hash::make('123456789'),
+            'nic' => '123456789',
+            'joining_date' => '2023-08-06',
             'role_id' => 2
         ]);
         User::create([
             'name' => 'Doctor',
             'email' => 'doctor@doctor.com',
             'password' => Hash::make('123456789'),
+            'nic' => '123456789',
+            'joining_date' => '2023-08-06',
             'role_id' => 3
         ]);
         User::create([
             'name' => 'Sale Agent',
             'email' => 'sale@sale.com',
             'password' => Hash::make('123456789'),
+            'nic' => '123456789',
+            'joining_date' => '2023-08-06',
             'role_id' => 5
         ]);
         User::create([
             'name' => 'Assistant',
             'email' => 'assistant@assistant.com',
             'password' => Hash::make('123456789'),
+            'nic' => '123456789',
+            'joining_date' => '2023-08-06',
             'role_id' => 6
         ]);
        
