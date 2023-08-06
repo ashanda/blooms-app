@@ -105,7 +105,7 @@ class TreatmentController extends Controller
         $treatment = Treatment::findOrFail($id);
         $treatment->treatment_code = $request->treatment_code;
         $treatment->treatment_name = $request->treatment_name;
-        $treatment->doctor_id = $request->doctor_id;
+       // $treatment->doctor_id = $request->doctor_id;
         $treatment->treatment_time = $request->treatment_time;
         $treatment->face_value = $request->face_value;
         $treatment->actual_value = $request->actual_value;
