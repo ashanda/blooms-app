@@ -105,7 +105,7 @@ function isRouteActive($slug)
 
 
 function all_leads_count(){
-	if(Auth::user()->role->name == 'Admin'){
+	if(Auth::user()->role->name == 'Admin' || Auth::user()->role->name == 'Front Officer'){
 		$all_leads = Lead::where('status','not_converted')->count();
 	}else{
 		$all_leads =Lead::where('agent_id', Auth::user()->id)->where('status','not_converted')->count();
@@ -114,7 +114,7 @@ function all_leads_count(){
 }
 
 function all_appoinments_count(){
-	if(Auth::user()->role->name == 'Admin'){
+	if(Auth::user()->role->name == 'Admin'|| Auth::user()->role->name == 'Front Officer'){
 		$all_appoinments = Appointment::count();
 	}else{
 		$all_appoinments =Appointment::where('agent_id', Auth::user()->id)->count();
@@ -123,7 +123,7 @@ function all_appoinments_count(){
 }
 
 function all_missed_appoinments_count(){
-	if(Auth::user()->role->name == 'Admin'){
+	if(Auth::user()->role->name == 'Admin' || Auth::user()->role->name == 'Front Officer'){
 		$all_missed_appoinments = Appointment::where('status', 'missed')->count();
 	}else{
 		$all_missed_appoinments = Appointment::where('status', 'missed')
@@ -133,7 +133,7 @@ function all_missed_appoinments_count(){
 }
 
 function all_ongoing_appoinments_count(){
-	if(Auth::user()->role->name == 'Admin'){
+	if(Auth::user()->role->name == 'Admin' || Auth::user()->role->name == 'Front Officer' ){
 		$all_missed_appoinments = Appointment::where('status', 'ongoing')->count();
 	}else{
 		$all_missed_appoinments = Appointment::where('status', 'ongoing')
