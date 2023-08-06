@@ -5,90 +5,92 @@
 <div class="container-fluid py-4 px-0 px-md-4 px-lg-4">
 
   <div class="card">
-    <div class="table-responsive">
-      <table id="data_table" class="table align-items-center mb-0">
-        <thead>
-          <tr>
-            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Customer Name</th>
-            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Phone Number</th>
-            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Treatment</th>
-            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Note</th>
-            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
-            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">convert</th>
-            <!-- <th class="text-secondary opacity-7"></th> -->
-          </tr>
-        </thead>
-        <tbody>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table id="data_table" class="table align-items-center mb-0">
+          <thead>
+            <tr>
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Customer Name</th>
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Phone Number</th>
+              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Treatment</th>
+              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Note</th>
+              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
+              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">convert</th>
+              <!-- <th class="text-secondary opacity-7"></th> -->
+            </tr>
+          </thead>
+          <tbody>
 
-          @foreach ($leads as $lead)
-          <tr>
-            <td>
-              <div class="d-flex px-2 py-1">
+            @foreach ($leads as $lead)
+            <tr>
+              <td>
+                <div class="d-flex px-2 py-1">
 
-                <div class="d-flex flex-column justify-content-center">
-                  <h6 class="mb-0 text-xs">{{ $lead->customer_name }}</h6>
+                  <div class="d-flex flex-column justify-content-center">
+                    <h6 class="mb-0 text-xs">{{ $lead->customer_name }}</h6>
+                  </div>
                 </div>
-              </div>
-            </td>
-            <td>
-              <p class="text-xs font-weight-bold mb-0">{{ $lead->customer_phone }}</p>
-            </td>
-            <td class="align-middle text-center text-sm">
-              <p class="text-xs font-weight-bold mb-0">{{ $lead->treatment }}</p>
-            </td>
-            <td class="align-middle text-center text-sm">
-              <p class="text-xs font-weight-bold mb-0">{{ $lead->note }}</p>
-            </td>
-            <td class="align-middle text-center text-sm">
+              </td>
+              <td>
+                <p class="text-xs font-weight-bold mb-0">{{ $lead->customer_phone }}</p>
+              </td>
+              <td class="align-middle text-center text-sm">
+                <p class="text-xs font-weight-bold mb-0">{{ $lead->treatment }}</p>
+              </td>
+              <td class="align-middle text-center text-sm">
+                <p class="text-xs font-weight-bold mb-0">{{ $lead->note }}</p>
+              </td>
+              <td class="align-middle text-center text-sm">
 
-              @if ($lead->status == 'converted')
-              {{ "Can't Edit or Delete" }}
-              @else
-              <a href="{{ route('lead.edit', $lead->id) }}" class="btn btn-sm btn-primary">Edit</a>
-              <!-- Button trigger modal -->
-              <form id="deleteForm{{ $lead->id }}" action="{{ route('lead.destroy', $lead->id) }}" method="POST" style="display: inline-block;">
-                @csrf
-                @method('DELETE')
-                <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteConfirmationModal{{ $lead->id }}">Delete</button>
-              </form>
+                @if ($lead->status == 'converted')
+                {{ "Can't Edit or Delete" }}
+                @else
+                <a href="{{ route('lead.edit', $lead->id) }}" class="btn btn-sm btn-primary">Edit</a>
+                <!-- Button trigger modal -->
+                <form id="deleteForm{{ $lead->id }}" action="{{ route('lead.destroy', $lead->id) }}" method="POST" style="display: inline-block;">
+                  @csrf
+                  @method('DELETE')
+                  <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteConfirmationModal{{ $lead->id }}">Delete</button>
+                </form>
 
-              <!-- Modal -->
-              <div class="modal fade" id="deleteConfirmationModal{{ $lead->id }}" tabindex="-1" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="deleteConfirmationModalLabel">Delete Lead</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                      Are you sure you want to delete this lead?
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                      <button type="button" class="btn btn-danger" onclick="document.getElementById('deleteForm{{ $lead->id }}').submit()">Delete</button>
+                <!-- Modal -->
+                <div class="modal fade" id="deleteConfirmationModal{{ $lead->id }}" tabindex="-1" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="deleteConfirmationModalLabel">Delete Lead</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        Are you sure you want to delete this lead?
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-danger" onclick="document.getElementById('deleteForm{{ $lead->id }}').submit()">Delete</button>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              @endif
+                @endif
 
 
-            </td>
-            <td class="align-middle text-center text-sm">
-              @if ($lead->status == 'converted')
-              {{ "It All Ready Convet in Appoinment" }}
-              @else
-              <a href="javascript:;" data-lead-id="{{ $lead->id }}" data-lead-name="{{ $lead->customer_name }}" data-lead-phone="{{ $lead->customer_phone }}" data-lead-address="{{ $lead->customer_address }}" data-lead-treatment="{{ $lead->treatment }}" data-lead-source="{{ $lead->source }}" data-lead-ads_name="{{ $lead->ads_name }}" class="text-secondary font-weight-bold text-xs convert-lead" data-toggle="tooltip" data-original-title="Edit user">
-                Convert to Appoinment
-              </a>
-              @endif
+              </td>
+              <td class="align-middle text-center text-sm">
+                @if ($lead->status == 'converted')
+                {{ "It All Ready Convet in Appoinment" }}
+                @else
+                <a href="javascript:;" data-lead-id="{{ $lead->id }}" data-lead-name="{{ $lead->customer_name }}" data-lead-phone="{{ $lead->customer_phone }}" data-lead-address="{{ $lead->customer_address }}" data-lead-treatment="{{ $lead->treatment }}" data-lead-source="{{ $lead->source }}" data-lead-ads_name="{{ $lead->ads_name }}" class="text-secondary font-weight-bold text-xs convert-lead" data-toggle="tooltip" data-original-title="Edit user">
+                  Convert to Appoinment
+                </a>
+                @endif
 
-            </td>
-          </tr>
-          @endforeach
-        </tbody>
-      </table>
+              </td>
+            </tr>
+            @endforeach
+          </tbody>
+        </table>
+      </div>
     </div>
 
   </div>
