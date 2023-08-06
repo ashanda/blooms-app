@@ -52,7 +52,7 @@ class CampaignController extends Controller
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $filename = date('YmdHi') . $image->getClientOriginalName();
-            $image->move(public_path('/campaign_image'), $filename);
+            $image->move(public_path('/campaing_image'), $filename);
             $campaign->image = $filename;
         }
 
