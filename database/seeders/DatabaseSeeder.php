@@ -51,6 +51,8 @@ class DatabaseSeeder extends Seeder
             'salary' => '12345',
             'joining_date' => '2015-09-30',
             'password' => Hash::make('123456789'),
+            'nic' => '123456789',
+            'joining_date' => '2023-08-06',
             'role_id' => 1
         ]);
         User::create([
@@ -60,6 +62,8 @@ class DatabaseSeeder extends Seeder
             'salary' => '12345',
             'joining_date' => '2015-09-30',
             'password' => Hash::make('123456789'),
+            'nic' => '123456789',
+            'joining_date' => '2023-08-06',
             'role_id' => 2
         ]);
         User::create([
@@ -69,6 +73,8 @@ class DatabaseSeeder extends Seeder
             'salary' => '12345',
             'joining_date' => '2015-09-30',
             'password' => Hash::make('123456789'),
+            'nic' => '123456789',
+            'joining_date' => '2023-08-06',
             'role_id' => 3
         ]);
         User::create([
@@ -78,6 +84,8 @@ class DatabaseSeeder extends Seeder
             'salary' => '12345',
             'joining_date' => '2015-09-30',
             'password' => Hash::make('123456789'),
+            'nic' => '123456789',
+            'joining_date' => '2023-08-06',
             'role_id' => 5
         ]);
         User::create([
@@ -87,6 +95,8 @@ class DatabaseSeeder extends Seeder
             'salary' => '12345',
             'joining_date' => '2015-09-30',
             'password' => Hash::make('123456789'),
+            'nic' => '123456789',
+            'joining_date' => '2023-08-06',
             'role_id' => 6
         ]);
        
