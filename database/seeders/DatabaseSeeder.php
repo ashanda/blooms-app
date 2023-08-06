@@ -46,7 +46,10 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'name' => 'Administrator',
+            'nic' => '123456789V',
             'email' => 'admin@admin.com',
+            'salary' => '12345',
+            'joining_date' => '2015-09-30',
             'password' => Hash::make('123456789'),
             'nic' => '123456789',
             'joining_date' => '2023-08-06',
@@ -54,7 +57,10 @@ class DatabaseSeeder extends Seeder
         ]);
         User::create([
             'name' => 'Front Officer',
+            'nic' => '123456789V',
             'email' => 'officer@officer.com',
+            'salary' => '12345',
+            'joining_date' => '2015-09-30',
             'password' => Hash::make('123456789'),
             'nic' => '123456789',
             'joining_date' => '2023-08-06',
@@ -62,7 +68,10 @@ class DatabaseSeeder extends Seeder
         ]);
         User::create([
             'name' => 'Doctor',
+            'nic' => '123456789V',
             'email' => 'doctor@doctor.com',
+            'salary' => '12345',
+            'joining_date' => '2015-09-30',
             'password' => Hash::make('123456789'),
             'nic' => '123456789',
             'joining_date' => '2023-08-06',
@@ -70,7 +79,10 @@ class DatabaseSeeder extends Seeder
         ]);
         User::create([
             'name' => 'Sale Agent',
+            'nic' => '123456789V',
             'email' => 'sale@sale.com',
+            'salary' => '12345',
+            'joining_date' => '2015-09-30',
             'password' => Hash::make('123456789'),
             'nic' => '123456789',
             'joining_date' => '2023-08-06',
@@ -78,7 +90,10 @@ class DatabaseSeeder extends Seeder
         ]);
         User::create([
             'name' => 'Assistant',
+            'nic' => '123456789V',
             'email' => 'assistant@assistant.com',
+            'salary' => '12345',
+            'joining_date' => '2015-09-30',
             'password' => Hash::make('123456789'),
             'nic' => '123456789',
             'joining_date' => '2023-08-06',
