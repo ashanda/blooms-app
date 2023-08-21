@@ -24,7 +24,7 @@ class InvoiceController extends Controller
         $customer->customer_id = $request->customer_id;
         $customer->name = $request->name;
         $customer->phone = $request->phone;
-        $customer->appointment_date_time = $convert->appointment_date_time;
+        
         $customer->save();
         }
         
