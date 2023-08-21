@@ -149,7 +149,7 @@ class TreatmentController extends Controller
             $query->where('appoinment_id', $inputQuery)
                 ->orWhere('phone', $inputQuery)
                 ->orWhere('name', $inputQuery)
-                ->orWhere('customer_id', $inputQuery);
+                ->orWhere('customers.customer_id', $inputQuery);
         })
         ->first(['customer_treatments.*', 'customers.*']);
     
