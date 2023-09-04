@@ -67,6 +67,7 @@ class LeadController extends Controller
         if (Auth::user()->role_id == 5) {
             $lead->agent_id = Auth::user()->id;
         }
+        $lead->prefix = $request->prefix; 
         $lead->customer_name = $request->name;
         $lead->customer_phone = $request->phone;
         $lead->customer_address = $request->address;

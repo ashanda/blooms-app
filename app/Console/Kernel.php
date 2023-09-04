@@ -4,7 +4,7 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-
+use Illuminate\Support\Facades\Log;
 class Kernel extends ConsoleKernel
 {
     /**
@@ -13,7 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+      
     ];
 
     /**
@@ -26,8 +26,13 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
 
-        $schedule->command('follow_back')->dailyAt('00:00');
-        $schedule->command('agent_assign')->dailyAt('00:00');
+       // $schedule->command('follow_back')->dailyAt('00:00');
+       // $schedule->command('agent_assign')->dailyAt('00:00');
+        
+        $schedule->command('send_sms_reminder')->dailyAt('07:00');
+        $schedule->command('send_sms_today')->dailyAt('06:00');
+       
+        
     }
 
     /**

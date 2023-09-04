@@ -10,13 +10,47 @@ use App\Models\Customer;
 use App\Models\Invoice;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+
+
+function smsBalance(){
+	$curl = curl_init();
+
+	curl_setopt_array($curl, array(
+	CURLOPT_URL => 'https://sms.send.lk/api/v3/balance',
+	CURLOPT_RETURNTRANSFER => true,
+	CURLOPT_ENCODING => '',
+	CURLOPT_MAXREDIRS => 10,
+	CURLOPT_TIMEOUT => 0,
+	CURLOPT_FOLLOWLOCATION => true,
+	CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+	CURLOPT_CUSTOMREQUEST => 'GET',
+	CURLOPT_HTTPHEADER => array(
+		'Authorization: Bearer 1191|CuoN6OXPs0DW7ISi9KbNNjTGiVxgCpakH6SXAE2T'
+	),
+	));
+
+	$response = curl_exec($curl);
+
+	curl_close($curl);
+	$data = json_decode($response, true);
+
+	// Check if the "remaining_unit" key exists in the data array
+	if (isset($data['data']['remaining_unit'])) {
+		$remainingUnit = $data['data']['remaining_unit'];
+		echo "Remaining SMS Units: " . $remainingUnit;
+	} else {
+		echo "Remaining Units not found in the response.";
+	}
+	
+}
 
 function sendSMS($phone,$message)
 {
     $MSISDN = $phone;
-	$SRC = 'Araliya CCT';
+	$SRC = 'Bloom';
 	$MESSAGE = ( urldecode($message));
-	$AUTH = "716|dgD95hyXSbuxuoj5F4pG8QBdJ4wcoFzo064CAuhs ";  //Replace your Access Token
+	$AUTH = "1191|CuoN6OXPs0DW7ISi9KbNNjTGiVxgCpakH6SXAE2T";  //Replace your Access Token
 	
 	$msgdata = array("recipient"=>$MSISDN, "sender_id"=>$SRC, "message"=>$MESSAGE);
 
@@ -31,6 +65,7 @@ function sendSMS($phone,$message)
 			curl_setopt_array($curl, array(
 			  CURLOPT_URL => "https://sms.send.lk/api/v3/sms/send",
 			  CURLOPT_CUSTOMREQUEST => "POST",
+			  CURLOPT_RETURNTRANSFER => true,
 			  CURLOPT_POSTFIELDS => json_encode($msgdata),
 			  CURLOPT_HTTPHEADER => array(
 				"accept: application/json",
@@ -48,7 +83,7 @@ function sendSMS($phone,$message)
 			if ($err) {
 			  echo "cURL Error #:" . $err;
 			} else {
-			  echo $response;
+			 // echo $response;
 			}
 }
 

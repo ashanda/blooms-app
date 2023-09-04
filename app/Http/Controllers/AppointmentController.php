@@ -1,6 +1,6 @@
 <?php
 namespace App\Http\Controllers;
-
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Appointment;
@@ -55,6 +55,7 @@ class AppointmentController extends Controller
         $treatment = Treatment::where('treatment_name',$request->treatments)->first();   
         $appointment->appointment_id = $random_number.'-'.$treatment->treatment_code ;
         $appointment->customer_id = $random_number ;
+        $appointment->prefix = $request->prefix; 
         $appointment->customer_name = $request->name;
         $appointment->customer_phone = $request->phone;
         $appointment->customer_address = $request->address;
@@ -64,9 +65,14 @@ class AppointmentController extends Controller
         $appointment->ads_name = $request->adsName;
         $appointment->appointment_date_time = $request->appointmentDateTime;
         $appointment->note = $request->note;
-       
+        
         // Save the appointment
         $appointment->save();
+        userdata($request->doctors);
+        $formattedDateTime = Carbon::parse($request->appointmentDateTime)->format('jS F, g:ia (l)');
+     
+        $message = ''.$request->prefix.'.'.$request->name.', Your appointment is confirmed with '.userdata($request->doctors)->name.' at Bloom Skin Clinic, Thalawathugoda on '.$formattedDateTime.'' ;
+        sendSMS($request->phone,$message);
 
         if($request->leadID !== null){
             $lead = Lead::findOrFail($request->leadID);
