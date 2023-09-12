@@ -34,7 +34,7 @@
 
 
 
-    @if(Auth::user()->role->name == 'Admin')
+    @if(Auth::user()->role->name === 'Admin')
     <hr class="horizontal dark" />
     {{-- campaing --}}
     <li class="nav-item">
@@ -60,7 +60,7 @@
     @endif
 
 
-    @if(Auth::user()->role->name == 'Admin' || Auth::user()->role->name == 'Sales Agent')
+    @if(Auth::user()->role->name === 'Admin' || Auth::user()->role->name === 'Sales Agent')
     <hr class="horizontal dark" />
     {{-- Leads --}}
     <li class="nav-item ">
@@ -125,7 +125,7 @@
 
 
     <li class="nav-item ">
-      @if(Auth::user()->role->name == 'Doctor' || Auth::user()->role->name == 'Admin' || Auth::user()->role->name == 'Front Officer' || Auth::user()->role->name == 'Sales Agent')
+      @if(Auth::user()->role->name === 'Doctor' || Auth::user()->role->name === 'Admin' || Auth::user()->role->name === 'Front Officer' || Auth::user()->role->name === 'Sales Agent')
       {{-- Appoinment --}}
     <li class="nav-item ">
 
@@ -192,7 +192,7 @@
     </li>
     @endif
 
-    @if(Auth::user()->role->name == 'Admin' || Auth::user()->role->name == 'Sales Agent')
+    @if(Auth::user()->role->name === 'Admin' || Auth::user()->role->name === 'Sales Agent')
     <hr class="horizontal dark" />
     <li class="nav-item ">
 
@@ -220,7 +220,7 @@
 
     {{-- finance --}}
     <li class="nav-item ">
-      @if(Auth::user()->role->name == 'Admin' || Auth::user()->role->name == 'Accountant')
+      @if(Auth::user()->role->name === 'Admin' || Auth::user()->role->name === 'Accountant')
     <li class="nav-item ">
 
       <a data-bs-toggle="collapse" href="#applicationsExamples2" class="nav-link collapsed" aria-controls="applicationsExamples2" role="button" aria-expanded="false">
@@ -268,7 +268,7 @@
       </div>
     </li>
     @endif
-    @if(Auth::user()->role->name == 'Admin')
+    @if(Auth::user()->role->name === 'Admin')
     <hr class="horizontal dark" />
 
     <li class="nav-item">
@@ -314,7 +314,7 @@
     @endif
 
     {{-- Treatments --}}
-    @if(Auth::user()->role->name == 'Admin')
+    @if(Auth::user()->role->name === 'Admin')
     <hr class="horizontal dark" />
 
     <li class="nav-item">
@@ -360,7 +360,7 @@
 
     @endif
 
-    @if(Auth::user()->role->name == 'Doctor')
+    @if(Auth::user()->role->name === 'Doctor')
 
     <li class="nav-item">
       <a href="{{ route('patient.all') }}" class="nav-link " aria-controls="pagesExamples" role="button" aria-expanded="false">
