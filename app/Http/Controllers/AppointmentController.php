@@ -245,6 +245,7 @@ class AppointmentController extends Controller
         $appoinment_id = $random_number . '-' . $treatment->treatment_code;
         $customer_id = $random_number;
         $appointment->appointment_id = $appoinment_id;
+        $appointment->prefix = $request->prefix; 
         $appointment->customer_id = $customer_id;
         $appointment->customer_name = $request->name;
         $appointment->customer_phone = $request->phone;
