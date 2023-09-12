@@ -168,7 +168,7 @@
                           @endphp
                           <select id="search-input-feed-data" class="form-control" >
                           @foreach ( $todayAppoinments as $todayAppoinment)
-                            <option value="{{ $todayAppoinment->appoinment_id }}">{{$todayAppoinment->customer_name .' - '.$todayAppoinment->customer_phone.' - '.$todayAppoinment->treatment.' - '.$todayAppoinment->appoinment_id}}</option>
+                            <option value="{{ $todayAppoinment->customer_id }}">{{$todayAppoinment->customer_name .' - '.$todayAppoinment->customer_phone.' - '.$todayAppoinment->treatment.' - '.$todayAppoinment->appoinment_id}}</option>
                           @endforeach
                            
                             <!-- Add more options as needed -->
