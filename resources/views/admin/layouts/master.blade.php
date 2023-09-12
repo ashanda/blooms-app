@@ -209,7 +209,8 @@
     $(document).ready(function() {
       var table = $('#data_table').DataTable({
         lengthChange: false,
-        buttons: ['copy', 'excel', 'pdf', 'colvis']
+        buttons: ['copy', 'excel', 'pdf', 'colvis'],
+        order: [[ $(this).find('.date-column').index(), 'desc' ]]
       });
 
       table.buttons().container()

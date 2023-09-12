@@ -14,7 +14,7 @@
               <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Customer Name</th>
               <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Phone Number</th>
               <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Treatment</th>
-              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Appointment Date</th>
+              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 date-column">Appointment Date</th>
               <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
             </tr>
           </thead>

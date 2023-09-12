@@ -159,7 +159,7 @@
         <div class="col-sm-12 mt-sm-0">
             <div class="card border h-100">
                 <div class="card-body d-flex flex-column justify-content-center text-center">
-                    <h6 class="text-secondary">Enter Appointment ID/Name/Customer Phone</h6>
+                    <h6 class="text-secondary">Select Appointment</h6>
                     <form id="search-form-feed-data">
                         <div class="input-group">
                           @php
@@ -176,7 +176,7 @@
 
                             
                             <div class="input-group-append">
-                                <button type="submit" class="btn btn-primary search">Search</button>
+                                <button type="submit" class="btn btn-primary search">Select</button>
                             </div>
                         </div>
                     </form>
