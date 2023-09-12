@@ -14,7 +14,7 @@
       
     <h6 class="text-white font-weight-bolder mb-3">Hey {{ Auth::user()->name }} !</h6>
     <p class="text-white mb-3">Stay informed with important updates, alerts, and messages regarding your dashboard and its features.</p>
-    @if (Auth::user()->role->name = 'Admin')
+    @if (Auth::user()->role->name === 'Admin')
     <p class="text-white mb-3">{{ smsBalance() }}</p>
     @endif
     </div>
