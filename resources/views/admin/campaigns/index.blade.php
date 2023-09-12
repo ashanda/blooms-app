@@ -19,7 +19,7 @@
                 <thead>
                     <tr>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">Name</th>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">Start Date</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2 date-column">Start Date</th>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">End Date</th>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">Image</th>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">Description</th>
