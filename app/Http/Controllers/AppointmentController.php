@@ -260,7 +260,11 @@ class AppointmentController extends Controller
 
         // Save the appointment
         $appointment->save();
-
+        userdata($request->doctors);
+        $formattedDateTime = Carbon::parse($request->appointmentDateTime)->format('jS F, g:ia (l)');
+     
+        $message = ''.$request->prefix.'.'.$request->name.', Your appointment is confirmed with '.userdata($request->doctors)->name.' at Bloom Skin Clinic, Thalawathugoda on '.$formattedDateTime.'' ;
+        sendSMS($request->phone,$message);
 
         //Customer Treatment Table Record
         $customer = new CustomerTreatment();
