@@ -8,6 +8,15 @@
         <div class="card-body">
             <form role="form text-left" action="{{ route('add_appointment') }}" method="POST" enctype="multipart/form-data">
               @csrf
+               <div class="input-group mb-3">
+                <select class="form-control" id="prefix" name="prefix" aria-label="prefix" aria-describedby="prefix-addon" required>
+                    <option value="Mr">Mr</option>
+                    <option value="Mrs">Mrs</option>
+                    <option value="Ms">Ms</option>
+                    <option value="Ven">Ven</option>
+                </select>
+
+              </div>
               <label for="name">Name</label>
               <div class="input-group mb-3">
                 <input type="text" class="form-control" id="name" name="name" placeholder="Name" aria-label="Name" aria-describedby="name-addon" required>
