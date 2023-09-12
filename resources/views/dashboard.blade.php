@@ -162,7 +162,19 @@
                     <h6 class="text-secondary">Enter Appointment ID/Name/Customer Phone</h6>
                     <form id="search-form-feed-data">
                         <div class="input-group">
-                            <input type="text" id="search-input-feed-data" class="form-control" placeholder="Type here...">
+                          @php
+                              $role = 'assistant';
+                              $todayAppoinments = todayAppoinment($role,Auth::user()->id); 
+                          @endphp
+                          <select id="search-input-feed-data" class="form-control" >
+                          @foreach ( $todayAppoinments as $todayAppoinment)
+                            <option value="{{ $todayAppoinment->appoinment_id }}">{{$todayAppoinment->customer_name .' '.$todayAppoinment->customer_phone.' '.$todayAppoinment->treatment.' '.$todayAppoinment->appoinment_id .' '.$todayAppoinment->customer_id }}</option>
+                          @endforeach
+                           
+                            <!-- Add more options as needed -->
+                          </select>
+
+                            
                             <div class="input-group-append">
                                 <button type="submit" class="btn btn-primary search">Search</button>
                             </div>

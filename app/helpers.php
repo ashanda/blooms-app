@@ -89,10 +89,12 @@ function sendSMS($phone,$message)
 
 
 function todayAppoinment($role,$id) {
-	$todayAppoinment = 	CustomerTreatment::where($role,'=',$id)
-										  ->whereDate('created_at', '=', Carbon::today()->format('Y-m-d'))
-										  ->where('status', '=', 'waiting')
-										  ->get();	
+	$todayAppoinment = CustomerTreatment::where($role, '=', $id)
+    ->whereDate('customer_treatments.created_at', '=', Carbon::today()->format('Y-m-d'))
+    ->where('customer_treatments.status', '=', 'waiting')
+    ->join('appointments', 'customer_treatments.appoinment_id', '=', 'appointments.appointment_id')
+    ->get();
+	
 	return $todayAppoinment;									  
 }
 

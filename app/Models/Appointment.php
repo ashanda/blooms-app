@@ -34,4 +34,9 @@ class Appointment extends Model
     {
         return $this->belongsTo(Appointment::class);
     }
+
+    public function customerTreatment()
+    {
+        return $this->hasOne(CustomerTreatment::class, 'appoinment_id');
+    }
 }
